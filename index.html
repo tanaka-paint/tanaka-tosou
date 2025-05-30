@@ -18,7 +18,7 @@
     h1, h2 { color: #008000; }
     .cta-button { display: inline-block; background: #e60000; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
     .cta-button:hover { background: #cc0000; }
-    .gallery img { width: 100%; height: auto; margin-bottom: 20px; border: 1px solid #ccc; }
+    .gallery img { width: 100%; max-width: 480px; height: auto; margin-bottom: 20px; border: 1px solid #ccc; display: block; margin-left: auto; margin-right: auto; }
     .staff { display: flex; flex-wrap: wrap; gap: 20px; }
     .staff-member { flex: 1 1 100%; background: #f9f9f9; padding: 20px; border-radius: 8px; text-align: center; }
     .staff-member img { max-width: 150px; border-radius: 50%; }
@@ -28,6 +28,9 @@
     form input, form textarea { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; }
     form button { background: #004080; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
     form button:hover { background: #003366; }
+    .blog-entry { margin-bottom: 30px; border-bottom: 1px solid #ccc; padding-bottom: 20px; }
+    .blog-entry h3 { margin-bottom: 10px; }
+    .blog-entry p { margin: 0; }
   </style>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -41,9 +44,7 @@
           }
         });
       }, options);
-      sections.forEach(section => {
-        observer.observe(section);
-      });
+      sections.forEach(section => { observer.observe(section); });
     });
   </script>
 </head>
@@ -59,7 +60,7 @@
     <a href="#about">会社案内</a>
     <a href="#services">サービス</a>
     <a href="#works">施工事例</a>
-    <a href="#staff">代表紹介</a>
+    <a href="#staff">スタッフ紹介</a>
     <a href="#blog">お知らせ</a>
     <a href="#access">アクセス</a>
     <a href="#contact">お問い合わせ</a>
@@ -67,25 +68,29 @@
 
   <section id="about">
     <h2>会社案内</h2>
-    <p>田中塗装は、東京都八王子市に拠点を置く外壁塗装専門業者です。住宅から商業施設まで、幅広い建物の塗装に対応。地域密着で信頼と実績を積んできました。</p>
+    <p>田中塗装は、東京都八王子市に拠点を置く外壁塗装専門業者です。地域密着型のサービスを提供し、信頼と実績を積み重ねてきました。</p>
     <ul>
       <li><strong>会社名：</strong>田中塗装</li>
       <li><strong>代表者：</strong>中田 七守</li>
       <li><strong>所在地：</strong>東京都八王子市長房町627−1</li>
       <li><strong>創業：</strong>2013年</li>
-      <li><strong>電話番号：</strong>090-6120-3852</li>
+      <li><strong>事業内容：</strong>外壁塗装、内装工事、リフォーム、マイクロセメント、打ちっ放し補修、エイジング塗装</li>
+      <li><strong>電話番号：</strong>090−6120−3852</li>
       <li><strong>メール：</strong>tanakatoso_yoon@ezweb.ne.jp</li>
-      <li><strong>事業内容：</strong>外壁塗装、屋根塗装、防水工事、内装リフォーム、マイクロセメント、打ちっ放し補修、エイジング塗装</li>
     </ul>
+    <h3>代表挨拶</h3>
+    <p>「一塗りに真心を」── これが私たちの信念です。家は人生の大きな舞台。そこを彩り、守ることが私たちの使命です。</p>
+    <h3>経歴</h3>
+    <p>中田 七守：塗装歴30年以上。特殊塗装やデザイン施工、アートウォールなど多彩な実績。</p>
   </section>
 
   <section id="services">
     <h2>サービス紹介</h2>
     <ul>
-      <li>外壁・屋根塗装</li>
-      <li>防水工事・雨漏り対策</li>
-      <li>内装リフォーム・特殊塗装</li>
-      <li>無料診断・お見積り</li>
+      <li>外壁塗装</li>
+      <li>屋根塗装</li>
+      <li>防水工事</li>
+      <li>無料診断・見積もり</li>
     </ul>
     <a href="#contact" class="cta-button">無料見積もりはこちら</a>
   </section>
@@ -101,12 +106,12 @@
   </section>
 
   <section id="staff">
-    <h2>代表紹介</h2>
+    <h2>スタッフ紹介</h2>
     <div class="staff">
       <div class="staff-member">
         <img src="nakata.jpg" alt="代表 中田 七守">
         <h3>中田 七守</h3>
-        <p>塗装歴30年以上。外壁・内装からマイクロセメントやエイジング塗装まで手がける熟練職人。「一塗りに真心を」が信条です。</p>
+        <p>代表／塗装歴30年以上。お客様第一主義で高品質な仕上がりをお約束します。</p>
       </div>
     </div>
   </section>
@@ -114,28 +119,27 @@
   <section id="blog">
     <h2>お知らせ</h2>
     <ul>
-      <li>2025年5月：梅雨前の外壁点検キャンペーン実施中！</li>
-      <li>2025年4月：屋根防水工事の施工実績を更新しました。</li>
+      <li>2025年6月：夏の塗り替えキャンペーン開始！</li>
+      <li>2025年5月：施工事例に新しい写真を追加しました。</li>
     </ul>
   </section>
 
   <section id="access">
     <h2>アクセス</h2>
-    <p>〒193-0824 東京都八王子市長房町627−1</p>
-    <iframe src="https://www.google.com/maps?q=東京都八王子市長房町627−1&output=embed"
-            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <p>東京都八王子市長房町627−1</p>
+    <iframe src="https://www.google.com/maps?q=東京都八王子市長房町627−1&output=embed" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
   </section>
 
   <section id="contact">
     <h2>お問い合わせ</h2>
-    <form action="https://formsubmit.io/send/chilsoo129@gmail.com" method="POST">
-      <input type="hidden" name="_redirect" value="https://tanaka-paint.github.io/tanaka-tosou/thanks.html">
-      <input type="text" name="name" placeholder="お名前" required>
-      <input type="tel" name="tel" placeholder="電話番号" required>
-      <input type="email" name="email" placeholder="メールアドレス" required>
-      <textarea name="message" rows="5" placeholder="お問い合わせ内容" required></textarea>
-      <button type="submit">送信する</button>
-    </form>
+    <p>ご質問・ご相談・お見積もり依頼など、お気軽にお問い合わせください。</p>
+    <div style="position: relative; width: 100%; height: 0; padding-bottom: 134%; max-width: 100%;">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScuBxIaAu5mtUj6G0ZzHEpnhs3llJNgZf8G03e9Zu3zxWgZhA/viewform?embedded=true"
+              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+              frameborder="0" marginheight="0" marginwidth="0">
+        読み込んでいます…
+      </iframe>
+    </div>
   </section>
 
   <footer>
