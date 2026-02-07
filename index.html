@@ -199,7 +199,19 @@
 </head>
 
 <body>
-  <header>
+  <!-- ===== 暗転（幕） ===== -->
+<div id="curtain"></div>
+
+<!-- ===== 忍者スプラッシュ ===== -->
+<div id="splash">
+  <div class="splash-inner">
+    <img src="nurin_tanaka.png" class="splash-img">
+    <div class="splash-text">
+      <div class="splash-title">必殺：影塗</div>
+      <div class="splash-sub">静かに近づき、仕上がりだけ残す。</div>
+    </div>
+  </div>
+</div>  <header>
     <div class="wrap">
       <div class="topbar">
         <div class="brand"><span class="dot"></span>田中塗装 <span class="mut">｜八王子</span></div>
@@ -356,5 +368,23 @@
       © Tanaka Tosou. Color on the front. Shadow in the back.
     </div>
   </main>
+  <script>
+document.body.classList.add('loading');
+
+window.addEventListener('load', () => {
+  const curtain = document.getElementById('curtain');
+  const splash  = document.getElementById('splash');
+
+  setTimeout(() => {
+    curtain.classList.add('open');
+  }, 300);
+
+  setTimeout(() => {
+    splash.classList.add('hide');
+    document.body.classList.remove('loading');
+    document.body.classList.add('ready');
+  }, 1800);
+});
+</script>
 </body>
 </html>
