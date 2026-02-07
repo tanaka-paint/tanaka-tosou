@@ -2,383 +2,369 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>田中塗装｜八王子｜色は華やか、仕事は静かに。</title>
-  <meta name="description" content="八王子の田中塗装。外壁塗装・無機塗料・特殊塗装・打ちっぱなし保護など。誠実に、静かに、きれいに仕上げます。" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>田中塗装｜八王子｜外壁塗装・無機塗料・特殊塗装</title>
+  <meta name="description" content="八王子の田中塗装。戸建て外壁塗装から無機塗料・特殊塗装・打ちっぱなしコンクリート保護まで対応。丁寧で静かな仕事、仕上がりは美しく。" />
 
   <style>
     :root{
-      --bg:#0b1220;
-      --panel:#0f1b31;
-      --text:#eaf2ff;
-      --muted:rgba(234,242,255,.72);
+      --bg1:#061318;
+      --bg2:#071b22;
+      --card:#0b2028;
+      --text:#eaf2f3;
+      --muted:#b7c7c9;
       --line:rgba(255,255,255,.10);
-      --accent:#39ff88;
+      --accent:#20e18b;
+      --accent2:#1aa3ff;
+      --shadow: 0 30px 70px rgba(0,0,0,.35);
+      --radius: 22px;
     }
-
-    *{ box-sizing:border-box; }
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+      font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
       color:var(--text);
-      background: radial-gradient(1200px 600px at 20% 0%, rgba(57,255,136,.18), transparent 55%),
-                  radial-gradient(900px 500px at 80% 20%, rgba(0,160,255,.14), transparent 55%),
-                  var(--bg);
-      min-height:100vh;
+      background: radial-gradient(1000px 600px at 20% 10%, #0d3a3d 0%, transparent 55%),
+                  radial-gradient(900px 600px at 90% 0%, #11304a 0%, transparent 55%),
+                  linear-gradient(180deg, var(--bg2), var(--bg1));
       overflow-x:hidden;
     }
-    a{ color:inherit; text-decoration:none; }
-    .wrap{ max-width:1020px; margin:0 auto; padding:20px 16px 80px; }
+    a{color:inherit}
+    .container{width:min(1100px, 92vw); margin:0 auto;}
 
+    /* ====== ヘッダー ====== */
     header{
-      position:sticky;
-      top:0;
+      position:sticky; top:0; z-index:50;
       backdrop-filter: blur(10px);
-      background: rgba(11,18,32,.55);
+      background: linear-gradient(180deg, rgba(5,15,18,.92), rgba(5,15,18,.55));
       border-bottom:1px solid var(--line);
-      z-index:50;
     }
-    .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
+    .header-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
       gap:12px;
-      max-width:1020px;
-      margin:0 auto;
-      padding:12px 16px;
     }
     .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
+      display:flex; align-items:center; gap:10px;
+      letter-spacing:.08em;
       font-weight:800;
-      letter-spacing:.06em;
     }
     .dot{
-      width:10px; height:10px; border-radius:50%;
+      width:10px; height:10px; border-radius:999px;
       background:var(--accent);
-      box-shadow:0 0 18px rgba(57,255,136,.65);
+      box-shadow:0 0 18px rgba(32,225,139,.55);
+      flex:0 0 auto;
     }
-    .nav a.btn{
-      display:inline-flex;
-      align-items:center;
+    .brand small{display:block; font-weight:600; color:var(--muted); letter-spacing:.02em}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
       gap:8px;
-      padding:10px 14px;
-      border:1px solid var(--line);
+      padding:12px 16px;
       border-radius:999px;
+      border:1px solid var(--line);
       background: rgba(255,255,255,.06);
-      transition:.2s;
+      color:var(--text);
+      text-decoration:none;
       font-weight:700;
+      transition:.2s;
+      white-space:nowrap;
     }
-    .nav a.btn:hover{ transform:translateY(-1px); background: rgba(255,255,255,.10); }
+    .btn:hover{transform:translateY(-1px); background: rgba(255,255,255,.10);}
+    .btn.primary{
+      border-color: rgba(32,225,139,.35);
+      background: linear-gradient(180deg, rgba(32,225,139,.20), rgba(32,225,139,.10));
+    }
 
-    .hero{
-      padding:34px 0 10px;
-    }
-    .kicker{
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      padding:7px 12px;
-      border:1px solid var(--line);
+    /* ====== メイン ====== */
+    main{padding:34px 0 90px;}
+    .pill{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px;
       border-radius:999px;
+      border:1px solid var(--line);
       background: rgba(255,255,255,.05);
       color:var(--muted);
       font-weight:700;
-      font-size:13px;
     }
-    h1{
-      margin:14px 0 10px;
-      font-size: clamp(28px, 4.2vw, 46px);
-      line-height:1.15;
-      letter-spacing:.03em;
-    }
-    .sub{
-      color:var(--muted);
-      font-size:16px;
-      line-height:1.75;
-      max-width:760px;
-    }
-
-    .grid{
+    .hero{
+      margin-top:18px;
       display:grid;
       grid-template-columns: 1.2fr .8fr;
-      gap:18px;
-      margin-top:18px;
+      gap:22px;
+      align-items:stretch;
     }
-    @media (max-width: 860px){
-      .grid{ grid-template-columns: 1fr; }
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;}
+    }
+    .lead{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.04);
+      box-shadow: var(--shadow);
+      padding:26px;
+      position:relative;
+      overflow:hidden;
+    }
+    .lead h1{
+      margin:14px 0 12px;
+      font-size: clamp(28px, 4.2vw, 44px);
+      line-height:1.15;
+      letter-spacing:.02em;
+    }
+    .lead p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.9;
+      font-size:15.5px;
+    }
+    .cta{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top:18px;
     }
     .card{
       border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(11,32,40,.70);
+      box-shadow: var(--shadow);
+      padding:22px;
+      position:relative;
+      overflow:hidden;
+      min-height: 280px;
+    }
+    .card h2{margin:0 0 12px; font-size:20px;}
+    .list{margin:0; padding-left:18px; color:var(--muted); line-height:1.9;}
+    .list li{margin:6px 0;}
+    .mini-img{
+      position:absolute;
+      right:14px; bottom:14px;
+      width:min(190px, 40vw);
       border-radius:18px;
-      background: rgba(15,27,49,.65);
-      padding:18px;
-    }
-    .card h2{
-      margin:0 0 10px;
-      font-size:18px;
-      letter-spacing:.04em;
-    }
-    .list{
-      margin:0;
-      padding-left:18px;
-      color:var(--muted);
-      line-height:1.8;
-    }
-    .ctaRow{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:14px;
-    }
-    .cta{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:12px 14px;
-      border-radius:14px;
-      border:1px solid var(--line);
+      border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.06);
-      font-weight:800;
-      transition:.18s;
-      min-width:160px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.35);
     }
-    .cta.primary{
-      background: rgba(57,255,136,.14);
-      border-color: rgba(57,255,136,.35);
-    }
-    .cta:hover{ transform: translateY(-1px); background: rgba(255,255,255,.10); }
+    .mini-img.hidden{display:none;}
 
-    /* ===== スプラッシュ（最初の演出） ===== */
-    #curtain{
-      position:fixed;
-      inset:0;
-      background:#000;
-      z-index:9998;
-      opacity:1;
-      transition: opacity .9s ease;
-    }
-    #curtain.open{
-      opacity:0;
-      pointer-events:none;
-    }
-
+    /* ====== スプラッシュ（黒画面） ====== */
     #splash{
-      position:fixed;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      z-index:9999;
-      pointer-events:none;
+      position:fixed; inset:0; z-index:9999;
+      background: radial-gradient(900px 500px at 20% 20%, rgba(32,225,139,.20), transparent 55%),
+                  radial-gradient(900px 500px at 80% 10%, rgba(26,163,255,.18), transparent 55%),
+                  #020607;
+      display:flex; align-items:center; justify-content:center;
+      transition: opacity .5s ease, visibility .5s ease;
     }
+    #splash.hide{opacity:0; visibility:hidden; pointer-events:none;}
     .splash-inner{
+      width:min(620px, 90vw);
       text-align:center;
-      transform: translateY(10px);
-      opacity:0;
-      animation: splashIn 1s forwards;
+      padding:26px 18px;
     }
-    @keyframes splashIn{
-      to{ opacity:1; transform: translateY(0); }
-    }
-    .splash-badge{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
+    .splash-logo{
+      display:inline-flex; align-items:center; gap:10px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
       padding:12px 16px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.55);
-      box-shadow: 0 30px 90px rgba(0,0,0,.45);
-    }
-    .splash-badge .dot{ width:12px; height:12px; }
-    .splash-title{
+      border-radius:999px;
       font-weight:900;
       letter-spacing:.08em;
     }
-    .splash-sub{
-      display:block;
-      margin-top:8px;
+    .splash-tag{
+      margin-top:12px;
       color: rgba(255,255,255,.75);
-      font-size:13px;
-      letter-spacing:.06em;
+      letter-spacing:.02em;
     }
-    #splash.hide{ display:none; }
+    .splash-img{
+      margin:18px auto 0;
+      width:min(340px, 70vw);
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: 0 30px 80px rgba(0,0,0,.55);
+      display:block;
+    }
+    .progress{
+      margin:18px auto 0;
+      width:min(360px, 72vw);
+      height:6px;
+      border-radius:999px;
+      background: rgba(255,255,255,.10);
+      overflow:hidden;
+    }
+    .bar{
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      animation: loadbar 2.2s ease forwards;
+    }
+    @keyframes loadbar{to{width:100%}}
 
-    /* ===== 忍者フローティング（右下からスッ…） ===== */
+    /* ====== 忍者：右下からスッ… ====== */
     .ninja-float{
       position:fixed;
-      right:18px;
-      bottom:-160px; /* ここから上がってくる */
-      z-index:9997;
+      right:16px;
+      bottom:-160px;
+      z-index:200;
       text-align:center;
+      transition: bottom .7s ease;
       cursor:pointer;
-      transition: bottom .8s ease;
       user-select:none;
     }
-    .ninja-float.show{ bottom:18px; }
-
+    .ninja-float.show{bottom:16px;}
     .ninja-float img{
-      width:98px;
+      width:96px;
       height:auto;
-      display:block;
-      filter: drop-shadow(0 12px 26px rgba(0,0,0,.45));
+      filter: drop-shadow(0 12px 28px rgba(0,0,0,.55));
       transition: transform .2s ease;
     }
-    .ninja-float:hover img{ transform: scale(1.05); }
-
+    .ninja-float:hover img{transform:scale(1.05) rotate(-1deg);}
     .ninja-text{
-      margin-top:8px;
+      margin-top:6px;
       display:inline-block;
-      background: rgba(2,6,23,.88);
-      border:1px solid rgba(255,255,255,.16);
-      color:#fff;
-      padding:8px 12px;
+      padding:7px 12px;
       border-radius:999px;
-      font-size:12px;
-      letter-spacing:.06em;
-      white-space:nowrap;
-    }
-
-    /* もし画像が読み込めなかった時の保険（ニンジャ絵文字） */
-    .ninja-fallback{
-      width:98px;
-      height:98px;
-      border-radius:20px;
-      display:none;
-      place-items:center;
-      font-size:44px;
-      background: rgba(255,255,255,.08);
       border:1px solid rgba(255,255,255,.14);
-      filter: drop-shadow(0 12px 26px rgba(0,0,0,.45));
+      background: rgba(0,0,0,.35);
+      color:#fff;
+      font-weight:800;
+      font-size:12px;
+      letter-spacing:.02em;
     }
 
-    footer{
-      margin-top:22px;
-      color:var(--muted);
-      font-size:13px;
-      text-align:center;
-    }
+    /* mainのフェード（壊れても表示されるように“保険”あり） */
+    body.loading main{opacity:0; transform:translateY(8px);}
+    body.ready main{opacity:1; transform:none; transition:.55s ease;}
   </style>
 </head>
 
-<body>
-  <!-- ===== 演出：暗転（幕） ===== -->
-  <div id="curtain"></div>
-
-  <!-- ===== 演出：スプラッシュ ===== -->
-  <div id="splash">
+<body class="loading">
+  <!-- スプラッシュ -->
+  <div id="splash" aria-hidden="true">
     <div class="splash-inner">
-      <div class="splash-badge">
-        <span class="dot"></span>
-        <span class="splash-title">田中塗装</span>
-      </div>
-      <span class="splash-sub">色は華やか、仕事は静かに。</span>
+      <div class="splash-logo"><span class="dot"></span> 田中塗装</div>
+      <div class="splash-tag">色は華やか、仕事は静かに。</div>
+
+      <!-- ここは「nurinto_mini.png」に統一して置く -->
+      <img class="splash-img" src="nurinto_mini.png" alt="忍者デフォルメ" onerror="this.style.display='none'">
+
+      <div class="progress" aria-hidden="true"><div class="bar"></div></div>
     </div>
   </div>
 
   <header>
-    <div class="nav">
-      <div class="brand"><span class="dot"></span> TANAKA TOSOU</div>
-      <a class="btn" href="#contact">お問い合わせ</a>
+    <div class="container">
+      <div class="header-inner">
+        <div class="brand">
+          <span class="dot"></span>
+          <div>
+            TANAKA TOSOU
+            <small>八王子｜外壁塗装・無機塗料・特殊塗装</small>
+          </div>
+        </div>
+        <a class="btn primary" href="#contact">お問い合わせ</a>
+      </div>
     </div>
   </header>
 
-  <main class="wrap">
-    <section class="hero">
-      <div class="kicker"><span class="dot"></span> 八王子｜外壁塗装・無機塗料・特殊塗装</div>
-      <h1>色は華やか、<br>仕事は静かに。</h1>
-      <p class="sub">
-        田中塗装は、戸建て外壁塗装から、無機塗料・特殊塗装・打ちっぱなしコンクリート保護まで対応。<br>
-        見た目は派手でも、現場は丁寧に。仕上がりは静かに美しく。
-      </p>
+  <main>
+    <div class="container">
+      <div class="pill"><span class="dot"></span> 八王子｜外壁塗装・無機塗料・特殊塗装</div>
 
-      <div class="grid">
-        <div class="card">
+      <section class="hero">
+        <div class="lead">
+          <h1>色は華やか、<br>仕事は静かに。</h1>
+          <p>
+            田中塗装は、戸建て外壁塗装から、無機塗料・特殊塗装・打ちっぱなしコンクリート保護まで対応。<br>
+            見た目は派手でも、現場は丁寧に。仕上がりは静かに美しく。
+          </p>
+          <div class="cta">
+            <a class="btn primary" href="#contact">無料相談する</a>
+            <a class="btn" href="#works">施工イメージ</a>
+          </div>
+        </div>
+
+        <aside class="card">
           <h2>強み</h2>
           <ul class="list">
             <li>無機塗料／高耐候・高意匠</li>
             <li>特殊塗装／質感仕上げ・エイジング</li>
-            <li>打ちっぱなし保護／コンクリート補修・保護</li>
+            <li>打ちっぱなし保護／コンクリート補修</li>
           </ul>
+          <!-- 右下の小さい画像（任意） -->
+          <img class="mini-img" src="nurin_tanaka.png" alt="忍者ペインター" onerror="this.classList.add('hidden')">
+        </aside>
+      </section>
 
-          <div class="ctaRow">
-            <a class="cta primary" href="#contact">無料相談する</a>
-            <a class="cta" href="#works">施工イメージ</a>
-          </div>
-        </div>
-
-        <div class="card" id="works">
+      <section id="works" style="margin-top:22px;">
+        <div class="card" style="min-height:auto;">
           <h2>施工イメージ</h2>
-          <p class="sub" style="margin:0">
-            ここは後で画像を置こう。<br>
-            （画像差し替えで崩れないように、まずは“動く骨組み”を固定します）
+          <p style="margin:0; color:var(--muted); line-height:1.9;">
+            ここに施工写真（before/after）や、無機塗料・特殊塗装の事例を追加していこう。<br>
+            写真を入れるなら、ファイル名を英数字にしてこのリポジトリにアップ → HTMLに追記でOK。
           </p>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="card" id="contact" style="margin-top:18px">
-      <h2>お問い合わせ</h2>
-      <p class="sub" style="margin:0">
-        「だいたいの予算感だけ聞きたい」でもOK。<br>
-        ここにGoogleフォームやLINEリンクを後で入れます。
-      </p>
-    </section>
-
-    <footer>
-      © 田中塗装 / TANAKA TOSOU
-    </footer>
+      <section id="contact" style="margin-top:22px;">
+        <div class="card" style="min-height:auto;">
+          <h2>お問い合わせ</h2>
+          <p style="margin:0; color:var(--muted); line-height:1.9;">
+            ここは今のフォーム導線（Googleフォーム等）に合わせてリンクを入れる。<br>
+            例：<code style="color:#fff;">&lt;a href="（フォームURL）"&gt;お問い合わせ&lt;/a&gt;</code>
+          </p>
+        </div>
+      </section>
+    </div>
   </main>
 
-  <!-- ===== 忍者本体（必ず body の中！） ===== -->
-  <div class="ninja-float" id="ninja">
-    <img id="ninjaImg" src="nurin_tanaka.png" alt="忍者ペインター">
-    <div class="ninja-fallback" id="ninjaFallback">🥷</div>
+  <!-- 忍者（右下からスッ…） -->
+  <div class="ninja-float" id="ninja" title="相談してね">
+    <img src="nurin_tanaka.png" alt="忍者ペインター" onerror="this.style.display='none'">
     <div class="ninja-text">相談してね</div>
   </div>
 
   <script>
-    // 画像が404でも動く保険（絵文字表示）
     (function(){
-      const img = document.getElementById("ninjaImg");
-      const fb = document.getElementById("ninjaFallback");
-      img.addEventListener("error", () => {
-        img.style.display = "none";
-        fb.style.display = "grid";
+      const splash = document.getElementById("splash");
+      const ninja  = document.getElementById("ninja");
+
+      // どんな事故でも「真っ黒固定」にならない保険：最大5秒で強制解除
+      const failsafe = setTimeout(() => {
+        document.body.classList.remove("loading");
+        document.body.classList.add("ready");
+        if (splash) splash.classList.add("hide");
+        if (ninja) ninja.classList.add("show");
+      }, 5000);
+
+      window.addEventListener("load", () => {
+        try{
+          // まず本文表示の準備
+          document.body.classList.remove("loading");
+          document.body.classList.add("ready");
+
+          // スプラッシュは少し見せてから消す（2.2秒）
+          setTimeout(() => {
+            if (splash) splash.classList.add("hide");
+          }, 2200);
+
+          // さらに0.5秒後に忍者がスッ…
+          setTimeout(() => {
+            if (ninja) ninja.classList.add("show");
+          }, 2700);
+
+        } finally {
+          clearTimeout(failsafe);
+        }
       });
+
+      // 忍者を押したらお問い合わせへ
+      if (ninja){
+        ninja.addEventListener("click", () => {
+          const el = document.getElementById("contact");
+          if (el) el.scrollIntoView({behavior:"smooth"});
+        });
+      }
     })();
-
-    window.addEventListener("load", () => {
-      const curtain = document.getElementById("curtain");
-      const splash  = document.getElementById("splash");
-      const ninja   = document.getElementById("ninja");
-
-      // 最初は body を軽く隠しておく（演出用）
-      document.body.classList.add("loading");
-
-      // 1.5秒で暗転解除（幕が開く）
-      setTimeout(() => {
-        curtain.classList.add("open");
-      }, 1500);
-
-      // 3.2秒でスプラッシュ終了 → 本編表示
-      setTimeout(() => {
-        splash.classList.add("hide");
-
-        // さらに0.5秒後、忍者が右下からスッ…
-        setTimeout(() => {
-          ninja.classList.add("show");
-        }, 500);
-
-      }, 3200);
-
-      // クリックしたらお問い合わせへジャンプ
-      ninja.addEventListener("click", () => {
-        location.hash = "#contact";
-      });
-    });
   </script>
 </body>
 </html>
