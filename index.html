@@ -2,497 +2,383 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>田中塗装｜八王子｜色は華やか、仕事は静かに。</title>
-  <meta name="description" content="八王子の田中塗装。外壁・屋根・防水・打ちっぱなし補修・マイクロセメント・特殊塗装。静かに近づき、仕上がりだけ残す。LINE写真相談OK。" />
+  <meta name="description" content="八王子の田中塗装。外壁塗装・無機塗料・特殊塗装・打ちっぱなし保護など。誠実に、静かに、きれいに仕上げます。" />
 
   <style>
     :root{
-      --ink:#0f172a;
-      --mut:#475569;
-      --bg:#ffffff;
-      --card:#ffffff;
-      --line:#e2e8f0;
-
-      --accent:#2563eb;
-      --ok:#16a34a;
-      --hot:#f97316;
-
-      /* 闇の差し色 */
-      --shadow:#020617;
+      --bg:#0b1220;
+      --panel:#0f1b31;
+      --text:#eaf2ff;
+      --muted:rgba(234,242,255,.72);
+      --line:rgba(255,255,255,.10);
+      --accent:#39ff88;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{ box-sizing:border-box; }
     body{
       margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",system-ui,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--ink);
-      line-height:1.75;
-
-      /* 表：カラフル / 裏：うっすら斜め影（忍者の気配） */
-      background:
-        radial-gradient(900px 600px at 10% 0%, rgba(37,99,235,.18), transparent 55%),
-        radial-gradient(900px 600px at 90% 10%, rgba(249,115,22,.18), transparent 55%),
-        radial-gradient(900px 600px at 50% 100%, rgba(22,163,74,.15), transparent 55%),
-        repeating-linear-gradient(135deg, rgba(2,6,23,.035) 0 10px, transparent 10px 26px),
-        var(--bg);
+      font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+      color:var(--text);
+      background: radial-gradient(1200px 600px at 20% 0%, rgba(57,255,136,.18), transparent 55%),
+                  radial-gradient(900px 500px at 80% 20%, rgba(0,160,255,.14), transparent 55%),
+                  var(--bg);
+      min-height:100vh;
+      overflow-x:hidden;
     }
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width:1020px; margin:0 auto; padding:20px 16px 80px; }
 
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:1040px; margin:0 auto; padding:0 18px}
-
-    header{padding:18px 0 0}
-    .topbar{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      padding:14px 16px;
-      border:1px solid var(--line);
-      border-radius:18px;
-      background:rgba(255,255,255,.78);
+    header{
+      position:sticky;
+      top:0;
       backdrop-filter: blur(10px);
-      box-shadow:0 10px 30px rgba(2,6,23,.06);
+      background: rgba(11,18,32,.55);
+      border-bottom:1px solid var(--line);
+      z-index:50;
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      max-width:1020px;
+      margin:0 auto;
+      padding:12px 16px;
     }
     .brand{
-      display:flex; align-items:center; gap:10px; font-weight:900;
-      letter-spacing:.04em;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      letter-spacing:.06em;
     }
     .dot{
-      width:10px; height:10px; border-radius:999px;
-      background:linear-gradient(135deg, var(--accent), var(--hot));
-      box-shadow:0 0 0 6px rgba(37,99,235,.12);
+      width:10px; height:10px; border-radius:50%;
+      background:var(--accent);
+      box-shadow:0 0 18px rgba(57,255,136,.65);
     }
-    .mini{
-      display:flex; flex-wrap:wrap; gap:8px;
-      justify-content:flex-end;
-    }
-    .badge{
-      font-size:12px;
-      font-weight:800;
-      padding:6px 10px;
-      border-radius:999px;
+    .nav a.btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
       border:1px solid var(--line);
-      background:rgba(255,255,255,.85);
-      color:var(--mut);
-      white-space:nowrap;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      transition:.2s;
+      font-weight:700;
+    }
+    .nav a.btn:hover{ transform:translateY(-1px); background: rgba(255,255,255,.10); }
+
+    .hero{
+      padding:34px 0 10px;
+    }
+    .kicker{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding:7px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background: rgba(255,255,255,.05);
+      color:var(--muted);
+      font-weight:700;
+      font-size:13px;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(28px, 4.2vw, 46px);
+      line-height:1.15;
+      letter-spacing:.03em;
+    }
+    .sub{
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.75;
+      max-width:760px;
     }
 
-    .hero{padding:22px 0 10px}
-    .heroGrid{
+    .grid{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
       gap:18px;
-      align-items:stretch;
+      margin-top:18px;
     }
-    @media (max-width:900px){
-      .heroGrid{grid-template-columns:1fr}
+    @media (max-width: 860px){
+      .grid{ grid-template-columns: 1fr; }
     }
-
     .card{
       border:1px solid var(--line);
-      border-radius:22px;
-      background:rgba(255,255,255,.82);
-      backdrop-filter: blur(10px);
-      box-shadow:0 18px 50px rgba(2,6,23,.07);
+      border-radius:18px;
+      background: rgba(15,27,49,.65);
+      padding:18px;
     }
-    .cardPad{padding:18px 18px 16px}
-
-    .headline{
-      font-size:40px;
-      line-height:1.15;
-      letter-spacing:.02em;
+    .card h2{
       margin:0 0 10px;
-      font-weight:950;
+      font-size:18px;
+      letter-spacing:.04em;
     }
-    @media (max-width:520px){
-      .headline{font-size:32px}
+    .list{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.8;
     }
-
-    .lead{
-      margin:0 0 14px;
-      color:var(--mut);
-      font-weight:800;
-    }
-
-    .skills{
-      display:flex; flex-wrap:wrap; gap:10px;
-      margin:12px 0 0;
-      padding:0;
-      list-style:none;
-    }
-    .skills li{
-      font-size:13px;
-      font-weight:900;
-      padding:10px 12px;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.9);
-      box-shadow:0 10px 20px rgba(2,6,23,.05);
-    }
-
-    .ctaBox{
-      display:grid;
-      gap:10px;
-    }
-    .btns{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-    }
-    @media (max-width:520px){
-      .btns{grid-template-columns:1fr}
-    }
-    .btn{
+    .ctaRow{
       display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+    .cta{
+      display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:10px;
-      padding:14px 14px;
-      border-radius:16px;
-      font-weight:950;
-      border:1px solid transparent;
-      transition:.15s ease;
-      user-select:none;
-    }
-    .btn:hover{transform:translateY(-1px)}
-    .btn:active{transform:translateY(0)}
-
-    .btn.ok{background:linear-gradient(135deg, #22c55e, #16a34a); color:#fff}
-    .btn.primary{background:linear-gradient(135deg, #60a5fa, #2563eb); color:#fff}
-    .btn.dark{
-      background:linear-gradient(135deg, #111827, #020617);
-      color:#fff;
-      border-color:rgba(255,255,255,.08);
-    }
-    .btn.hot{background:linear-gradient(135deg, #fb7185, #f97316); color:#fff}
-
-    .subnote{
-      margin:0;
-      color:var(--mut);
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.06);
       font-weight:800;
-      font-size:13px;
+      transition:.18s;
+      min-width:160px;
     }
+    .cta.primary{
+      background: rgba(57,255,136,.14);
+      border-color: rgba(57,255,136,.35);
+    }
+    .cta:hover{ transform: translateY(-1px); background: rgba(255,255,255,.10); }
 
-    .panelTitle{
-      margin:0 0 8px;
-      font-weight:950;
-      letter-spacing:.06em;
-      display:flex; align-items:center; gap:10px;
-    }
-    .panelTitle .mark{
-      width:10px; height:10px; border-radius:999px;
-      background:var(--shadow);
-      box-shadow:0 0 0 6px rgba(2,6,23,.08);
-    }
-
-    .swatches{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap:10px;
-      margin-top:12px;
-    }
-    @media (max-width:520px){
-      .swatches{grid-template-columns: repeat(3, 1fr);}
-    }
-    .sw{
-      height:54px;
-      border-radius:16px;
-      border:1px solid rgba(2,6,23,.08);
-      box-shadow:0 12px 24px rgba(2,6,23,.06);
-      position:relative;
-      overflow:hidden;
-    }
-    .sw::after{
-      content:"";
-      position:absolute; inset:-40%;
-      background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.55), transparent 60%);
-      transform:rotate(12deg);
-    }
-    /* 色見本：光と闇 */
-    .sw:nth-child(1){background:#60a5fa}
-    .sw:nth-child(2){background:#fb7185}
-    .sw:nth-child(3){background:#34d399}
-    .sw:nth-child(4){background:#fbbf24}
-    .sw:nth-child(5){background:#a78bfa}
-    .sw:nth-child(6){background:#22c55e}
-    .sw:nth-child(7){background:#0f172a} /* 深夜 */
-    .sw:nth-child(8){background:#020617} /* 闇 */
-
-    .footer{
-      padding:24px 0 34px;
-      color:var(--mut);
-      font-size:12px;
-    }
-
-    /* ===== 暗転の幕 ===== */
+    /* ===== スプラッシュ（最初の演出） ===== */
     #curtain{
       position:fixed;
       inset:0;
-      background:#020617;
-      z-index:10000;
+      background:#000;
+      z-index:9998;
       opacity:1;
-      transition: opacity .6s ease;
+      transition: opacity .9s ease;
     }
     #curtain.open{
       opacity:0;
       pointer-events:none;
     }
 
-    /* ===== 忍者スプラッシュ ===== */
     #splash{
       position:fixed;
       inset:0;
-      background:white;
       display:flex;
       align-items:center;
       justify-content:center;
       z-index:9999;
-      transition: opacity .9s ease, visibility .9s ease;
+      pointer-events:none;
     }
-    #splash.hide{
+    .splash-inner{
+      text-align:center;
+      transform: translateY(10px);
       opacity:0;
-      visibility:hidden;
+      animation: splashIn 1s forwards;
     }
-
-    .splash-inner{ text-align:center; }
-
-    .splash-img{
-      width:min(520px,85vw);
-      border-radius:22px;
-      box-shadow:0 30px 70px rgba(0,0,0,.25);
-      opacity:0;
-      transform:translateY(10px);
-      animation:splashIn 1s forwards;
-    }
-
-    .splash-text{
-      margin-top:16px;
-      opacity:0;
-      animation:splashIn 1s .2s forwards;
-    }
-
-    .splash-title{
-      font-size:22px;
-      font-weight:900;
-      letter-spacing:.1em;
-      color:#0f172a;
-    }
-
-    .splash-sub{
-      font-size:14px;
-      color:#475569;
-      font-weight:700;
-    }
-
     @keyframes splashIn{
-      to{opacity:1; transform:translateY(0);}
+      to{ opacity:1; transform: translateY(0); }
+    }
+    .splash-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 16px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.55);
+      box-shadow: 0 30px 90px rgba(0,0,0,.45);
+    }
+    .splash-badge .dot{ width:12px; height:12px; }
+    .splash-title{
+      font-weight:900;
+      letter-spacing:.08em;
+    }
+    .splash-sub{
+      display:block;
+      margin-top:8px;
+      color: rgba(255,255,255,.75);
+      font-size:13px;
+      letter-spacing:.06em;
+    }
+    #splash.hide{ display:none; }
+
+    /* ===== 忍者フローティング（右下からスッ…） ===== */
+    .ninja-float{
+      position:fixed;
+      right:18px;
+      bottom:-160px; /* ここから上がってくる */
+      z-index:9997;
+      text-align:center;
+      cursor:pointer;
+      transition: bottom .8s ease;
+      user-select:none;
+    }
+    .ninja-float.show{ bottom:18px; }
+
+    .ninja-float img{
+      width:98px;
+      height:auto;
+      display:block;
+      filter: drop-shadow(0 12px 26px rgba(0,0,0,.45));
+      transition: transform .2s ease;
+    }
+    .ninja-float:hover img{ transform: scale(1.05); }
+
+    .ninja-text{
+      margin-top:8px;
+      display:inline-block;
+      background: rgba(2,6,23,.88);
+      border:1px solid rgba(255,255,255,.16);
+      color:#fff;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:12px;
+      letter-spacing:.06em;
+      white-space:nowrap;
     }
 
-    body.loading header,
-    body.loading main{
-      opacity:0;
-      transform:translateY(8px);
+    /* もし画像が読み込めなかった時の保険（ニンジャ絵文字） */
+    .ninja-fallback{
+      width:98px;
+      height:98px;
+      border-radius:20px;
+      display:none;
+      place-items:center;
+      font-size:44px;
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.14);
+      filter: drop-shadow(0 12px 26px rgba(0,0,0,.45));
     }
 
-    body.ready header,
-    body.ready main{
-      opacity:1;
-      transform:none;
-      transition:.9s ease;
+    footer{
+      margin-top:22px;
+      color:var(--muted);
+      font-size:13px;
+      text-align:center;
     }
   </style>
 </head>
 
 <body>
-  <!-- ===== 暗転（幕） ===== -->
+  <!-- ===== 演出：暗転（幕） ===== -->
   <div id="curtain"></div>
 
-  <!-- ===== 忍者スプラッシュ ===== -->
+  <!-- ===== 演出：スプラッシュ ===== -->
   <div id="splash">
     <div class="splash-inner">
-      <img src="nurin_tanaka.png" class="splash-img" alt="田中塗装 忍者" />
-      <div class="splash-text">
-        <div class="splash-title">必殺：影塗</div>
-        <div class="splash-sub">静かに近づき、仕上がりだけ残す。</div>
+      <div class="splash-badge">
+        <span class="dot"></span>
+        <span class="splash-title">田中塗装</span>
       </div>
+      <span class="splash-sub">色は華やか、仕事は静かに。</span>
     </div>
   </div>
 
   <header>
-    <div class="wrap">
-      <div class="topbar">
-        <div class="brand"><span class="dot"></span><span>田中塗装 / 八王子</span></div>
-        <div class="mini">
-          <span class="badge">🎨 色の職人</span>
-          <span class="badge">🫥 表に立たない</span>
-          <span class="badge">⚡ 速い（静かに）</span>
-          <span class="badge">📩 LINE写真相談OK</span>
-        </div>
-      </div>
+    <div class="nav">
+      <div class="brand"><span class="dot"></span> TANAKA TOSOU</div>
+      <a class="btn" href="#contact">お問い合わせ</a>
     </div>
   </header>
 
-  <main>
+  <main class="wrap">
     <section class="hero">
-      <div class="wrap">
-        <div class="heroGrid">
-          <div class="card">
-            <div class="cardPad">
-              <h1 class="headline">色は華やか。<br>仕事は、静かに。</h1>
-              <p class="lead">
-                外壁・屋根・防水・打ちっぱなし補修・マイクロセメント・特殊塗装。<br>
-                目立たず動いて、唯一無二の仕上がりだけ残すタイプです。
-              </p>
+      <div class="kicker"><span class="dot"></span> 八王子｜外壁塗装・無機塗料・特殊塗装</div>
+      <h1>色は華やか、<br>仕事は静かに。</h1>
+      <p class="sub">
+        田中塗装は、戸建て外壁塗装から、無機塗料・特殊塗装・打ちっぱなしコンクリート保護まで対応。<br>
+        見た目は派手でも、現場は丁寧に。仕上がりは静かに美しく。
+      </p>
 
-              <ul class="skills">
-                <li>外壁塗装</li>
-                <li>屋根塗装</li>
-                <li>防水</li>
-                <li>打ちっぱなし補修</li>
-                <li>マイクロセメント</li>
-                <li>特殊塗装</li>
-                <li>写真で事前相談</li>
-                <li>無理な押し売りしない</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="cardPad ctaBox">
-              <h3 class="panelTitle"><span class="mark"></span>連絡（最短ルート）</h3>
-
-              <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener">
-                🟩 LINEで写真送る（最強）
-              </a>
-
-              <div class="btns">
-                <a class="btn primary" href="mailto:tanakatoso_yoon@ezweb.ne.jp">
-                  ✉️ まず相談する
-                </a>
-                <a class="btn dark" href="tel:09061203852">
-                  📞 電話する
-                </a>
-              </div>
-
-              <a class="btn hot" href="https://www.instagram.com/tanakatoso_yoon/" target="_blank" rel="noopener">
-                📷 Instagram（作品）を見る
-              </a>
-
-              <a class="btn hot" href="https://youtube.com/channel/UC_ic4KvdbTO_w0gmX3QGXWg?si=TirZogHwcdMEXKVq" target="_blank" rel="noopener">
-                🎥 YouTube（狂い動画）を見る
-              </a>
-
-              <p class="subnote">
-                ※ 相見積もり歓迎。無理な押し売りはしません。押すのはローラーだけ。
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div style="height:14px"></div>
-
+      <div class="grid">
         <div class="card">
-          <div class="cardPad">
-            <h3 class="panelTitle"><span class="mark"></span>色見本：光と闇（忍者の気配）</h3>
-            <p class="subnote" style="margin:0">
-              カラフルに見せたい。でも、ところどころ闇が効く。そんな仕上げが好きです。
-            </p>
-            <div class="swatches" aria-hidden="true">
-              <div class="sw"></div><div class="sw"></div><div class="sw"></div><div class="sw"></div>
-              <div class="sw"></div><div class="sw"></div><div class="sw"></div><div class="sw"></div>
-            </div>
+          <h2>強み</h2>
+          <ul class="list">
+            <li>無機塗料／高耐候・高意匠</li>
+            <li>特殊塗装／質感仕上げ・エイジング</li>
+            <li>打ちっぱなし保護／コンクリート補修・保護</li>
+          </ul>
+
+          <div class="ctaRow">
+            <a class="cta primary" href="#contact">無料相談する</a>
+            <a class="cta" href="#works">施工イメージ</a>
           </div>
         </div>
 
-        <div class="footer">
-          田中塗装｜東京都 八王子（長房町）｜代表：中田<br>
-          © Tanaka Tosou. Color on the front. Shadow in the back.
+        <div class="card" id="works">
+          <h2>施工イメージ</h2>
+          <p class="sub" style="margin:0">
+            ここは後で画像を置こう。<br>
+            （画像差し替えで崩れないように、まずは“動く骨組み”を固定します）
+          </p>
         </div>
       </div>
     </section>
+
+    <section class="card" id="contact" style="margin-top:18px">
+      <h2>お問い合わせ</h2>
+      <p class="sub" style="margin:0">
+        「だいたいの予算感だけ聞きたい」でもOK。<br>
+        ここにGoogleフォームやLINEリンクを後で入れます。
+      </p>
+    </section>
+
+    <footer>
+      © 田中塗装 / TANAKA TOSOU
+    </footer>
   </main>
 
+  <!-- ===== 忍者本体（必ず body の中！） ===== -->
+  <div class="ninja-float" id="ninja">
+    <img id="ninjaImg" src="nurin_tanaka.png" alt="忍者ペインター">
+    <div class="ninja-fallback" id="ninjaFallback">🥷</div>
+    <div class="ninja-text">相談してね</div>
+  </div>
+
   <script>
-    // 最初は暗転＆中身非表示
-    document.body.classList.add('loading');
+    // 画像が404でも動く保険（絵文字表示）
+    (function(){
+      const img = document.getElementById("ninjaImg");
+      const fb = document.getElementById("ninjaFallback");
+      img.addEventListener("error", () => {
+        img.style.display = "none";
+        fb.style.display = "grid";
+      });
+    })();
 
-    window.addEventListener('load', () => {
-      const curtain = document.getElementById('curtain');
-      const splash  = document.getElementById('splash');
+    window.addEventListener("load", () => {
+      const curtain = document.getElementById("curtain");
+      const splash  = document.getElementById("splash");
+      const ninja   = document.getElementById("ninja");
 
-      // 暗転を“見える長さ”に（1.5秒）
+      // 最初は body を軽く隠しておく（演出用）
+      document.body.classList.add("loading");
+
+      // 1.5秒で暗転解除（幕が開く）
       setTimeout(() => {
-        curtain.classList.add('open');
+        curtain.classList.add("open");
       }, 1500);
 
-      // スプラッシュ→本編表示（3.2秒）
+      // 3.2秒でスプラッシュ終了 → 本編表示
       setTimeout(() => {
-        splash.classList.add('hide');
-        document.body.classList.remove('loading');
-        document.body.classList.add('ready');
+        splash.classList.add("hide");
+
+        // さらに0.5秒後、忍者が右下からスッ…
+        setTimeout(() => {
+          ninja.classList.add("show");
+        }, 500);
+
       }, 3200);
+
+      // クリックしたらお問い合わせへジャンプ
+      ninja.addEventListener("click", () => {
+        location.hash = "#contact";
+      });
     });
   </script>
-  /* ===== 忍者フローティング ===== */
-.ninja-float{
-  position:fixed;
-  right:20px;
-  bottom:-140px;
-  z-index:9999;
-  text-align:center;
-  cursor:pointer;
-  transition:.8s;
-}
-.ninja-float.show{ bottom:20px; }
-
-.ninja-float img{
-  width:95px;
-  filter:drop-shadow(0 10px 25px rgba(0,0,0,.4));
-  transition:.3s;
-}
-.ninja-float img:hover{ transform:scale(1.1); }
-
-.ninja-text{
-  background:#020617;
-  color:#fff;
-  padding:7px 14px;
-  border-radius:20px;
-  font-size:12px;
-  margin-top:6px;
-}  
-  <!-- ===== 忍者本体 ===== -->
-<div class="ninja-float">
-  <img src="nurin_tanaka.png">
-  <div class="ninja-text">相談してね</div>
-</div>
 </body>
-  <script>
-window.addEventListener("load", () => {
-
-  const curtain = document.getElementById("curtain");
-  const splash = document.getElementById("splash");
-  const ninja  = document.querySelector(".ninja-float");
-
-  // 初期状態
-  document.body.classList.add("loading");
-
-  // カーテンOPEN（1.5秒）
-  setTimeout(() => {
-    curtain.classList.add("open");
-  }, 1500);
-
-  // スプラッシュ終了（3.2秒）
-  setTimeout(() => {
-    splash.classList.add("hide");
-    document.body.classList.remove("loading");
-    document.body.classList.add("ready");
-
-    // 忍者登場（さらに0.5秒後）
-    setTimeout(() => {
-      ninja.classList.add("show");
-    }, 500);
-
-  }, 3200);
-
-});
-</script>
 </html>
