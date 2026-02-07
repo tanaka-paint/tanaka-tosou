@@ -656,6 +656,60 @@
           </div>
         </div>
 
+        <!-- ===== 簡易見積フォーム ===== -->
+<section style="background:#f7f7f7;padding:60px 20px;text-align:center">
+  <h2 style="font-size:28px;margin-bottom:10px;">30秒で分かる簡易見積</h2>
+  <p style="margin-bottom:30px;">写真を送るだけで概算をお伝えします</p>
+
+  <form action="https://formspree.io/f/xgvylwka" method="POST" style="max-width:500px;margin:auto;text-align:left">
+
+    <label>建物タイプ</label>
+    <select name="建物タイプ" required>
+      <option>戸建て</option>
+      <option>アパート</option>
+      <option>店舗</option>
+    </select>
+
+    <label>塗装したい場所</label>
+    <select name="塗装箇所">
+      <option>外壁</option>
+      <option>屋根</option>
+      <option>ベランダ</option>
+      <option>室内</option>
+    </select>
+
+    <label>築年数</label>
+    <select name="築年数">
+      <option>10年未満</option>
+      <option>10〜20年</option>
+      <option>20〜30年</option>
+      <option>30年以上</option>
+    </select>
+
+    <label>延床面積</label>
+    <select name="坪数">
+      <option>30坪</option>
+      <option>35坪</option>
+      <option>40坪</option>
+      <option>50坪以上</option>
+      <option>不明</option>
+    </select>
+
+    <label>お名前</label>
+    <input type="text" name="name" required>
+
+    <label>電話番号</label>
+    <input type="tel" name="phone" required>
+
+    <label>メール</label>
+    <input type="email" name="email" required>
+
+    <button type="submit" style="background:#ff6600;color:#fff;padding:15px;border:none;width:100%;font-size:18px;margin-top:20px;">
+      簡易見積を依頼する
+    </button>
+
+  </form>
+</section>
         <div class="card shadowCorner">
           <p class="k">お問い合わせ</p>
           <p class="mut" style="margin:0">
