@@ -656,6 +656,341 @@
           </div>
         </div>
 
+        <!-- ===== 簡易見積フォーム（コピペで動く）ここから ===== -->
+<section id="quick-estimate" class="card shadowCorner" style="margin-top:18px;">
+  <p class="k">簡易見積（30秒）</p>
+  <p class="mut" style="margin:0 0 10px;">
+    概算です。正確なお見積は現地確認で確定します。<br>
+    ※「写真を送る」が最短ルートです。
+  </p>
+
+  <div class="qe-grid">
+    <label class="qe-field">
+      <span>建物タイプ</span>
+      <select id="qe_type">
+        <option value="house">戸建て</option>
+        <option value="apartment">アパート/小規模集合</option>
+        <option value="shop">店舗/事務所</option>
+      </select>
+    </label>
+
+    <label class="qe-field">
+      <span>延床面積（㎡）</span>
+      <input id="qe_area" type="number" inputmode="decimal" placeholder="例：100" min="10" max="9999">
+      <small>わからなければ「坪」でもOK（下に換算あり）</small>
+    </label>
+
+    <label class="qe-field">
+      <span>延床面積（坪・任意）</span>
+      <input id="qe_tsubo" type="number" inputmode="decimal" placeholder="例：30" min="5" max="9999">
+      <small>入力すると㎡に自動換算（1坪=3.306㎡）</small>
+    </label>
+
+    <label class="qe-field">
+      <span>階数</span>
+      <select id="qe_floor">
+        <option value="1">平屋</option>
+        <option value="2" selected>2階建</option>
+        <option value="3">3階建</option>
+        <option value="4">4階以上</option>
+      </select>
+    </label>
+
+    <label class="qe-field">
+      <span>工事内容</span>
+      <select id="qe_scope">
+        <option value="ext">外壁のみ</option>
+        <option value="ext_roof">外壁＋屋根</option>
+        <option value="roof">屋根のみ</option>
+        <option value="int">内装塗装</option>
+      </select>
+    </label>
+
+    <label class="qe-field">
+      <span>塗料グレード</span>
+      <select id="qe_grade">
+        <option value="standard">標準（シリコン等）</option>
+        <option value="inorganic" selected>高耐久（無機/シリケート）</option>
+        <option value="design">特殊塗装/意匠（要相談）</option>
+      </select>
+    </label>
+
+    <label class="qe-field">
+      <span>足場（外装の場合）</span>
+      <select id="qe_scaffold">
+        <option value="auto" selected>自動（外装なら含む）</option>
+        <option value="yes">含む</option>
+        <option value="no">不要（部分/内装など）</option>
+      </select>
+    </label>
+
+    <label class="qe-field">
+      <span>状態</span>
+      <select id="qe_condition">
+        <option value="light">軽度（チョーキング少/割れ少）</option>
+        <option value="mid" selected>中程度（一般的）</option>
+        <option value="heavy">重度（割れ多/下地傷み）</option>
+      </select>
+    </label>
+
+    <label class="qe-field qe-wide">
+      <span>追加オプション（任意）</span>
+      <div class="qe-checks">
+        <label><input type="checkbox" value="seal" class="qe_opt"> シーリング打替え多め</label>
+        <label><input type="checkbox" value="crack" class="qe_opt"> クラック補修多め</label>
+        <label><input type="checkbox" value="balcony" class="qe_opt"> バルコニー防水</label>
+        <label><input type="checkbox" value="concrete" class="qe_opt"> 打ちっぱなし保護（ランデックス等）</label>
+      </div>
+    </label>
+
+    <label class="qe-field qe-wide">
+      <span>メモ（任意）</span>
+      <input id="qe_note" type="text" placeholder="例：八王子市 / 築15年 / 外壁サイディング / 色は濃いめ希望 など">
+    </label>
+  </div>
+
+  <div class="qe-result">
+    <div class="qe-price">
+      <div class="qe-price-title">概算目安</div>
+      <div class="qe-price-main" id="qe_price">—</div>
+      <div class="qe-price-sub" id="qe_detail">入力すると目安が出ます</div>
+    </div>
+
+    <div class="qe-actions">
+      <button class="btn primary" type="button" id="qe_calc">概算を出す</button>
+      <a class="btn ok" id="qe_line" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener noreferrer">LINEで写真を送る</a>
+      <a class="btn" href="#contact">お問い合わせへ</a>
+    </div>
+  </div>
+
+  <p class="note" style="margin-top:10px;">
+    ※表示は概算です。現地で下地・劣化・足場条件を確認して最終確定します。
+  </p>
+</section>
+
+<style>
+  /* 既存CSSに干渉しにくいように prefix: qe- */
+  #quick-estimate .qe-grid{
+    display:grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap:12px;
+    margin-top:12px;
+  }
+  #quick-estimate .qe-field span{display:block; font-weight:700; margin-bottom:6px;}
+  #quick-estimate .qe-field input, 
+  #quick-estimate .qe-field select{
+    width:100%;
+    padding:10px 12px;
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:10px;
+    background: rgba(0,0,0,.18);
+    color: inherit;
+    outline:none;
+  }
+  #quick-estimate .qe-field small{
+    display:block;
+    opacity:.8;
+    margin-top:6px;
+    font-size:.85em;
+  }
+  #quick-estimate .qe-wide{grid-column: 1 / -1;}
+  #quick-estimate .qe-checks{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 14px;
+    padding:10px 0 0;
+  }
+  #quick-estimate .qe-checks label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    opacity:.95;
+  }
+  #quick-estimate .qe-result{
+    display:flex;
+    gap:14px;
+    align-items:stretch;
+    justify-content:space-between;
+    margin-top:14px;
+    flex-wrap:wrap;
+  }
+  #quick-estimate .qe-price{
+    flex: 1 1 320px;
+    padding:12px 14px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:14px;
+    background: rgba(255,255,255,.04);
+  }
+  #quick-estimate .qe-price-title{opacity:.85; font-weight:700;}
+  #quick-estimate .qe-price-main{font-size:1.35em; font-weight:900; margin-top:6px;}
+  #quick-estimate .qe-price-sub{opacity:.85; margin-top:6px; font-size:.92em; line-height:1.35;}
+  #quick-estimate .qe-actions{
+    flex: 0 0 auto;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  @media (max-width: 720px){
+    #quick-estimate .qe-grid{grid-template-columns: 1fr;}
+  }
+</style>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const fmtYen = (n) => "¥" + Math.round(n).toLocaleString("ja-JP");
+  const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
+
+  // ㎡⇄坪 連動
+  const areaEl = $("qe_area");
+  const tsuboEl = $("qe_tsubo");
+  let lock = false;
+
+  tsuboEl.addEventListener("input", () => {
+    if(lock) return;
+    const t = parseFloat(tsuboEl.value);
+    if(!isFinite(t)) return;
+    lock = true;
+    areaEl.value = (t * 3.306).toFixed(1);
+    lock = false;
+  });
+
+  areaEl.addEventListener("input", () => {
+    if(lock) return;
+    const a = parseFloat(areaEl.value);
+    if(!isFinite(a)) return;
+    lock = true;
+    tsuboEl.value = (a / 3.306).toFixed(1);
+    lock = false;
+  });
+
+  function calc(){
+    const type = $("qe_type").value;
+    const floor = parseInt($("qe_floor").value, 10);
+    const scope = $("qe_scope").value;
+    const grade = $("qe_grade").value;
+    const condition = $("qe_condition").value;
+    const scaffold = $("qe_scaffold").value;
+
+    let area = parseFloat(areaEl.value);
+    if(!isFinite(area)) area = NaN;
+
+    // 面積が空なら “ざっくり” 2階なら 90㎡を仮置き（出し過ぎ防止で控えめ）
+    if(!isFinite(area)) area = 90;
+
+    // 外壁塗装は延床から「外壁面積」を概算（経験則）
+    // 2階建100㎡延床 → 外壁約160〜200㎡程度になりやすいので係数1.8を採用
+    let wall = area * 1.8;
+    // 屋根面積ざっくり（延床の0.6〜0.8程度）→0.7
+    let roof = area * 0.7;
+
+    // 基本単価（㎡あたり概算）※あなたの強み(無機/シリケート)に寄せたレンジ
+    // ここは“目安”なので少し広めレンジにする
+    let wallUnitLow = 0, wallUnitHigh = 0;
+    let roofUnitLow = 0, roofUnitHigh = 0;
+
+    if(grade === "standard"){
+      wallUnitLow = 3200; wallUnitHigh = 5200;
+      roofUnitLow = 3500; roofUnitHigh = 5500;
+    } else if(grade === "inorganic"){
+      wallUnitLow = 4800; wallUnitHigh = 7600;
+      roofUnitLow = 5200; roofUnitHigh = 8200;
+    } else { // design
+      wallUnitLow = 6500; wallUnitHigh = 12000;
+      roofUnitLow = 6500; roofUnitHigh = 12000;
+    }
+
+    // 状態補正
+    let condMul = 1.0;
+    if(condition === "light") condMul = 0.92;
+    if(condition === "mid") condMul = 1.00;
+    if(condition === "heavy") condMul = 1.18;
+
+    // 建物タイプ補正（集合/店舗は養生や共用・動線で上振れしがち）
+    let typeMul = 1.0;
+    if(type === "apartment") typeMul = 1.12;
+    if(type === "shop") typeMul = 1.08;
+
+    // 階数補正（高所ほど少し上げ）
+    let floorMul = 1.0;
+    if(floor === 3) floorMul = 1.08;
+    if(floor >= 4) floorMul = 1.18;
+
+    // 足場（外装の場合）
+    // 一般戸建：18〜28万目安。面積と階で補正。
+    let scaffoldLow = 0, scaffoldHigh = 0;
+    const isExterior = (scope === "ext" || scope === "ext_roof" || scope === "roof");
+    if(isExterior && (scaffold === "auto" || scaffold === "yes")){
+      const base = 210000;
+      const aMul = clamp(area/100, 0.7, 1.6);
+      const fMul = floorMul;
+      scaffoldLow = base * aMul * fMul * 0.9;
+      scaffoldHigh = base * aMul * fMul * 1.25;
+    }
+
+    // 工事範囲による計算
+    let workLow = 0, workHigh = 0;
+    let lines = [];
+
+    if(scope === "int"){
+      // 内装は壁天井の㎡がわからないため “延床×2.0” をざっくり施工面積扱い
+      const intArea = area * 2.0;
+      const uL = (grade==="design") ? 2200 : 1500;
+      const uH = (grade==="design") ? 5200 : 3800;
+      workLow += intArea * uL;
+      workHigh += intArea * uH;
+      lines.push(`内装（目安面積 ${Math.round(intArea)}㎡）`);
+    } else {
+      if(scope === "ext" || scope === "ext_roof"){
+        workLow += wall * wallUnitLow;
+        workHigh += wall * wallUnitHigh;
+        lines.push(`外壁（目安 ${Math.round(wall)}㎡）`);
+      }
+      if(scope === "roof" || scope === "ext_roof"){
+        workLow += roof * roofUnitLow;
+        workHigh += roof * roofUnitHigh;
+        lines.push(`屋根（目安 ${Math.round(roof)}㎡）`);
+      }
+    }
+
+    // オプション
+    const opts = Array.from(document.querySelectorAll("#quick-estimate .qe_opt:checked")).map(x=>x.value);
+    let optLow=0, optHigh=0;
+    if(opts.includes("seal")){ optLow+=60000; optHigh+=160000; }
+    if(opts.includes("crack")){ optLow+=40000; optHigh+=140000; }
+    if(opts.includes("balcony")){ optLow+=70000; optHigh+=220000; }
+    if(opts.includes("concrete")){ optLow+=90000; optHigh+=380000; }
+
+    // 最終
+    let totalLow = (workLow * condMul * typeMul * floorMul) + scaffoldLow + optLow;
+    let totalHigh = (workHigh * condMul * typeMul * floorMul) + scaffoldHigh + optHigh;
+
+    // 最低ライン（出張/小工事の最低工事費っぽい下限）
+    totalLow = Math.max(totalLow, 120000);
+    totalHigh = Math.max(totalHigh, totalLow * 1.15);
+
+    $("qe_price").textContent = `${fmtYen(totalLow)} 〜 ${fmtYen(totalHigh)}`;
+
+    const note = $("qe_note").value?.trim();
+    const add = [];
+    add.push(lines.join(" + "));
+    add.push(`グレード：${$("qe_grade").selectedOptions[0].textContent}`);
+    add.push(`状態：${$("qe_condition").selectedOptions[0].textContent}`);
+    if(isExterior && (scaffold === "auto" || scaffold === "yes")) add.push(`足場：含む`);
+    if(opts.length) add.push(`オプション：${opts.length}件`);
+    if(note) add.push(`メモ：${note}`);
+
+    $("qe_detail").textContent = add.join(" / ");
+  }
+
+  $("qe_calc").addEventListener("click", calc);
+
+  // 初期表示（押したくなるように軽く案内）
+  // calc(); // 自動計算したいならコメント外す
+})();
+</script>
+<!-- ===== 簡易見積フォーム ここまで ===== -->
         <!-- ===== 簡易見積フォーム ===== -->
 <section style="background:#f7f7f7;padding:60px 20px;text-align:center">
   <h2 style="font-size:28px;margin-bottom:10px;">30秒で分かる簡易見積</h2>
