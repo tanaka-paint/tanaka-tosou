@@ -432,5 +432,67 @@
       }, 3200);
     });
   </script>
+  /* ===== 忍者フローティング ===== */
+.ninja-float{
+  position:fixed;
+  right:20px;
+  bottom:-140px;
+  z-index:9999;
+  text-align:center;
+  cursor:pointer;
+  transition:.8s;
+}
+.ninja-float.show{ bottom:20px; }
+
+.ninja-float img{
+  width:95px;
+  filter:drop-shadow(0 10px 25px rgba(0,0,0,.4));
+  transition:.3s;
+}
+.ninja-float img:hover{ transform:scale(1.1); }
+
+.ninja-text{
+  background:#020617;
+  color:#fff;
+  padding:7px 14px;
+  border-radius:20px;
+  font-size:12px;
+  margin-top:6px;
+}  
+  <!-- ===== 忍者本体 ===== -->
+<div class="ninja-float">
+  <img src="nurin_tanaka.png">
+  <div class="ninja-text">相談してね</div>
+</div>
 </body>
+  <script>
+window.addEventListener("load", () => {
+
+  const curtain = document.getElementById("curtain");
+  const splash = document.getElementById("splash");
+  const ninja  = document.querySelector(".ninja-float");
+
+  // 初期状態
+  document.body.classList.add("loading");
+
+  // カーテンOPEN（1.5秒）
+  setTimeout(() => {
+    curtain.classList.add("open");
+  }, 1500);
+
+  // スプラッシュ終了（3.2秒）
+  setTimeout(() => {
+    splash.classList.add("hide");
+    document.body.classList.remove("loading");
+    document.body.classList.add("ready");
+
+    // 忍者登場（さらに0.5秒後）
+    setTimeout(() => {
+      ninja.classList.add("show");
+    }, 500);
+
+  }, 3200);
+
+});
+</script>
 </html>
