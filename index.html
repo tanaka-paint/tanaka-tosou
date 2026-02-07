@@ -1,142 +1,207 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>田中塗装｜外壁塗装のプロフェッショナル</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <style>
-    * { box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; }
-    header { background: #008000; color: white; text-align: center; padding: 10px 0; }
-    nav { background: #333; text-align: center; overflow-x: auto; white-space: nowrap; }
-    nav a { color: white; display: inline-block; padding: 15px 20px; text-decoration: none; }
-    nav a:hover { background: #555; }
-    section { padding: 40px 20px; max-width: 1000px; margin: auto; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-    section.visible { opacity: 1; transform: translateY(0); }
-    footer { background: #eee; text-align: center; padding: 20px; font-size: 14px; }
-    h1, h2 { color: #008000; }
-    .cta-button { display: inline-block; background: #e60000; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
-    .cta-button:hover { background: #cc0000; }
-    .gallery img { width: 100%; max-width: 480px; height: auto; margin-bottom: 20px; border: 1px solid #ccc; display: block; margin-left: auto; margin-right: auto; }
-    .staff { display: flex; flex-wrap: wrap; gap: 20px; }
-    .staff-member { flex: 1 1 100%; background: #f9f9f9; padding: 20px; border-radius: 8px; text-align: center; }
-    .staff-member img { max-width: 150px; border-radius: 50%; }
-    @media(min-width: 600px) {
-      .staff-member { flex: 1 1 45%; }
-    }
-    .blog-entry { margin-bottom: 30px; border-bottom: 1px solid #ccc; padding-bottom: 20px; }
-    .blog-entry h3 { margin-bottom: 10px; }
-    .blog-entry p { margin: 0; }
-  </style>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const sections = document.querySelectorAll("section");
-      const options = { threshold: 0.1 };
-      const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      }, options);
-      sections.forEach(section => { observer.observe(section); });
-    });
-  </script>
-</head>
-<body>
+<!-- ===== Tanaka Tosou TOP FINAL (YouTube + LINE template) ===== -->
+<style>
+  :root{--c:#0b3a63;--c2:#1f7ae0;--bg:#f6f8fb;--tx:#111;--muted:#5b6675;}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",Segoe UI,Roboto,Arial,sans-serif;color:var(--tx);line-height:1.7;}
+  a{color:inherit}
+  .wrap{max-width:980px;margin:0 auto;padding:0 18px;}
+  .hero{background:linear-gradient(180deg,#0b3a63 0%, #0b3a63 55%, #ffffff 55%);padding:34px 0 24px;}
+  .heroCard{background:#fff;border-radius:16px;padding:22px 18px;box-shadow:0 10px 30px rgba(0,0,0,.08);}
+  .badge{display:inline-block;background:rgba(31,122,224,.12);color:var(--c);padding:6px 10px;border-radius:999px;font-weight:700;font-size:13px}
+  h1{margin:10px 0 8px;font-size:30px;line-height:1.25}
+  .sub{color:var(--muted);margin:0 0 14px}
+  .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .btn{display:inline-block;padding:12px 14px;border-radius:12px;font-weight:800;text-decoration:none}
+  .btn.primary{background:var(--c2);color:#fff}
+  .btn.outline{border:2px solid #d9e2ef;color:var(--c)}
+  .grid{display:grid;gap:14px}
+  @media(min-width:820px){.grid.cols2{grid-template-columns:1fr 1fr}.grid.cols3{grid-template-columns:1fr 1fr 1fr}}
+  section{padding:26px 0}
+  .card{background:#fff;border:1px solid #e7edf6;border-radius:14px;padding:16px}
+  .kicker{font-weight:900;color:var(--c);margin:0 0 10px}
+  .list{margin:0;padding-left:18px;color:var(--muted)}
+  .why h3{margin:0 0 6px;font-size:16px}
+  .muted{color:var(--muted)}
+  .svc h3{margin:0 0 6px}
+  .cta{background:var(--bg);border-top:1px solid #e7edf6;border-bottom:1px solid #e7edf6}
+  .footerNote{font-size:12px;color:var(--muted);padding:16px 0}
+  .small{font-size:13px}
+</style>
 
-  <header>
-    <img src="logo-green.png" alt="田中塗装ロゴ" style="width: 25%; max-width: 300px; height: auto; margin: 0;">
-    <h1 style="margin: 10px 0 5px;">田中塗装</h1>
-    <p style="margin: 0;">あなたの家に、安心と美しさを。外壁塗装なら田中塗装へ！</p>
-  </header>
+<header class="hero">
+  <div class="wrap">
+    <div class="heroCard">
+      <span class="badge">八王子密着｜30年以上の現場経験</span>
+      <h1>設計事務所も頼る、塗装職人。</h1>
+      <p class="sub">
+        外壁塗装・打ちっぱなし補修・マイクロセメント・特殊塗装。<br>
+        住まいと建築の価値を守るために、職人が直接対応します。
+      </p>
 
-  <nav>
-    <a href="#about">会社案内</a>
-    <a href="#services">サービス</a>
-    <a href="#works">施工事例</a>
-    <a href="#staff">スタッフ紹介</a>
-    <a href="https://tanakatoso-yoon.hatenablog.com" target="_blank">ブログ</a>
-    <a href="#access">アクセス</a>
-    <a href="#contact">お問い合わせ</a>
-  </nav>
+      <div class="btns">
+        <a class="btn primary" href="#contact">無料相談はこちら</a>
+        <a class="btn outline" href="#line">LINEで写真診断</a>
+        <a class="btn outline" href="tel:09061203852">電話する</a>
+        <a class="btn outline" href="#youtube">YouTube</a>
+      </div>
 
-  <section id="about">
-    <h2>会社案内</h2>
-    <p>田中塗装は、東京都八王子市に拠点を置く外壁塗装専門業者です。地域密着型のサービスを提供し、信頼と実績を積み重ねてきました。</p>
-    <ul>
-      <li><strong>会社名：</strong>田中塗装</li>
-      <li><strong>代表者：</strong>中田 七守</li>
-      <li><strong>所在地：</strong>東京都八王子市長房町627−1</li>
-      <li><strong>創業：</strong>2013年</li>
-      <li><strong>事業内容：</strong>外壁塗装、内装工事、リフォーム、マイクロセメント、打ちっ放し補修、エイジング塗装</li>
-      <li><strong>電話番号：</strong>090−6120−3852</li>
-      <li><strong>メール：</strong>tanakatoso_yoon@ezweb.ne.jp</li>
-    </ul>
-    <h3>代表挨拶</h3>
-    <p>「一塗りに真心を」── これが私たちの信念です。家は人生の大きな舞台。そこを彩り、守ることが私たちの使命です。</p>
-    <h3>経歴</h3>
-    <p>中田 七守：塗装歴30年以上。戸建住宅から商業施設、大規模建築物の外装・内装塗装まで幅広く対応。特殊塗装やデザイン施工、アートウォール、マイクロセメント、コンクリート打ちっぱなし再生仕上げなど、多彩な技術を現場で発揮してきました。</p>
-  </section>
-
-  <section id="services">
-    <h2>サービス紹介</h2>
-    <ul>
-      <li>外壁塗装</li>
-      <li>屋根塗装</li>
-      <li>防水工事</li>
-      <li>内装工事</li>
-      <li>リフォーム</li>
-      <li>マイクロセメント</li>
-      <li>打ちっ放し補修</li>
-      <li>エイジング塗装</li>
-      <li>無料診断・見積もり</li>
-    </ul>
-    <a href="#contact" class="cta-button">無料見積もりはこちら</a>
-  </section>
-
-  <section id="works">
-    <h2>施工事例</h2>
-    <div class="gallery">
-      <img src="before1.jpg" alt="施工前1">
-      <img src="after1.jpg" alt="施工後1">
-      <img src="before2.jpg" alt="施工前2">
-      <img src="after2.jpg" alt="施工後2">
+      <p class="muted small" style="margin:10px 0 0">
+        ※相見積もり歓迎｜写真だけで概算の目安もお伝えできます
+      </p>
     </div>
-  </section>
+  </div>
+</header>
 
-  <section id="staff">
-    <h2>スタッフ紹介</h2>
-    <div class="staff">
-      <div class="staff-member">
-        <img src="nakata.jpg" alt="代表 中田 七守">
-        <h3>中田 七守</h3>
-        <p>代表／塗装歴30年以上。お客様第一主義で高品質な仕上がりをお約束します。</p>
+<section>
+  <div class="wrap">
+    <p class="kicker">こんなお悩みありませんか？</p>
+    <div class="grid cols2">
+      <div class="card">
+        <ul class="list">
+          <li>どの塗装業者を選べばいいかわからない</li>
+          <li>打ちっぱなしコンクリートを綺麗にしたい</li>
+          <li>普通の塗装では物足りない（意匠・質感にこだわりたい）</li>
+        </ul>
+      </div>
+      <div class="card">
+        <ul class="list">
+          <li>設計事務所案件で、施工会社が見つからない</li>
+          <li>素材や納まりまで理解してくれる職人に頼みたい</li>
+          <li>信頼できる人に直接相談したい</li>
+        </ul>
       </div>
     </div>
-  </section>
+    <p style="margin:12px 0 0"><b>ひとつでも当てはまれば、田中塗装がお役に立てます。</b></p>
+  </div>
+</section>
 
-  <section id="access">
-    <h2>アクセス</h2>
-    <p>東京都八王子市長房町627−1</p>
-    <iframe src="https://www.google.com/maps?q=東京都八王子市長房町627−1&output=embed" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-  </section>
-
-  <section id="contact">
-    <h2>お問い合わせ</h2>
-    <p>ご質問・ご相談・お見積もり依頼など、お気軽にお問い合わせください。</p>
-    <div style="position: relative; width: 100%; height: 0; padding-bottom: 155%; max-width: 100%;">
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScuBxIaAu5mtUj6G0ZzHEpnhs3llJNgZf8G03e9Zu3zxWgZhA/viewform?embedded=true" 
-              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" 
-              frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
+<section class="why">
+  <div class="wrap">
+    <p class="kicker">田中塗装が選ばれる3つの理由</p>
+    <div class="grid cols3">
+      <div class="card">
+        <h3>① 30年以上の現場経験</h3>
+        <p class="muted" style="margin:0">
+          住宅・マンション・店舗・設計事務所案件まで対応。<br>
+          現場を知り尽くした職人が直接対応します。
+        </p>
+      </div>
+      <div class="card">
+        <h3>② 設計事務所案件に対応</h3>
+        <p class="muted" style="margin:0">
+          意匠性・素材・仕上がりの品質が求められる案件を多数施工。<br>
+          「難しい塗装」ほどご相談ください。
+        </p>
+      </div>
+      <div class="card">
+        <h3>③ 打ちっぱなし・特殊塗装が得意</h3>
+        <p class="muted" style="margin:0">
+          打ちっぱなし再生／保護塗装／マイクロセメント／エイジング塗装など、<br>
+          一般塗装では対応できない施工が可能です。
+        </p>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>
-    <p>&copy; 2025 田中塗装. All rights reserved.</p>
-  </footer>
+<section class="svc">
+  <div class="wrap">
+    <p class="kicker">サービス</p>
+    <div class="grid cols3">
+      <div class="card">
+        <h3>戸建て・住宅塗装</h3>
+        <p class="muted" style="margin:0">外壁塗装／屋根塗装／防水工事</p>
+      </div>
+      <div class="card">
+        <h3>コンクリート再生</h3>
+        <p class="muted" style="margin:0">打ちっぱなし補修／美観回復／保護塗装</p>
+      </div>
+      <div class="card">
+        <h3>特殊・意匠塗装</h3>
+        <p class="muted" style="margin:0">マイクロセメント／エイジング塗装／店舗内装</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-</body>
-</html>
+<section id="youtube">
+  <div class="wrap">
+    <p class="kicker">YouTube（施工動画・現場のリアル）</p>
+    <div class="card">
+      <p style="margin:0">
+        施工の流れ、補修のポイント、現場の雰囲気を動画で公開しています。<br>
+        <span class="muted small">※「どんな職人が来るのか」を事前に確認できます。</span>
+      </p>
+      <div class="btns" style="margin-top:12px">
+        <a class="btn primary" href="https://youtube.com/channel/UC_ic4KvdbTO_w0gmX3QGXWg" target="_blank" rel="noopener">YouTubeを見る</a>
+        <a class="btn outline" href="#line">LINEで相談する</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="line">
+  <div class="wrap">
+    <p class="kicker">LINEで写真診断</p>
+    <div class="card">
+      <p style="margin:0">
+        外壁・屋根・打ちっぱなしの写真を送るだけでOK。<br>
+        <span class="muted small">「劣化状況」と「だいたいの方向性」を先にお伝えできます。</span>
+      </p>
+
+      <div class="card" style="margin-top:12px;background:#fbfcff">
+        <p style="margin:0"><b>送ってほしい内容（コピペOK）</b></p>
+        <p class="muted" style="margin:8px 0 0">
+          ① 住所（町名までOK）<br>
+          ② 気になる場所（外壁/屋根/ベランダ/打ちっぱなし）<br>
+          ③ 写真 2〜4枚（全体＋気になる部分）<br>
+          ④ ご希望（色替え/補修/防水など）<br>
+          ⑤ ご希望時期（できれば）
+        </p>
+      </div>
+
+      <div class="btns" style="margin-top:12px">
+        <a class="btn primary" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener">LINEで相談する</a>
+        <a class="btn outline" href="tel:09061203852">電話する</a>
+      </div>
+
+      <p class="muted small" style="margin:10px 0 0">
+        ※「まだ工事するか迷ってる」段階でもOKです
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="cta">
+  <div class="wrap">
+    <p class="kicker">お問い合わせ</p>
+    <div class="grid cols2">
+      <div class="card">
+        <p style="margin:0"><b>無料見積もり／相見積もり歓迎</b></p>
+        <p class="muted" style="margin:8px 0 0">
+          状況を聞いて、最適な進め方を一緒に整理します。
+        </p>
+        <div class="btns" style="margin-top:12px">
+          <a class="btn primary" href="mailto:tanakatoso_yoon@ezweb.ne.jp">メールで問い合わせ</a>
+          <a class="btn outline" href="tel:09061203852">電話する</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <p style="margin:0"><b>連絡先</b></p>
+        <p class="muted" style="margin:8px 0 0">
+          TEL：090-6120-3852<br>
+          MAIL：tanakatoso_yoon@ezweb.ne.jp
+        </p>
+        <p class="muted small" style="margin:10px 0 0">
+          ※営業電話が多いので、なるべく「LINE」か「メール」だと助かります（任意）
+        </p>
+      </div>
+    </div>
+
+    <div class="footerNote">
+      田中塗装｜東京都八王子市（長房町）｜代表：中田<br>
+      TEL：090-6120-3852　MAIL：tanakatoso_yoon@ezweb.ne.jp
+    </div>
+  </div>
+</section>
+<!-- ===== /Tanaka Tosou TOP FINAL ===== -->
