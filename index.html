@@ -606,7 +606,8 @@ body.ready main{
 </script>
 
 <script>
-(() => {
+window.addEventListener('load', () => {
+
   const ninja = document.getElementById('ninja-peek');
   const trigger = document.getElementById('ninja-trigger');
   if(!ninja || !trigger) return;
@@ -628,11 +629,11 @@ body.ready main{
 
   io.observe(trigger);
 
- ninja.addEventListener('click', () => {
-  window.open('https://line.me/ti/p/yHunueNM1o', '_blank', 'noopener,noreferrer');
-});
+  ninja.addEventListener('click', () => {
+    window.open('https://line.me/ti/p/yHunueNM1o', '_blank', 'noopener,noreferrer');
+  });
 
-})();
+});
 </script>
   
 <!-- ===== スクロール忍者（気づく人だけ気づく） ===== -->
