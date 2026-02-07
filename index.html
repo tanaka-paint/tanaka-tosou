@@ -3,169 +3,176 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>田中塗装｜八王子の塗装屋（だけど、ちょっと変です）</title>
-  <meta name="description" content="八王子で塗装歴30年以上。外壁・屋根・防水・打ちっぱなし補修・マイクロセメント・特殊塗装。営業は苦手だけど、塗るのは得意。LINEで写真相談OK。YouTubeもやってます。" />
+  <title>田中塗装｜八王子｜色と仕上がりで勝負する塗装屋</title>
+  <meta name="description" content="八王子の田中塗装。外壁・屋根・防水・打ちっぱなし補修・マイクロセメント・特殊塗装。LINEで写真相談OK。YouTube/Instagramで現場と作品も公開中。" />
 
   <style>
     :root{
       --ink:#0f172a;
       --mut:#475569;
-      --bg:#0b1220;
-      --card:#0f1a2b;
-      --line:#1f7ae0;
+      --bg:#ffffff;
+      --card:#ffffff;
+      --line:#e2e8f0;
+      --accent:#2563eb;
+      --ok:#16a34a;
       --hot:#f97316;
-      --ok:#22c55e;
-      --w:#ffffff;
-      --bdr:rgba(255,255,255,.10);
-      --shadow: 0 16px 44px rgba(0,0,0,.35);
-      --radius:16px;
+      --shadow:0 18px 40px rgba(15,23,42,.10);
+      --r:16px;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--w);
+      color:var(--ink);
       background:
-        radial-gradient(1200px 800px at 10% 10%, rgba(31,122,224,.30), transparent 60%),
-        radial-gradient(900px 700px at 90% 20%, rgba(249,115,22,.28), transparent 55%),
-        radial-gradient(800px 900px at 40% 90%, rgba(34,197,94,.18), transparent 55%),
-        linear-gradient(180deg, #050a14 0%, #0b1220 45%, #070b12 100%);
+        radial-gradient(900px 600px at 10% 0%, rgba(37,99,235,.10), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(249,115,22,.10), transparent 60%),
+        radial-gradient(900px 600px at 50% 100%, rgba(22,163,74,.10), transparent 55%),
+        var(--bg);
       line-height:1.75;
     }
     a{color:inherit}
-    .wrap{max-width:980px;margin:0 auto;padding:0 18px}
-    .top{
-      padding:34px 0 22px;
+    .wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+    header{padding:22px 0 12px}
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      padding:10px 0;
+    }
+    .brand{
+      display:flex;align-items:center;gap:10px;font-weight:1000;letter-spacing:.02em;
+    }
+    .brand .dot{
+      width:14px;height:14px;border-radius:999px;
+      background: conic-gradient(from 0deg, #ef4444, #f97316, #eab308, #22c55e, #06b6d4, #3b82f6, #a855f7, #ef4444);
+      box-shadow:0 6px 18px rgba(0,0,0,.12);
+    }
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 10px;border:1px solid var(--line);border-radius:999px;
+      background:rgba(255,255,255,.8);
+      font-weight:900;font-size:13px;color:var(--mut);
     }
     .hero{
-      border:1px solid var(--bdr);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--line);
       border-radius:22px;
+      background:rgba(255,255,255,.75);
       box-shadow:var(--shadow);
-      padding:22px 18px;
+      padding:18px;
       overflow:hidden;
-      position:relative;
     }
-    .tag{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      padding:7px 10px;
-      border:1px solid var(--bdr);
-      border-radius:999px;
-      background:rgba(0,0,0,.18);
-      font-weight:800;
-      letter-spacing:.02em;
-      font-size:13px;
-    }
-    .tag b{color:#dbeafe}
-    h1{
-      margin:12px 0 10px;
-      font-size:34px;
-      line-height:1.15;
-      letter-spacing:.01em;
-    }
-    .lead{
-      margin:0;
-      color:rgba(255,255,255,.88);
-      font-size:15px;
-    }
-    .lead .mut{color:rgba(255,255,255,.70)}
-    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .heroGrid{display:grid;gap:14px}
+    @media(min-width:920px){.heroGrid{grid-template-columns:1.15fr .85fr;align-items:stretch}}
+    h1{margin:8px 0 8px;font-size:34px;line-height:1.15}
+    .lead{margin:0;color:var(--mut)}
+    .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
     .btn{
       display:inline-flex;align-items:center;gap:10px;
-      padding:12px 14px;
-      border-radius:14px;
-      text-decoration:none;
-      font-weight:900;
-      border:1px solid var(--bdr);
-      background:rgba(0,0,0,.22);
-      transition:transform .06s ease, background .2s ease;
+      padding:12px 14px;border-radius:14px;text-decoration:none;font-weight:1000;
+      border:1px solid var(--line);background:#fff;
+      box-shadow:0 10px 22px rgba(15,23,42,.06);
     }
-    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.10)}
-    .btn.primary{background:linear-gradient(135deg, var(--line), #60a5fa); border:none}
-    .btn.hot{background:linear-gradient(135deg, var(--hot), #fb7185); border:none}
-    .btn.ok{background:linear-gradient(135deg, var(--ok), #86efac); border:none; color:#052e16}
-    .btn small{font-weight:800;opacity:.9}
-    .grid{display:grid;gap:12px}
-    @media(min-width:860px){
-      .grid.cols2{grid-template-columns:1fr 1fr}
-      .grid.cols3{grid-template-columns:1fr 1fr 1fr}
-    }
-    section{padding:18px 0}
+    .btn:hover{transform:translateY(-1px)}
+    .btn.ok{background:linear-gradient(135deg,#22c55e,#86efac);border:none}
+    .btn.primary{background:linear-gradient(135deg,#2563eb,#60a5fa);border:none;color:#fff}
+    .btn.hot{background:linear-gradient(135deg,#f97316,#fb7185);border:none;color:#fff}
+    .btn.dark{background:#0f172a;color:#fff;border:none}
     .card{
-      border:1px solid var(--bdr);
-      background:rgba(255,255,255,.04);
-      border-radius:var(--radius);
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      background:rgba(255,255,255,.85);
+      box-shadow:0 14px 26px rgba(15,23,42,.06);
       padding:16px;
     }
-    .k{
-      margin:0 0 10px;
-      font-weight:1000;
-      letter-spacing:.02em;
-      color:#e2e8f0;
+    section{padding:16px 0}
+    .k{margin:0 0 10px;font-weight:1000;letter-spacing:.02em}
+    .mut{color:var(--mut)}
+    .grid{display:grid;gap:12px}
+    @media(min-width:920px){.grid.cols3{grid-template-columns:1fr 1fr 1fr}.grid.cols2{grid-template-columns:1fr 1fr}}
+    .swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:10px}
+    @media(min-width:920px){.swatches{grid-template-columns:repeat(8,1fr)}}
+    .sw{height:34px;border-radius:12px;border:1px solid rgba(0,0,0,.06);box-shadow:0 8px 14px rgba(0,0,0,.06)}
+    .sw:nth-child(1){background:#ef4444}
+    .sw:nth-child(2){background:#f97316}
+    .sw:nth-child(3){background:#eab308}
+    .sw:nth-child(4){background:#22c55e}
+    .sw:nth-child(5){background:#06b6d4}
+    .sw:nth-child(6){background:#3b82f6}
+    .sw:nth-child(7){background:#a855f7}
+    .sw:nth-child(8){background:#111827}
+    .sw:nth-child(9){background:#f8fafc}
+    .sw:nth-child(10){background:#94a3b8}
+    .sw:nth-child(11){background:#0ea5e9}
+    .sw:nth-child(12){background:#14b8a6}
+    .sw:nth-child(13){background:#fb7185}
+    .sw:nth-child(14){background:#c084fc}
+    .sw:nth-child(15){background:#f59e0b}
+    .sw:nth-child(16){background:#16a34a}
+    .list{margin:0;padding-left:18px;color:var(--mut)}
+    .note{
+      font-size:13px;color:var(--mut);
+      border-left:4px solid rgba(37,99,235,.35);
+      padding-left:10px;margin:10px 0 0;
     }
-    .p{margin:0;color:rgba(255,255,255,.82)}
-    .list{margin:0;padding-left:18px;color:rgba(255,255,255,.80)}
-    .pill{
-      display:inline-block;
-      padding:6px 10px;
-      border-radius:999px;
-      background:rgba(255,255,255,.06);
-      border:1px solid var(--bdr);
-      font-weight:900;
-      font-size:13px;
-      margin:6px 6px 0 0;
-    }
-    .quote{
-      font-weight:900;
-      font-size:18px;
-      color:#fff;
-      margin:0;
-    }
-    .subq{
-      margin:8px 0 0;
-      color:rgba(255,255,255,.75);
-      font-size:13px;
-    }
-    .hr{
-      height:1px;background:var(--bdr);margin:14px 0;
-    }
+    .links{display:flex;gap:10px;flex-wrap:wrap}
     .footer{
-      padding:20px 0 30px;
-      color:rgba(255,255,255,.60);
-      font-size:12px;
+      padding:24px 0 34px;color:var(--mut);font-size:12px
     }
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    .mini{
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap
+    }
+    .mini a{text-decoration:none}
+    .badge{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:6px 10px;border-radius:999px;border:1px solid var(--line);
+      background:#fff;font-weight:900;font-size:12px;color:var(--mut);
+    }
   </style>
 </head>
 
 <body>
-  <header class="top">
+  <header>
     <div class="wrap">
+      <div class="topbar">
+        <div class="brand"><span class="dot"></span>田中塗装 <span class="mut">｜八王子</span></div>
+        <div class="mini">
+          <span class="badge">🎨 色で勝負</span>
+          <span class="badge">🛠 職人直対応</span>
+          <span class="badge">📸 LINE写真相談OK</span>
+        </div>
+      </div>
+
       <div class="hero">
-        <div class="tag">
-          <span>🟦 八王子</span>
-          <span>🎨 塗装歴<b>30年以上</b></span>
-          <span>📸 写真相談OK</span>
+        <div class="heroGrid">
+          <div>
+            <div class="pill">「暗いサイトやめました」→ 色の人に見えるようにしました。</div>
+            <h1>色と仕上がりで、<br>ちゃんと“惚れさせる”塗装します。</h1>
+            <p class="lead">
+              外壁・屋根・防水・打ちっぱなし補修・マイクロセメント・特殊塗装。<br>
+              相談は軽くてOK。押し売りはしません。<b>押すのはローラーだけ。</b>
+            </p>
+
+            <div class="btns">
+              <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener">🟩 LINEで写真送る（最速）</a>
+              <a class="btn primary" href="#contact">📩 相談する</a>
+              <a class="btn" href="tel:09061203852">📞 電話</a>
+              <a class="btn hot" href="#sns">🎥 YouTube / Instagram</a>
+            </div>
+
+            <p class="note">※「まだ工事するか迷ってる」でもOK。写真だけでもOK。質問だけでもOK。</p>
+          </div>
+
+          <div class="card">
+            <p class="k">色見本（気分）</p>
+            <p class="mut" style="margin:0">ペンキ屋っぽく、まず色を置きます。</p>
+            <div class="swatches" aria-label="color swatches">
+              <div class="sw"></div><div class="sw"></div><div class="sw"></div><div class="sw"></div>
+              <div class="sw"></div><div class="sw"></div><div class="sw"></div><div class="sw"></div>
+              <div class="sw"></div><div class="sw"></div><div class="sw"></div><div class="sw"></div>
+              <div class="sw"></div><div class="sw"></div><div class="sw"></div><div class="sw"></div>
+            </div>
+            <p class="note">「この色の雰囲気で」って言ってくれたら、提案しやすい。</p>
+          </div>
         </div>
-
-        <h1>塗装屋ですが、<br>ちょっと変です。</h1>
-
-        <p class="lead">
-          営業は苦手。でも、塗るのは得意。<span class="mut">（たぶん変な方向に）</span><br>
-          外壁・屋根・防水・打ちっぱなし補修・マイクロセメント・特殊塗装。<br>
-          <b>「まだ工事するか迷ってる」段階で連絡くれる人、いちばん好きです。</b>
-        </p>
-
-        <div class="btns">
-          <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener">🟩 LINEで写真送る <small>（最強）</small></a>
-          <a class="btn primary" href="#contact">📩 まず相談する</a>
-          <a class="btn" href="tel:09061203852">📞 電話する</a>
-          <a class="btn hot" href="#sns">🎥 YouTube / Insta</a>
-        </div>
-
-        <p class="subq">※ 相見積もり歓迎。無理な押し売りはしません。押すのはローラーだけ。</p>
       </div>
     </div>
   </header>
@@ -173,129 +180,92 @@
   <main class="wrap">
 
     <section>
-      <div class="grid cols2">
+      <div class="grid cols3">
         <div class="card">
-          <p class="quote">「普通の塗装屋がちょっと怖い」<br>…それ、正しいセンサーです。</p>
-          <p class="subq">安心してください。ここは “圧が低い塗装屋” です。</p>
-          <div class="hr"></div>
-          <p class="k">たぶん相性がいい人</p>
-          <ul class="list">
-            <li>営業されるのが苦手</li>
-            <li>まずは相談だけしたい</li>
-            <li>職人に直接聞きたい（中間マージン苦手）</li>
-            <li>LINEで写真だけ送りたい</li>
-            <li>YouTube見てから決めたい</li>
-          </ul>
+          <p class="k">① 相談のハードル、低めです</p>
+          <p class="mut" style="margin:0">営業トークは得意じゃないので、まず聞きます。写真で見ます。正直に言います。</p>
         </div>
-
         <div class="card">
-          <p class="k">田中塗装ができること（わりと本気）</p>
-          <div>
-            <span class="pill">外壁塗装</span>
-            <span class="pill">屋根塗装</span>
-            <span class="pill">防水（ベランダ等）</span>
-            <span class="pill">打ちっぱなし補修</span>
-            <span class="pill">コンクリート保護</span>
-            <span class="pill">マイクロセメント</span>
-            <span class="pill">特殊塗装 / 意匠</span>
-          </div>
-          <div class="hr"></div>
-          <p class="p">
-            そして時々、<b>マスキングテープで作品</b>も作ります。<br>
-            でも安心して。家はちゃんと塗ります。
-          </p>
+          <p class="k">② “普通じゃない仕上げ”もOK</p>
+          <p class="mut" style="margin:0">打ちっぱなし、マイクロセメント、意匠。いわゆる「それ、誰ができるの？」系が好きです。</p>
+        </div>
+        <div class="card">
+          <p class="k">③ 人が見える（SNSで）</p>
+          <p class="mut" style="margin:0">現場も作品も、YouTubeとインスタに出してます。見てから相談できます。</p>
         </div>
       </div>
     </section>
 
     <section>
-      <div class="grid cols3">
+      <div class="grid cols2">
         <div class="card">
-          <p class="k">1) 相談が早い人ほど得する</p>
-          <p class="p">「今すぐ塗るべきか」も正直に言います。<br>塗らなくていいなら、塗らない案を出します。</p>
+          <p class="k">できること（現場）</p>
+          <ul class="list">
+            <li>外壁塗装 / 屋根塗装</li>
+            <li>防水（ベランダ等）</li>
+            <li>打ちっぱなし補修・保護（美観回復）</li>
+            <li>マイクロセメント</li>
+            <li>特殊塗装 / 意匠（質感・エイジング等）</li>
+          </ul>
+          <p class="note">※「どれ頼めばいいか分からん」→それが普通。写真送って。</p>
         </div>
-        <div class="card">
-          <p class="k">2) 写真だけでだいたい分かる</p>
-          <p class="p">外壁・屋根・コンクリは写真が強い。<br><b>LINEで2〜4枚</b>送ってください。</p>
-        </div>
-        <div class="card">
-          <p class="k">3) “どんな人が来るか”が見える</p>
-          <p class="p">YouTubeとインスタで現場を出してます。<br>逃げません。たぶん。</p>
+
+        <div class="card" id="line">
+          <p class="k">LINEで写真相談（コピペOK）</p>
+          <p class="mut" style="margin:0">これ送ってくれたら、話が早い。</p>
+          <div class="card" style="margin-top:12px">
+            <p class="mut" style="margin:0">
+              ① 住所（町名までOK）<br>
+              ② 気になる場所（外壁/屋根/ベランダ/打ちっぱなし）<br>
+              ③ 写真2〜4枚（全体＋気になる部分）<br>
+              ④ 希望（色替え/補修/防水など）<br>
+              ⑤ 希望時期（できれば）
+            </p>
+          </div>
+          <div class="btns" style="margin-top:12px">
+            <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener">🟩 LINEを開く</a>
+            <a class="btn" href="tel:09061203852">📞 電話</a>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="sns">
       <div class="card">
-        <p class="k">YouTube / Instagram（現場と作品と、たまに狂気）</p>
-        <p class="p">
-          「職人の顔が見えない業界」って言われがちなので、<br>
-          逆に<b>見えすぎるくらい</b>出してます。
+        <p class="k">YouTube / Instagram（現場と作品）</p>
+        <p class="mut" style="margin:0">
+          施工の過程、仕上げのクセ、作品のノリ。全部ここにあります。
         </p>
-
-        <div class="btns">
-          <a class="btn hot" href="https://youtube.com/channel/UC_ic4KvdbTO_w0gmX3QGXWg" target="_blank" rel="noopener">🎥 YouTubeを見る</a>
-
-          <!-- ★Instagram URLが分かったらここを差し替え -->
-          <a class="btn" href="https://www.instagram.com/" target="_blank" rel="noopener">📷 Instagramを見る（※URL差し替え）</a>
-
-          <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener">🟩 LINEで写真相談</a>
-        </div>
-
-        <p class="subq">※InstagramのURLを教えてくれたら、ボタンを本番に差し替えるよ。</p>
-      </div>
-    </section>
-
-    <section id="line">
-      <div class="card">
-        <p class="k">LINEで写真診断（コピペでOK）</p>
-        <p class="p">まずこれ送ってください。短くてOK。むしろ短いのが好き。</p>
-
-        <div class="card" style="margin-top:12px;background:rgba(0,0,0,.18)">
-          <p class="p mono" style="margin:0">
-            ① 住所（町名までOK）<br>
-            ② 気になる場所（外壁/屋根/ベランダ/打ちっぱなし）<br>
-            ③ 写真 2〜4枚（全体＋気になる部分）<br>
-            ④ 希望（色替え/補修/防水など）<br>
-            ⑤ 希望時期（できれば）
-          </p>
-        </div>
-
         <div class="btns" style="margin-top:12px">
-          <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener">🟩 LINEで送る</a>
-          <a class="btn" href="#contact">📩 他の方法で相談</a>
+          <a class="btn hot" href="https://youtube.com/channel/UC_ic4KvdbTO_w0gmX3QGXWg" target="_blank" rel="noopener">🎥 YouTubeを見る</a>
+          <a class="btn" href="https://www.instagram.com/tanakatoso_yoon" target="_blank" rel="noopener">📷 Instagramを見る</a>
+          <a class="btn dark" href="#contact">📩 相談する</a>
         </div>
-
-        <p class="subq">※「まだ塗るか決めてません」だけでもOK。こちらで質問返します。</p>
+        <p class="note">次の改造：Instagramの最新投稿を「ギャラリーっぽく」並べる（見た目爆上がり）。</p>
       </div>
     </section>
 
     <section id="contact">
       <div class="grid cols2">
         <div class="card">
-          <p class="k">連絡先</p>
-          <p class="p">
-            📞 <a href="tel:09061203852">090-6120-3852</a><br>
-            ✉️ <a href="mailto:tanakatoso_yoon@ezweb.ne.jp">tanakatoso_yoon@ezweb.ne.jp</a><br>
-            🟩 <a href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener">LINEで相談</a>
+          <p class="k">お問い合わせ</p>
+          <p class="mut" style="margin:0">
+            TEL：<a href="tel:09061203852">090-6120-3852</a><br>
+            MAIL：<a href="mailto:tanakatoso_yoon@ezweb.ne.jp">tanakatoso_yoon@ezweb.ne.jp</a><br>
+            LINE：<a href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener">写真相談はこちら</a>
           </p>
-          <div class="hr"></div>
-          <p class="p">
-            <b>営業電話が多いので</b>、できれば最初は「LINE or メール」だと助かります。<br>
-            もちろん電話もOK。出られない時は現場で塗ってます。
-          </p>
+          <p class="note">※現場中は出れない時あります。LINEが確実。</p>
         </div>
 
         <div class="card">
-          <p class="k">最後にひとこと</p>
-          <p class="quote">ちゃんと塗ります。<br>でも、ちょっと面白く生きてます。</p>
-          <p class="subq">
-            ここまで読んだあなたは、たぶん相性いい。<br>
-            まずは写真1枚、送ってみて。
+          <p class="k">ひとこと（ゆるめ）</p>
+          <p class="mut" style="margin:0">
+            色の話、質感の話、めっちゃ好きです。<br>
+            「この雰囲気にしたい」って画像1枚送ってくれたら、提案できます。
           </p>
-          <div class="btns">
+          <div class="btns" style="margin-top:12px">
             <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener">🟩 写真送る</a>
-            <a class="btn primary" href="mailto:tanakatoso_yoon@ezweb.ne.jp">📩 メールする</a>
+            <a class="btn primary" href="mailto:tanakatoso_yoon@ezweb.ne.jp">📩 メール</a>
           </div>
         </div>
       </div>
@@ -303,9 +273,8 @@
 
     <div class="footer">
       田中塗装｜東京都 八王子（長房町）｜代表：中田<br>
-      <span class="muted">© Tanaka Tosou. All paint, no pressure.</span>
+      © Tanaka Tosou. Color first, pressure zero.
     </div>
-
   </main>
 </body>
 </html>
