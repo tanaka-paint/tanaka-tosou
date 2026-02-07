@@ -216,10 +216,114 @@
       .btn{transition:none;}
       .btn:hover{transform:none;}
     }
+   
+/* ===== 演出：暗転＆スプラッシュ ===== */
+#curtain{
+  position:fixed;
+  inset:0;
+  background:#020617;  /* 漆黒 */
+  z-index:10000;
+  opacity:1;
+  transition: opacity .7s ease;
+}
+#curtain.open{
+  opacity:0;
+  pointer-events:none;
+}
+
+#splash{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  opacity:1;
+  visibility:visible;
+  transition: opacity .9s ease, visibility .9s ease;
+  /* 暗闇の中で出る感じ */
+  background: transparent;
+}
+#splash.hide{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.splash-inner{
+  text-align:center;
+  transform: translateY(8px);
+  opacity:0;
+  animation: splashIn 1.1s ease forwards;
+}
+
+.splash-img{
+  width:min(520px, 86vw);
+  border-radius:22px;
+  box-shadow:0 30px 70px rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+}
+
+.splash-text{ margin-top:14px; }
+
+.splash-title{
+  font-size:22px;
+  font-weight:1000;
+  letter-spacing:.12em;
+  color:#ffffff;
+  text-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+.splash-sub{
+  font-size:14px;
+  color:rgba(255,255,255,.80);
+  font-weight:900;
+}
+
+@keyframes splashIn{
+  to{ opacity:1; transform: translateY(0); }
+}
+
+/* 本文は最初ちょい隠す（スプラッシュ後に表示） */
+body.loading header,
+body.loading main{
+  opacity:0;
+  transform:translateY(8px);
+}
+
+body.ready header,
+body.ready main{
+  opacity:1;
+  transform:none;
+  transition: .9s ease;
+}
+
+/* 動きを減らす設定の人は演出スキップ */
+@media (prefers-reduced-motion: reduce){
+  #curtain, #splash{ display:none; }
+  body.loading header, body.loading main{ opacity:1; transform:none; }
+}
+  
   </style>
 </head>
 
 <body>
+  
+<!-- ===== 暗転（幕） ===== -->
+<div id="curtain"></div>
+
+<!-- ===== スプラッシュ（忍者画像） ===== -->
+<div id="splash" aria-hidden="true">
+  <div class="splash-inner">
+    <img src="nurin_tanaka.png" class="splash-img" alt="田中塗装 忍者" />
+    <div class="splash-text">
+      <div class="splash-title">必殺：影塗</div>
+      <div class="splash-sub">静かに近づき、仕上がりだけ残す。</div>
+    </div>
+  </div>
+</div>
+  
   <header>
     <div class="wrap">
       <div class="topbar">
@@ -377,5 +481,55 @@
       © Tanaka Tosou. Color on the front. Shadow in the back.
     </div>
   </main>
+
+<script>
+  // 最初は本文を隠す
+  document.body.classList.add('loading');
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function showMainNow(){
+    const curtain = document.getElementById('curtain');
+    const splash  = document.getElementById('splash');
+    if (curtain) curtain.classList.add('open');
+    if (splash) splash.classList.add('hide');
+    document.body.classList.remove('loading');
+    document.body.classList.add('ready');
+  }
+
+  window.addEventListener('load', () => {
+    if (prefersReduced){
+      showMainNow();
+      return;
+    }
+
+    const curtain = document.getElementById('curtain');
+    const splash  = document.getElementById('splash');
+    const img     = document.querySelector('.splash-img');
+
+    // 画像が無い/読めない時は事故らないよう即スキップ
+    if (img){
+      img.addEventListener('error', () => showMainNow(), { once:true });
+    }
+
+    // ① 暗転を少し見せる（ここで「開いた時に暗い」）
+    const t1 = setTimeout(() => {
+      if (curtain) curtain.classList.add('open'); // 暗転が薄くなる（開く）
+    }, 1200);
+
+    // ② 画像を見せてから、フェードアウトしてトップへ
+    const t2 = setTimeout(() => {
+      if (splash) splash.classList.add('hide');
+      document.body.classList.remove('loading');
+      document.body.classList.add('ready');
+    }, 2800);
+
+    // 念のため（ページ離脱など）でタイマー掃除
+    window.addEventListener('beforeunload', () => {
+      clearTimeout(t1); clearTimeout(t2);
+    });
+  });
+</script>
+
 </body>
 </html>
