@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>田中塗装｜八王子｜色と仕上がりで勝負する塗装屋</title>
+  <title>田中塗装｜八王子｜色は華やか、仕事は静かに。</title>
   <meta name="description" content="八王子の田中塗装。外壁・屋根・防水・打ちっぱなし補修・マイクロセメント・特殊塗装。LINEで写真相談OK。YouTube/Instagramで現場と作品も公開中。" />
 
   <style>
@@ -13,84 +13,168 @@
       --bg:#ffffff;
       --card:#ffffff;
       --line:#e2e8f0;
+
       --accent:#2563eb;
       --ok:#16a34a;
       --hot:#f97316;
-      --shadow:0 18px 40px rgba(15,23,42,.10);
-      --r:16px;
+
+      /* 闇の差し色 */
+      --shadowInk:#020617;   /* 漆黒 */
+      --night:#0f172a;       /* 深夜 */
+      --smoke:#1e293b;       /* 影 */
+      --mist:#334155;        /* 曇り */
+
+      --shadowA:0 18px 40px rgba(15,23,42,.10);
+      --shadowB:
+        0 14px 26px rgba(15,23,42,.08),
+        0 2px 0 rgba(0,0,0,.06),
+        inset 0 1px 0 rgba(255,255,255,.55);
+
+      --r:18px;
     }
+
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",Segoe UI,Roboto,Arial,sans-serif;
       color:var(--ink);
-      background:
-        radial-gradient(900px 600px at 10% 0%, rgba(37,99,235,.10), transparent 60%),
-        radial-gradient(900px 600px at 90% 10%, rgba(249,115,22,.10), transparent 60%),
-        radial-gradient(900px 600px at 50% 100%, rgba(22,163,74,.10), transparent 55%),
-        var(--bg);
       line-height:1.75;
+
+      /* 表：カラフル / 裏：うっすら斜め影（忍者の気配） */
+      background:
+        radial-gradient(900px 600px at 10% 0%, rgba(37,99,235,.12), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(249,115,22,.12), transparent 60%),
+        radial-gradient(900px 600px at 50% 100%, rgba(22,163,74,.10), transparent 55%),
+        repeating-linear-gradient(135deg, rgba(2,6,23,.045) 0 10px, rgba(2,6,23,0) 10px 22px),
+        var(--bg);
     }
+
     a{color:inherit}
     .wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+
     header{padding:22px 0 12px}
     .topbar{
       display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
       padding:10px 0;
     }
+
     .brand{
       display:flex;align-items:center;gap:10px;font-weight:1000;letter-spacing:.02em;
     }
     .brand .dot{
       width:14px;height:14px;border-radius:999px;
       background: conic-gradient(from 0deg, #ef4444, #f97316, #eab308, #22c55e, #06b6d4, #3b82f6, #a855f7, #ef4444);
-      box-shadow:0 6px 18px rgba(0,0,0,.12);
+      box-shadow:0 10px 22px rgba(0,0,0,.12);
+      border:1px solid rgba(0,0,0,.06);
     }
+
+    .badge{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:7px 10px;border-radius:999px;border:1px solid var(--line);
+      background:rgba(255,255,255,.85);
+      font-weight:900;font-size:12px;color:var(--mut);
+    }
+
+    .hero{
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:rgba(255,255,255,.82);
+      box-shadow:var(--shadowA);
+      padding:18px;
+      overflow:hidden;
+      position:relative;
+    }
+
+    /* ところどころ“闇”を仕込む（角に影） */
+    .hero:after{
+      content:"";
+      position:absolute;inset:-40px -40px auto auto;
+      width:220px;height:220px;border-radius:999px;
+      background:radial-gradient(circle at 30% 30%, rgba(2,6,23,.16), rgba(2,6,23,0) 62%);
+      pointer-events:none;
+      transform:rotate(18deg);
+    }
+
     .pill{
       display:inline-flex;align-items:center;gap:8px;
       padding:8px 10px;border:1px solid var(--line);border-radius:999px;
-      background:rgba(255,255,255,.8);
+      background:rgba(255,255,255,.9);
       font-weight:900;font-size:13px;color:var(--mut);
     }
-    .hero{
-      border:1px solid var(--line);
-      border-radius:22px;
-      background:rgba(255,255,255,.75);
-      box-shadow:var(--shadow);
-      padding:18px;
-      overflow:hidden;
-    }
+
     .heroGrid{display:grid;gap:14px}
     @media(min-width:920px){.heroGrid{grid-template-columns:1.15fr .85fr;align-items:stretch}}
-    h1{margin:8px 0 8px;font-size:34px;line-height:1.15}
+
+    h1{
+      margin:10px 0 8px;
+      font-size:34px;
+      line-height:1.15;
+      letter-spacing:.01em;
+
+      /* 見出しに“影のグラデ”＝闇の気配 */
+      background:linear-gradient(180deg, var(--night) 0%, var(--smoke) 38%, var(--night) 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
     .lead{margin:0;color:var(--mut)}
     .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+
     .btn{
       display:inline-flex;align-items:center;gap:10px;
       padding:12px 14px;border-radius:14px;text-decoration:none;font-weight:1000;
       border:1px solid var(--line);background:#fff;
       box-shadow:0 10px 22px rgba(15,23,42,.06);
+      transition:transform .06s ease;
     }
     .btn:hover{transform:translateY(-1px)}
     .btn.ok{background:linear-gradient(135deg,#22c55e,#86efac);border:none}
     .btn.primary{background:linear-gradient(135deg,#2563eb,#60a5fa);border:none;color:#fff}
     .btn.hot{background:linear-gradient(135deg,#f97316,#fb7185);border:none;color:#fff}
-    .btn.dark{background:#0f172a;color:#fff;border:none}
+    .btn.dark{background:linear-gradient(135deg, var(--night), var(--smoke));border:none;color:#fff}
+
+    section{padding:16px 0}
+
     .card{
       border:1px solid var(--line);
       border-radius:var(--r);
-      background:rgba(255,255,255,.85);
-      box-shadow:0 14px 26px rgba(15,23,42,.06);
+      background:rgba(255,255,255,.90);
+      box-shadow:var(--shadowB);
       padding:16px;
+      position:relative;
+      overflow:hidden;
     }
-    section{padding:16px 0}
+
+    /* カードの片隅に“影”を仕込む（主張しない忍者） */
+    .card.shadowCorner:after{
+      content:"";
+      position:absolute;right:-40px;bottom:-40px;
+      width:160px;height:160px;border-radius:999px;
+      background:radial-gradient(circle at 30% 30%, rgba(2,6,23,.14), rgba(2,6,23,0) 62%);
+      pointer-events:none;
+    }
+
     .k{margin:0 0 10px;font-weight:1000;letter-spacing:.02em}
     .mut{color:var(--mut)}
     .grid{display:grid;gap:12px}
     @media(min-width:920px){.grid.cols3{grid-template-columns:1fr 1fr 1fr}.grid.cols2{grid-template-columns:1fr 1fr}}
+
+    .list{margin:0;padding-left:18px;color:var(--mut)}
+
+    .note{
+      font-size:13px;color:var(--mut);
+      border-left:4px solid rgba(2,6,23,.18);
+      padding-left:10px;margin:10px 0 0;
+    }
+
+    /* 色見本（光と闇） */
     .swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:10px}
     @media(min-width:920px){.swatches{grid-template-columns:repeat(8,1fr)}}
-    .sw{height:34px;border-radius:12px;border:1px solid rgba(0,0,0,.06);box-shadow:0 8px 14px rgba(0,0,0,.06)}
+    .sw{
+      height:34px;border-radius:12px;
+      border:1px solid rgba(0,0,0,.06);
+      box-shadow:0 10px 18px rgba(0,0,0,.06);
+    }
     .sw:nth-child(1){background:#ef4444}
     .sw:nth-child(2){background:#f97316}
     .sw:nth-child(3){background:#eab308}
@@ -98,33 +182,18 @@
     .sw:nth-child(5){background:#06b6d4}
     .sw:nth-child(6){background:#3b82f6}
     .sw:nth-child(7){background:#a855f7}
-    .sw:nth-child(8){background:#111827}
-    .sw:nth-child(9){background:#f8fafc}
-    .sw:nth-child(10){background:#94a3b8}
-    .sw:nth-child(11){background:#0ea5e9}
-    .sw:nth-child(12){background:#14b8a6}
+    .sw:nth-child(8){background:#111827} /* 夜 */
+    .sw:nth-child(9){background:#020617} /* 漆黒 */
+    .sw:nth-child(10){background:#1e293b} /* 影 */
+    .sw:nth-child(11){background:#334155} /* 曇り */
+    .sw:nth-child(12){background:#0f172a} /* 深夜 */
     .sw:nth-child(13){background:#fb7185}
     .sw:nth-child(14){background:#c084fc}
     .sw:nth-child(15){background:#f59e0b}
     .sw:nth-child(16){background:#16a34a}
-    .list{margin:0;padding-left:18px;color:var(--mut)}
-    .note{
-      font-size:13px;color:var(--mut);
-      border-left:4px solid rgba(37,99,235,.35);
-      padding-left:10px;margin:10px 0 0;
-    }
-    .links{display:flex;gap:10px;flex-wrap:wrap}
+
     .footer{
       padding:24px 0 34px;color:var(--mut);font-size:12px
-    }
-    .mini{
-      display:flex;align-items:center;gap:10px;flex-wrap:wrap
-    }
-    .mini a{text-decoration:none}
-    .badge{
-      display:inline-flex;gap:8px;align-items:center;
-      padding:6px 10px;border-radius:999px;border:1px solid var(--line);
-      background:#fff;font-weight:900;font-size:12px;color:var(--mut);
     }
   </style>
 </head>
@@ -135,8 +204,9 @@
       <div class="topbar">
         <div class="brand"><span class="dot"></span>田中塗装 <span class="mut">｜八王子</span></div>
         <div class="mini">
-          <span class="badge">🎨 色で勝負</span>
+          <span class="badge">🎨 色の職人</span>
           <span class="badge">🛠 職人直対応</span>
+          <span class="badge">🥷 静かに速い</span>
           <span class="badge">📸 LINE写真相談OK</span>
         </div>
       </div>
@@ -144,15 +214,16 @@
       <div class="hero">
         <div class="heroGrid">
           <div>
-            <div class="pill">「暗いサイトやめました」→ 色の人に見えるようにしました。</div>
-            <h1>色と仕上がりで、<br>ちゃんと“惚れさせる”塗装します。</h1>
+            <div class="pill">派手に見せる。仕事は静かにやる。忍者みたいに。</div>
+            <h1>気づいたら、綺麗になってる。<br>それが一番いいと思っています。</h1>
             <p class="lead">
               外壁・屋根・防水・打ちっぱなし補修・マイクロセメント・特殊塗装。<br>
-              相談は軽くてOK。押し売りはしません。<b>押すのはローラーだけ。</b>
+              相談は軽くてOK。押し売りはしません。<b>押すのはローラーだけ。</b><br>
+              <b>表に立たず、誰にも迷惑をかけず、仕上がりだけ残します。</b>
             </p>
 
             <div class="btns">
-              <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener">🟩 LINEで写真送る（最速）</a>
+              <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener">🟩 LINEで写真送る（忍者最速）</a>
               <a class="btn primary" href="#contact">📩 相談する</a>
               <a class="btn" href="tel:09061203852">📞 電話</a>
               <a class="btn hot" href="#sns">🎥 YouTube / Instagram</a>
@@ -161,16 +232,16 @@
             <p class="note">※「まだ工事するか迷ってる」でもOK。写真だけでもOK。質問だけでもOK。</p>
           </div>
 
-          <div class="card">
-            <p class="k">色見本（気分）</p>
-            <p class="mut" style="margin:0">ペンキ屋っぽく、まず色を置きます。</p>
+          <div class="card shadowCorner">
+            <p class="k">色見本（光と闇）</p>
+            <p class="mut" style="margin:0">色を扱う店は、影も扱います。</p>
             <div class="swatches" aria-label="color swatches">
               <div class="sw"></div><div class="sw"></div><div class="sw"></div><div class="sw"></div>
               <div class="sw"></div><div class="sw"></div><div class="sw"></div><div class="sw"></div>
               <div class="sw"></div><div class="sw"></div><div class="sw"></div><div class="sw"></div>
               <div class="sw"></div><div class="sw"></div><div class="sw"></div><div class="sw"></div>
             </div>
-            <p class="note">「この色の雰囲気で」って言ってくれたら、提案しやすい。</p>
+            <p class="note">明るい色も、暗い色も。影まで塗って完成。</p>
           </div>
         </div>
       </div>
@@ -181,24 +252,30 @@
 
     <section>
       <div class="grid cols3">
-        <div class="card">
-          <p class="k">① 相談のハードル、低めです</p>
-          <p class="mut" style="margin:0">営業トークは得意じゃないので、まず聞きます。写真で見ます。正直に言います。</p>
+        <div class="card shadowCorner">
+          <p class="k">① まず、話を聞きます</p>
+          <p class="mut" style="margin:0">
+            派手な営業はしません。状況を聞いて、必要なことだけ提案します。
+          </p>
         </div>
-        <div class="card">
-          <p class="k">② “普通じゃない仕上げ”もOK</p>
-          <p class="mut" style="margin:0">打ちっぱなし、マイクロセメント、意匠。いわゆる「それ、誰ができるの？」系が好きです。</p>
+        <div class="card shadowCorner">
+          <p class="k">② 仕上がりに、うるさいです</p>
+          <p class="mut" style="margin:0">
+            色・質感・バランス。細かいところが気になりすぎるタイプです。（いい意味で）
+          </p>
         </div>
-        <div class="card">
-          <p class="k">③ 人が見える（SNSで）</p>
-          <p class="mut" style="margin:0">現場も作品も、YouTubeとインスタに出してます。見てから相談できます。</p>
+        <div class="card shadowCorner">
+          <p class="k">③ 普段は静か、SNSでは出ます</p>
+          <p class="mut" style="margin:0">
+            現場では気配薄め。YouTube/Instagramでは普通に出ています。
+          </p>
         </div>
       </div>
     </section>
 
     <section>
       <div class="grid cols2">
-        <div class="card">
+        <div class="card shadowCorner">
           <p class="k">できること（現場）</p>
           <ul class="list">
             <li>外壁塗装 / 屋根塗装</li>
@@ -210,7 +287,7 @@
           <p class="note">※「どれ頼めばいいか分からん」→それが普通。写真送って。</p>
         </div>
 
-        <div class="card" id="line">
+        <div class="card shadowCorner" id="line">
           <p class="k">LINEで写真相談（コピペOK）</p>
           <p class="mut" style="margin:0">これ送ってくれたら、話が早い。</p>
           <div class="card" style="margin-top:12px">
@@ -226,28 +303,30 @@
             <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener">🟩 LINEを開く</a>
             <a class="btn" href="tel:09061203852">📞 電話</a>
           </div>
+          <p class="note">「まだ塗るか決めてません」だけでもOK。そこから一緒に整理します。</p>
         </div>
       </div>
     </section>
 
     <section id="sns">
-      <div class="card">
+      <div class="card shadowCorner">
         <p class="k">YouTube / Instagram（現場と作品）</p>
         <p class="mut" style="margin:0">
-          施工の過程、仕上げのクセ、作品のノリ。全部ここにあります。
+          施工の過程、仕上げのクセ、作品のノリ。全部ここにあります。<br>
+          表は華やか。裏は静か。仕上がりは唯一無二。
         </p>
         <div class="btns" style="margin-top:12px">
           <a class="btn hot" href="https://youtube.com/channel/UC_ic4KvdbTO_w0gmX3QGXWg" target="_blank" rel="noopener">🎥 YouTubeを見る</a>
-          <a class="btn" href="https://www.instagram.com/tanakatoso_yoon" target="_blank" rel="noopener">📷 Instagramを見る</a>
-          <a class="btn dark" href="#contact">📩 相談する</a>
+          <a class="btn dark" href="https://www.instagram.com/tanakatoso_yoon" target="_blank" rel="noopener">📷 Instagramを見る（闇あり）</a>
+          <a class="btn primary" href="#contact">📩 相談する</a>
         </div>
-        <p class="note">次の改造：Instagramの最新投稿を「ギャラリーっぽく」並べる（見た目爆上がり）。</p>
+        <p class="note">次の改造：施工写真の「Before→After」3件だけ並べると、凄さが文章ゼロで伝わる。</p>
       </div>
     </section>
 
     <section id="contact">
       <div class="grid cols2">
-        <div class="card">
+        <div class="card shadowCorner">
           <p class="k">お問い合わせ</p>
           <p class="mut" style="margin:0">
             TEL：<a href="tel:09061203852">090-6120-3852</a><br>
@@ -257,11 +336,12 @@
           <p class="note">※現場中は出れない時あります。LINEが確実。</p>
         </div>
 
-        <div class="card">
-          <p class="k">ひとこと（ゆるめ）</p>
+        <div class="card shadowCorner">
+          <p class="k">ひとこと（忍者アーティスト）</p>
           <p class="mut" style="margin:0">
-            色の話、質感の話、めっちゃ好きです。<br>
-            「この雰囲気にしたい」って画像1枚送ってくれたら、提案できます。
+            表に立たない。誰にも迷惑をかけない。<br>
+            でも、仕上がりだけは残す。<br>
+            <b>静かに速い、変態級のアーチスト職人です。</b>
           </p>
           <div class="btns" style="margin-top:12px">
             <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener">🟩 写真送る</a>
@@ -273,7 +353,7 @@
 
     <div class="footer">
       田中塗装｜東京都 八王子（長房町）｜代表：中田<br>
-      © Tanaka Tosou. Color first, pressure zero.
+      © Tanaka Tosou. Color on the front. Shadow in the back.
     </div>
   </main>
 </body>
