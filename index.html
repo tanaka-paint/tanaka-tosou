@@ -304,7 +304,79 @@ body.ready main{
   #curtain, #splash{ display:none; }
   body.loading header, body.loading main{ opacity:1; transform:none; }
 }
-  
+
+/* ===== スクロール忍者：端からスッ… ===== */
+.ninja-peek{
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  z-index: 9998;
+
+  display:flex;
+  align-items:flex-end;
+  gap:10px;
+
+  /* 初期は隠す：右下の外にいる */
+  opacity: 0;
+  transform: translate(40px, 40px);
+  pointer-events:none;
+
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+.ninja-peek.show{
+  opacity: 1;
+  transform: translate(0, 0);
+  pointer-events:auto;
+}
+
+.ninja-img{
+  width: 92px;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(2,6,23,.22);
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.08);
+}
+
+.ninja-bubble{
+  position:relative;
+  max-width: 220px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(226,232,240,.9);
+  background: rgba(255,255,255,.92);
+  color: var(--ink);
+  font-weight: 900;
+  font-size: 13px;
+  line-height: 1.35;
+  box-shadow: 0 14px 28px rgba(2,6,23,.10);
+}
+
+/* 吹き出しのしっぽ */
+.ninja-bubble::after{
+  content:"";
+  position:absolute;
+  width: 10px; height: 10px;
+  transform: rotate(45deg);
+  background: rgba(255,255,255,.92);
+  border-left: 1px solid rgba(226,232,240,.9);
+  border-bottom: 1px solid rgba(226,232,240,.9);
+  right: 90px;
+  bottom: 16px;
+}
+
+/* スマホは少し小さく */
+@media (max-width:520px){
+  .ninja-img{ width: 78px; }
+  .ninja-bubble{ max-width: 190px; font-size:12px; }
+}
+
+/* 動きを減らす設定の人は “出現だけ” に */
+@media (prefers-reduced-motion: reduce){
+  .ninja-peek{ transition: none; }
+}
+    
   </style>
 </head>
 
@@ -398,6 +470,8 @@ body.ready main{
       </div>
     </section>
 
+    <div id="ninja-trigger" style="height:1px"></div>
+    
     <section>
       <div class="grid cols2">
         <div class="card shadowCorner">
@@ -475,7 +549,7 @@ body.ready main{
         </div>
       </div>
     </section>
-
+   
     <div class="footer">
       田中塗装｜東京都 八王子（長房町）｜代表：中田<br>
       © Tanaka Tosou. Color on the front. Shadow in the back.
@@ -530,6 +604,41 @@ body.ready main{
     });
   });
 </script>
+
+<script>
+(() => {
+  const ninja = document.getElementById('ninja-peek');
+  const trigger = document.getElementById('ninja-trigger');
+  if(!ninja || !trigger) return;
+
+  const SHOW_MS = 2600;
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if(e.isIntersecting){
+        ninja.classList.add('show');
+
+        clearTimeout(ninja._t);
+        ninja._t = setTimeout(() => {
+          ninja.classList.remove('show');
+        }, SHOW_MS);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  io.observe(trigger);
+
+  ninja.addEventListener('click', () => {
+    window.open('https://line.me/ti/p/yHunueNM1o', '_blank', 'noopener,noreferrer');
+  });
+})();
+</script>
+  
+<!-- ===== スクロール忍者（気づく人だけ気づく） ===== -->
+<div id="ninja-peek" class="ninja-peek" aria-hidden="true">
+  <img src="ChatGPT Image 2026年2月7日 11_41_31.png" alt="" class="ninja-img">
+  <div class="ninja-bubble">写真送るのが最短ルートです。</div>
+</div>
 
 </body>
 </html>
