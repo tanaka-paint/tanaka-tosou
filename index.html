@@ -195,7 +195,82 @@
     .footer{
       padding:24px 0 34px;color:var(--mut);font-size:12px
     }
-  </style>
+    /* ===== 暗転の幕 ===== */
+#curtain{
+  position:fixed;
+  inset:0;
+  background:#020617;
+  z-index:10000;
+  opacity:1;
+  transition: opacity .6s ease;
+}
+#curtain.open{
+  opacity:0;
+  pointer-events:none;
+}
+
+/* ===== 忍者スプラッシュ ===== */
+#splash{
+  position:fixed;
+  inset:0;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  transition: opacity .9s ease, visibility .9s ease;
+}
+#splash.hide{
+  opacity:0;
+  visibility:hidden;
+}
+
+.splash-inner{ text-align:center; }
+
+.splash-img{
+  width:min(520px,85vw);
+  border-radius:22px;
+  box-shadow:0 30px 70px rgba(0,0,0,.25);
+  opacity:0;
+  transform:translateY(10px);
+  animation:splashIn 1s forwards;
+}
+
+.splash-text{
+  margin-top:16px;
+  opacity:0;
+  animation:splashIn 1s .2s forwards;
+}
+
+.splash-title{
+  font-size:22px;
+  font-weight:900;
+  letter-spacing:.1em;
+  color:#0f172a;
+}
+
+.splash-sub{
+  font-size:14px;
+  color:#475569;
+  font-weight:700;
+}
+
+@keyframes splashIn{
+  to{opacity:1; transform:translateY(0);}
+}
+
+body.loading header,
+body.loading main{
+  opacity:0;
+  transform:translateY(8px);
+}
+
+body.ready header,
+body.ready main{
+  opacity:1;
+  transform:none;
+  transition:.9s ease;
+}  </style>
 </head>
 
 <body>
