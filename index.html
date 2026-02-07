@@ -6,6 +6,10 @@
   <title>田中塗装｜八王子｜色は華やか、仕事は静かに。</title>
   <meta name="description" content="八王子の田中塗装。外壁・屋根・防水・打ちっぱなし補修・マイクロセメント・特殊塗装。LINEで写真相談OK。YouTube/Instagramで現場と作品も公開中。" />
 
+  <!-- ★追加：演出画像を先読みして安定させる -->
+  <link rel="preload" as="image" href="nurin_tanaka.png">
+  <link rel="preload" as="image" href="ninja.png">
+
   <style>
     :root{
       --ink:#0f172a;
@@ -41,7 +45,6 @@
       color:var(--ink);
       line-height:1.75;
 
-      /* 表：カラフル / 裏：うっすら斜め影（忍者の気配） */
       background:
         radial-gradient(900px 600px at 10% 0%, rgba(37,99,235,.12), transparent 60%),
         radial-gradient(900px 600px at 90% 10%, rgba(249,115,22,.12), transparent 60%),
@@ -50,7 +53,6 @@
         var(--bg);
     }
 
-    /* 通常リンクは信頼感のため下線あり（ボタンは別で消す） */
     a{color:inherit; text-decoration:underline; text-underline-offset:3px;}
     .wrap{max-width:1040px;margin:0 auto;padding:0 18px}
 
@@ -70,7 +72,6 @@
       border:1px solid rgba(0,0,0,.06);
     }
 
-    /* ★追加：miniが未定義だったので整形 */
     .mini{
       display:flex;
       flex-wrap:wrap;
@@ -143,7 +144,6 @@
     .btn.hot{background:linear-gradient(135deg,#f97316,#fb7185);border:none;color:#fff}
     .btn.dark{background:linear-gradient(135deg, var(--night), var(--smoke));border:none;color:#fff}
 
-    /* ★追加：フォーカスが見えると“プロ感”出る */
     .btn:focus-visible{
       outline:3px solid rgba(37,99,235,.35);
       outline-offset:2px;
@@ -210,192 +210,185 @@
       padding:24px 0 34px;color:var(--mut);font-size:12px
     }
 
-    /* 動きを減らす設定の人向け（ジャンプを通常に） */
     @media (prefers-reduced-motion: reduce){
       html{scroll-behavior:auto;}
       .btn{transition:none;}
       .btn:hover{transform:none;}
     }
-   
-/* ===== 演出：暗転＆スプラッシュ ===== */
-#curtain{
-  position:fixed;
-  inset:0;
-  background:#020617;  /* 漆黒 */
-  z-index:10000;
-  opacity:1;
-  transition: opacity .7s ease;
-}
-#curtain.open{
-  opacity:0;
-  pointer-events:none;
-}
 
-#splash{
-  position:fixed;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-  opacity:1;
-  visibility:visible;
-  transition: opacity .9s ease, visibility .9s ease;
-  /* 暗闇の中で出る感じ */
-  background: transparent;
-}
-#splash.hide{
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-}
+    /* ===== 演出：暗転＆スプラッシュ ===== */
+    #curtain{
+      position:fixed;
+      inset:0;
+      background:#020617;  /* 漆黒 */
+      /* ★修正：スプラッシュより下に置く */
+      z-index:9998;
+      opacity:1;
+      transition: opacity .7s ease;
+    }
+    #curtain.open{
+      opacity:0;
+      pointer-events:none;
+    }
 
-.splash-inner{
-  text-align:center;
-  transform: translateY(8px);
-  opacity:0;
-  animation: splashIn 1.1s ease forwards;
-}
+    #splash{
+      position:fixed;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      /* ★修正：幕より上 */
+      z-index:9999;
+      opacity:1;
+      visibility:visible;
+      transition: opacity .9s ease, visibility .9s ease;
+      background: transparent;
+    }
+    #splash.hide{
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+    }
 
-.splash-img{
-  width:min(520px, 86vw);
-  border-radius:22px;
-  box-shadow:0 30px 70px rgba(0,0,0,.35);
-  border:1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.04);
-}
+    .splash-inner{
+      text-align:center;
+      transform: translateY(8px);
+      opacity:0;
+      animation: splashIn 1.1s ease forwards;
+    }
 
-.splash-text{ margin-top:14px; }
+    .splash-img{
+      width:min(520px, 86vw);
+      border-radius:22px;
+      box-shadow:0 30px 70px rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
 
-.splash-title{
-  font-size:22px;
-  font-weight:1000;
-  letter-spacing:.12em;
-  color:#ffffff;
-  text-shadow:0 10px 30px rgba(0,0,0,.35);
-}
+    .splash-text{ margin-top:14px; }
 
-.splash-sub{
-  font-size:14px;
-  color:rgba(255,255,255,.80);
-  font-weight:900;
-}
+    .splash-title{
+      font-size:22px;
+      font-weight:1000;
+      letter-spacing:.12em;
+      color:#ffffff;
+      text-shadow:0 10px 30px rgba(0,0,0,.35);
+    }
 
-@keyframes splashIn{
-  to{ opacity:1; transform: translateY(0); }
-}
+    .splash-sub{
+      font-size:14px;
+      color:rgba(255,255,255,.80);
+      font-weight:900;
+    }
 
-/* 本文は最初ちょい隠す（スプラッシュ後に表示） */
-body.loading header,
-body.loading main{
-  opacity:0;
-  transform:translateY(8px);
-}
+    @keyframes splashIn{
+      to{ opacity:1; transform: translateY(0); }
+    }
 
-body.ready header,
-body.ready main{
-  opacity:1;
-  transform:none;
-  transition: .9s ease;
-}
+    body.loading header,
+    body.loading main{
+      opacity:0;
+      transform:translateY(8px);
+    }
 
-/* 動きを減らす設定の人は演出スキップ */
-@media (prefers-reduced-motion: reduce){
-  #curtain, #splash{ display:none; }
-  body.loading header, body.loading main{ opacity:1; transform:none; }
-}
+    body.ready header,
+    body.ready main{
+      opacity:1;
+      transform:none;
+      transition: .9s ease;
+    }
 
-/* ===== スクロール忍者：端からスッ… ===== */
-.ninja-peek{
-  position: fixed;
-  right: 14px;
-  bottom: 14px;
-  z-index: 9998;
+    @media (prefers-reduced-motion: reduce){
+      #curtain, #splash{ display:none; }
+      body.loading header, body.loading main{ opacity:1; transform:none; }
+    }
 
-  display:flex;
-  align-items:flex-end;
-  gap:10px;
+    /* ===== スクロール忍者：端からスッ… ===== */
+    .ninja-peek{
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      z-index: 9997;
 
-  /* 初期は隠す：右下の外にいる */
-  opacity: 0;
-  transform: translate(40px, 40px);
-  pointer-events:none;
+      display:flex;
+      align-items:flex-end;
+      gap:10px;
 
-  transition: opacity .45s ease, transform .45s ease;
-}
+      opacity: 0;
+      transform: translate(40px, 40px);
+      pointer-events:none;
 
-.ninja-peek.show{
-  opacity: 1;
-  transform: translate(0, 0);
-  pointer-events:auto;
-}
+      transition: opacity .45s ease, transform .45s ease;
+    }
 
-.ninja-img{
-  width: 92px;
-  height: auto;
-  border-radius: 16px;
-  box-shadow: 0 18px 40px rgba(2,6,23,.22);
-  border: 1px solid rgba(255,255,255,.18);
-  background: rgba(255,255,255,.08);
-}
+    .ninja-peek.show{
+      opacity: 1;
+      transform: translate(0, 0);
+      pointer-events:auto;
+    }
 
-.ninja-bubble{
-  position:relative;
-  max-width: 220px;
-  padding: 10px 12px;
-  border-radius: 14px;
-  border: 1px solid rgba(226,232,240,.9);
-  background: rgba(255,255,255,.92);
-  color: var(--ink);
-  font-weight: 900;
-  font-size: 13px;
-  line-height: 1.35;
-  box-shadow: 0 14px 28px rgba(2,6,23,.10);
-}
+    .ninja-img{
+      width: 92px;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 18px 40px rgba(2,6,23,.22);
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+    }
 
-/* 吹き出しのしっぽ */
-.ninja-bubble::after{
-  content:"";
-  position:absolute;
-  width: 10px; height: 10px;
-  transform: rotate(45deg);
-  background: rgba(255,255,255,.92);
-  border-left: 1px solid rgba(226,232,240,.9);
-  border-bottom: 1px solid rgba(226,232,240,.9);
-  right: 90px;
-  bottom: 16px;
-}
+    .ninja-bubble{
+      position:relative;
+      max-width: 220px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(226,232,240,.9);
+      background: rgba(255,255,255,.92);
+      color: var(--ink);
+      font-weight: 900;
+      font-size: 13px;
+      line-height: 1.35;
+      box-shadow: 0 14px 28px rgba(2,6,23,.10);
+    }
 
-/* スマホは少し小さく */
-@media (max-width:520px){
-  .ninja-img{ width: 78px; }
-  .ninja-bubble{ max-width: 190px; font-size:12px; }
-}
+    .ninja-bubble::after{
+      content:"";
+      position:absolute;
+      width: 10px; height: 10px;
+      transform: rotate(45deg);
+      background: rgba(255,255,255,.92);
+      border-left: 1px solid rgba(226,232,240,.9);
+      border-bottom: 1px solid rgba(226,232,240,.9);
+      right: 90px;
+      bottom: 16px;
+    }
 
-/* 動きを減らす設定の人は “出現だけ” に */
-@media (prefers-reduced-motion: reduce){
-  .ninja-peek{ transition: none; }
-}
-    
+    @media (max-width:520px){
+      .ninja-img{ width: 78px; }
+      .ninja-bubble{ max-width: 190px; font-size:12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .ninja-peek{ transition: none; }
+    }
   </style>
 </head>
 
 <body>
-  
-<!-- ===== 暗転（幕） ===== -->
-<div id="curtain"></div>
 
-<!-- ===== スプラッシュ（忍者画像） ===== -->
-<div id="splash" aria-hidden="true">
-  <div class="splash-inner">
-    <img src="nurin_tanaka.png" class="splash-img" alt="田中塗装 忍者" />
-    <div class="splash-text">
-      <div class="splash-title">必殺：影塗</div>
-      <div class="splash-sub">静かに近づき、仕上がりだけ残す。</div>
+  <!-- ===== 暗転（幕） ===== -->
+  <div id="curtain"></div>
+
+  <!-- ===== スプラッシュ（忍者画像） ===== -->
+  <div id="splash" aria-hidden="true">
+    <div class="splash-inner">
+      <img src="nurin_tanaka.png" class="splash-img" alt="田中塗装 忍者" />
+      <div class="splash-text">
+        <div class="splash-title">必殺：影塗</div>
+        <div class="splash-sub">静かに近づき、仕上がりだけ残す。</div>
+      </div>
     </div>
   </div>
-</div>
-  
+
   <header>
     <div class="wrap">
       <div class="topbar">
@@ -472,7 +465,7 @@ body.ready main{
     </section>
 
     <div id="ninja-trigger" style="height:1px"></div>
-    
+
     <section>
       <div class="grid cols2">
         <div class="card shadowCorner">
@@ -509,93 +502,92 @@ body.ready main{
     </section>
 
     <section id="history">
-  <div class="card shadowCorner">
-    <p class="k">塗装の歴史（日本編）</p>
-    <p class="mut" style="margin:0">
-      塗装は「色をつける」より先に、<b>守る</b>ために生まれました。<br>
-      雨、湿気、紫外線、そして時間。建物の敵はいつも“静か”です。<br>
-      だから塗装も、静かに効くほうが強い。忍者みたいに。
-    </p>
-
-    <div class="grid cols3" style="margin-top:12px">
       <div class="card shadowCorner">
-        <p class="k">① 漆と油：守るための塗り</p>
+        <p class="k">塗装の歴史（日本編）</p>
         <p class="mut" style="margin:0">
-          昔は木を守るために、漆や油、顔料を使ってきました。<br>
-          ツヤは飾りではなく、<b>耐久の結果</b>です。
+          塗装は「色をつける」より先に、<b>守る</b>ために生まれました。<br>
+          雨、湿気、紫外線、そして時間。建物の敵はいつも“静か”です。<br>
+          だから塗装も、静かに効くほうが強い。忍者みたいに。
         </p>
-      </div>
 
+        <div class="grid cols3" style="margin-top:12px">
+          <div class="card shadowCorner">
+            <p class="k">① 漆と油：守るための塗り</p>
+            <p class="mut" style="margin:0">
+              昔は木を守るために、漆や油、顔料を使ってきました。<br>
+              ツヤは飾りではなく、<b>耐久の結果</b>です。
+            </p>
+          </div>
+
+          <div class="card shadowCorner">
+            <p class="k">② 町家と土壁：素材に合わせる</p>
+            <p class="mut" style="margin:0">
+              日本の家は湿気と共存する文化。<br>
+              塗る・乾かす・呼吸させる。<br>
+              <b>素材を殺さない</b>のが職人の仕事です。
+            </p>
+          </div>
+
+          <div class="card shadowCorner">
+            <p class="k">③ いま：保護＋意匠の時代</p>
+            <p class="mut" style="margin:0">
+              現代は、守りながら魅せる。<br>
+              光の当たり方、影の出方、質感。<br>
+              <b>空気ごと仕上げる</b>のが今の塗装です。
+            </p>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <p class="mut" style="margin:0">
+            この流れの上に、いまの現場があります。<br><br>
+
+            <b>塗装歴30年以上。</b><br>
+            住宅・集合住宅・店舗・打ちっぱなし補修・意匠仕上げまで、数多くの現場に関わってきました。<br><br>
+
+            田中塗装は、<b>「守る（耐久）」と「魅せる（意匠）」</b>を両方やります。<br>
+            押し売りはしません。押すのはローラーだけ。<br>
+            静かに近づいて、仕上がりだけ残します。
+          </p>
+        </div>
+
+        <div class="btns" style="margin-top:12px">
+          <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener noreferrer">🟩 写真で相談する（最短）</a>
+          <a class="btn primary" href="#contact">📩 相談する</a>
+        </div>
+
+        <p class="note">※歴史は軽めに。いまの家の状態が一番大事なので、写真だけ送ってください。</p>
+      </div>
+    </section>
+
+    <section id="ai">
       <div class="card shadowCorner">
-        <p class="k">② 町家と土壁：素材に合わせる</p>
+        <p class="k">AI忍者相談（24時間）</p>
         <p class="mut" style="margin:0">
-          日本の家は湿気と共存する文化。<br>
-          塗る・乾かす・呼吸させる。<br>
-          <b>素材を殺さない</b>のが職人の仕事です。
+          気になることをそのまま書いてください。概算と次の一手を返します。<br>
+          ※最終判断は写真で。LINEが最短です。
         </p>
+
+        <div class="card" style="margin-top:12px">
+          <div id="chatLog" class="mut" style="height:220px; overflow:auto; white-space:pre-wrap;"></div>
+
+          <div style="display:flex; gap:10px; margin-top:10px">
+            <input id="chatInput" class="btn" style="flex:1; text-decoration:none;"
+                   placeholder="例：外壁にヒビ。30坪。八王子。屋根も気になる" />
+            <button id="chatSend" class="btn primary">送信</button>
+          </div>
+
+          <p class="note" style="margin-top:10px">
+            返信が長い/不安なら：🟩 LINEで写真相談が最短です。
+          </p>
+
+          <div class="btns" style="margin-top:10px">
+            <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener noreferrer">🟩 LINEで写真送る</a>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <div class="card shadowCorner">
-        <p class="k">③ いま：保護＋意匠の時代</p>
-        <p class="mut" style="margin:0">
-          現代は、守りながら魅せる。<br>
-          光の当たり方、影の出方、質感。<br>
-          <b>空気ごと仕上げる</b>のが今の塗装です。
-        </p>
-      </div>
-    </div>
-
-    <!-- ★ここに実績を自然に追加 -->
-    <div class="card" style="margin-top:12px">
-      <p class="mut" style="margin:0">
-        この流れの上に、いまの現場があります。<br><br>
-
-        <b>塗装歴30年以上。</b><br>
-        住宅・集合住宅・店舗・打ちっぱなし補修・意匠仕上げまで、数多くの現場に関わってきました。<br><br>
-
-        田中塗装は、<b>「守る（耐久）」と「魅せる（意匠）」</b>を両方やります。<br>
-        押し売りはしません。押すのはローラーだけ。<br>
-        静かに近づいて、仕上がりだけ残します。
-      </p>
-    </div>
-
-    <div class="btns" style="margin-top:12px">
-      <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener noreferrer">🟩 写真で相談する（最短）</a>
-      <a class="btn primary" href="#contact">📩 相談する</a>
-    </div>
-
-    <p class="note">※歴史は軽めに。いまの家の状態が一番大事なので、写真だけ送ってください。</p>
-  </div>
-</section>
-
-<section id="ai">
-  <div class="card shadowCorner">
-    <p class="k">AI忍者相談（24時間）</p>
-    <p class="mut" style="margin:0">
-      気になることをそのまま書いてください。概算と次の一手を返します。<br>
-      ※最終判断は写真で。LINEが最短です。
-    </p>
-
-    <div class="card" style="margin-top:12px">
-      <div id="chatLog" class="mut" style="height:220px; overflow:auto; white-space:pre-wrap;"></div>
-
-      <div style="display:flex; gap:10px; margin-top:10px">
-        <input id="chatInput" class="btn" style="flex:1; text-decoration:none;"
-               placeholder="例：外壁にヒビ。30坪。八王子。屋根も気になる" />
-        <button id="chatSend" class="btn primary">送信</button>
-      </div>
-
-      <p class="note" style="margin-top:10px">
-        返信が長い/不安なら：🟩 LINEで写真相談が最短です。
-      </p>
-
-      <div class="btns" style="margin-top:10px">
-        <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener noreferrer">🟩 LINEで写真送る</a>
-      </div>
-    </div>
-  </div>
-</section>
-    
     <section id="sns">
       <div class="card shadowCorner">
         <p class="k">YouTube / Instagram（現場と作品）</p>
@@ -617,53 +609,53 @@ body.ready main{
       <div class="grid cols2">
 
         <div class="card shadowCorner" id="company">
-  <p class="k">会社概要</p>
+          <p class="k">会社概要</p>
 
-  <div class="grid" style="gap:10px">
-    <div class="card" style="padding:12px">
-      <p class="mut" style="margin:0">
-        <b>屋号</b>：田中塗装<br>
-        <b>代表</b>：中田 七守<br>
-        <b>所在地</b>：〒193-0824 東京都八王子市長房町627-1-101<br>
-        <b>TEL</b>：<a href="tel:090-6120-3852">090-6120-3852</a><br>
-        <b>MAIL</b>：<a href="mailto:tanakatoso_yoon@ezweb.ne.jp">tanakatoso_yoon@ezweb.ne.jp</a><br>
-        <b>LINE</b>：<a href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener noreferrer">写真相談はこちら</a>
-      </p>
-    </div>
+          <div class="grid" style="gap:10px">
+            <div class="card" style="padding:12px">
+              <p class="mut" style="margin:0">
+                <b>屋号</b>：田中塗装<br>
+                <b>代表</b>：中田 七守<br>
+                <b>所在地</b>：〒193-0824 東京都八王子市長房町627-1-101<br>
+                <b>TEL</b>：<a href="tel:090-6120-3852">090-6120-3852</a><br>
+                <b>MAIL</b>：<a href="mailto:tanakatoso_yoon@ezweb.ne.jp">tanakatoso_yoon@ezweb.ne.jp</a><br>
+                <b>LINE</b>：<a href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener noreferrer">写真相談はこちら</a>
+              </p>
+            </div>
 
-    <div class="card" style="padding:12px">
-      <p class="mut" style="margin:0">
-        <b>事業内容</b>：外壁塗装／屋根塗装／防水（ベランダ等）／打ちっぱなし補修・保護（美観回復）／マイクロセメント／特殊塗装・意匠（質感・エイジング等）<br><br>
-        <b>対応エリア</b>：八王子・多摩エリア中心（近隣も相談OK）<br>
-        <b>見積</b>：現地確認の上でご提案（LINE写真相談OK）<br>
-        <b>支払い方法</b>：現金・銀行振込<br>
-        <b>保険</b>：工事保険加入
-      </p>
-    </div>
+            <div class="card" style="padding:12px">
+              <p class="mut" style="margin:0">
+                <b>事業内容</b>：外壁塗装／屋根塗装／防水（ベランダ等）／打ちっぱなし補修・保護（美観回復）／マイクロセメント／特殊塗装・意匠（質感・エイジング等）<br><br>
+                <b>対応エリア</b>：八王子・多摩エリア中心（近隣も相談OK）<br>
+                <b>見積</b>：現地確認の上でご提案（LINE写真相談OK）<br>
+                <b>支払い方法</b>：現金・銀行振込<br>
+                <b>保険</b>：工事保険加入
+              </p>
+            </div>
 
-    <div class="card" style="padding:12px">
-      <p class="mut" style="margin:0">
-        <b>営業時間</b>：9:00〜18:00<br>
-        <b>定休日</b>：土曜・日曜<br>
-        <b>創業</b>：2013年<br>
-        <b>資格・許可</b>：塗装工事一式<br>
-        <b>建設業許可</b>：未取得（小規模工事対応）<br>
-        <b>適格請求書（インボイス）</b>：登録済
-      </p>
-    </div>
-  </div>
+            <div class="card" style="padding:12px">
+              <p class="mut" style="margin:0">
+                <b>営業時間</b>：9:00〜18:00<br>
+                <b>定休日</b>：土曜・日曜<br>
+                <b>創業</b>：2013年<br>
+                <b>資格・許可</b>：塗装工事一式<br>
+                <b>建設業許可</b>：未取得（小規模工事対応）<br>
+                <b>適格請求書（インボイス）</b>：登録済
+              </p>
+            </div>
+          </div>
 
-  <p class="note">
-    ※現場中は電話に出られない場合があります。LINEが最も確実です。
-  </p>
+          <p class="note">
+            ※現場中は電話に出られない場合があります。LINEが最も確実です。
+          </p>
 
-  <div class="btns" style="margin-top:12px">
-    <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener noreferrer">🟩 LINEで写真送る</a>
-    <a class="btn" href="tel:090-6120-3852">📞 電話</a>
-    <a class="btn primary" href="#contact">📩 相談する</a>
-  </div>
-</div>
-        
+          <div class="btns" style="margin-top:12px">
+            <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener noreferrer">🟩 LINEで写真送る</a>
+            <a class="btn" href="tel:090-6120-3852">📞 電話</a>
+            <a class="btn primary" href="#contact">📩 相談する</a>
+          </div>
+        </div>
+
         <div class="card shadowCorner">
           <p class="k">お問い合わせ</p>
           <p class="mut" style="margin:0">
@@ -688,153 +680,162 @@ body.ready main{
         </div>
       </div>
     </section>
-   
-<div class="footer">
-  田中塗装<br>
-  〒193-0824 東京都八王子市長房町627-1-101<br>
-  TEL：090-6120-3852 / MAIL：tanakatoso_yoon@ezweb.ne.jp<br>
-  代表：中田 七守 / 創業：2013年 / インボイス登録済<br><br>
-  © Tanaka Tosou. All Rights Reserved.
-</div> 
-  
+
+    <div class="footer">
+      田中塗装<br>
+      〒193-0824 東京都八王子市長房町627-1-101<br>
+      TEL：090-6120-3852 / MAIL：tanakatoso_yoon@ezweb.ne.jp<br>
+      代表：中田 七守 / 創業：2013年 / インボイス登録済<br><br>
+      © Tanaka Tosou. All Rights Reserved.
+    </div>
+
   </main>
 
-<script>
-  // 最初は本文を隠す
-  document.body.classList.add('loading');
+  <script>
+    // 最初は本文を隠す
+    document.body.classList.add('loading');
 
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function showMainNow(){
-    const curtain = document.getElementById('curtain');
-    const splash  = document.getElementById('splash');
-    if (curtain) curtain.classList.add('open');
-    if (splash) splash.classList.add('hide');
-    document.body.classList.remove('loading');
-    document.body.classList.add('ready');
-  }
-
-  window.addEventListener('load', () => {
-    if (prefersReduced){
-      showMainNow();
-      return;
-    }
-
-    const curtain = document.getElementById('curtain');
-    const splash  = document.getElementById('splash');
-    const img     = document.querySelector('.splash-img');
-
-    // 画像が無い/読めない時は事故らないよう即スキップ
-    if (img){
-      img.addEventListener('error', () => showMainNow(), { once:true });
-    }
-
-    // ① 暗転を少し見せる（ここで「開いた時に暗い」）
-    const t1 = setTimeout(() => {
-      if (curtain) curtain.classList.add('open'); // 暗転が薄くなる（開く）
-    }, 1200);
-
-    // ② 画像を見せてから、フェードアウトしてトップへ
-    const t2 = setTimeout(() => {
+    function showMainNow(){
+      const curtain = document.getElementById('curtain');
+      const splash  = document.getElementById('splash');
       if (splash) splash.classList.add('hide');
+      if (curtain) curtain.classList.add('open');
       document.body.classList.remove('loading');
       document.body.classList.add('ready');
-    }, 2800);
+    }
 
-    // 念のため（ページ離脱など）でタイマー掃除
-    window.addEventListener('beforeunload', () => {
-      clearTimeout(t1); clearTimeout(t2);
-    });
-  });
-</script>
-
-<script>
-window.addEventListener('load', () => {
-
-  const ninja = document.getElementById('ninja-peek');
-  const trigger = document.getElementById('ninja-trigger');
-  if(!ninja || !trigger) return;
-
-  const SHOW_MS = 2600;
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if(e.isIntersecting){
-        ninja.classList.add('show');
-
-        clearTimeout(ninja._t);
-        ninja._t = setTimeout(() => {
-          ninja.classList.remove('show');
-        }, SHOW_MS);
+    window.addEventListener('load', () => {
+      if (prefersReduced){
+        showMainNow();
+        return;
       }
+
+      const curtain = document.getElementById('curtain');
+      const splash  = document.getElementById('splash');
+      const img     = document.querySelector('.splash-img');
+
+      // 画像が無い/読めない時は事故らないよう即スキップ
+      if (img){
+        img.addEventListener('error', () => showMainNow(), { once:true });
+      }
+
+      // ★修正：順番を自然に（スプラッシュ→幕→本文）
+      const t1 = setTimeout(() => {
+        if (splash) splash.classList.add('hide');
+      }, 2200);
+
+      const t2 = setTimeout(() => {
+        if (curtain) curtain.classList.add('open');
+        document.body.classList.remove('loading');
+        document.body.classList.add('ready');
+      }, 2800);
+
+      window.addEventListener('beforeunload', () => {
+        clearTimeout(t1); clearTimeout(t2);
+      });
     });
-  }, { threshold: 0.2 });
+  </script>
 
-  io.observe(trigger);
+  <script>
+    window.addEventListener('load', () => {
+      const ninja = document.getElementById('ninja-peek');
+      const trigger = document.getElementById('ninja-trigger');
+      if(!ninja || !trigger) return;
 
-  ninja.addEventListener('click', () => {
-    window.open('https://line.me/ti/p/yHunueNM1o', '_blank', 'noopener,noreferrer');
-  });
+      const SHOW_MS = 2600;
+      let ninjaTimer = null; // ★修正：DOMにプロパティを生やさない
 
-});
-</script>
-  
-<!-- ===== スクロール忍者（気づく人だけ気づく） ===== -->
-<div id="ninja-peek" class="ninja-peek" aria-hidden="true">
-  <img src="ninja.png" alt="" class="ninja-img">
-  <div class="ninja-bubble">写真送るのが最短ルートです。</div>
-</div>
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if(e.isIntersecting){
+            ninja.classList.add('show');
+            clearTimeout(ninjaTimer);
+            ninjaTimer = setTimeout(() => {
+              ninja.classList.remove('show');
+            }, SHOW_MS);
+          }
+        });
+      }, { threshold: 0.2 });
 
-<script>
-const WORKER_URL = "https://YOUR-WORKER-URL-HERE/chat"; // ←あとで置き換え
+      io.observe(trigger);
 
-const log = document.getElementById("chatLog");
-const input = document.getElementById("chatInput");
-const sendBtn = document.getElementById("chatSend");
-
-function addLine(role, text){
-  const label = role === "user" ? "あなた" : "AI忍者";
-  log.textContent += `${label}：${text}\n\n`;
-  log.scrollTop = log.scrollHeight;
-}
-
-async function send(){
-  const text = (input.value || "").trim();
-  if(!text) return;
-
-  addLine("user", text);
-  input.value = "";
-  sendBtn.disabled = true;
-  addLine("assistant", "……（影の中で考え中）");
-
-  try{
-    const res = await fetch(WORKER_URL, {
-      method:"POST",
-      headers:{ "Content-Type":"application/json" },
-      body: JSON.stringify({ message: text })
+      ninja.addEventListener('click', () => {
+        window.open('https://line.me/ti/p/yHunueNM1o', '_blank', 'noopener,noreferrer');
+      });
     });
-    const data = await res.json();
+  </script>
 
-    // 最後の「考え中」を消して、回答を表示
-    const lines = log.textContent.split("\n\n");
-    lines.pop(); // 空
-    lines.pop(); // "AI忍者：……"
-    log.textContent = lines.join("\n\n") + (lines.length? "\n\n":"");
+  <!-- ===== スクロール忍者（クリックできるので aria-hidden は付けない） ===== -->
+  <div id="ninja-peek" class="ninja-peek">
+    <img src="ninja.png" alt="" class="ninja-img">
+    <div class="ninja-bubble">写真送るのが最短ルートです。</div>
+  </div>
 
-    addLine("assistant", data.reply || "すみません、返答に失敗しました。LINEで写真送ってください。");
-  }catch(e){
-    addLine("assistant", "通信に失敗しました。LINEで写真送ってください。");
-  }finally{
-    sendBtn.disabled = false;
-  }
-}
+  <script>
+    // ★ここを本番URLに置き換え（仮のままだと送信無効にする）
+    const WORKER_URL = "https://YOUR-WORKER-URL-HERE/chat";
 
-sendBtn.addEventListener("click", send);
-input.addEventListener("keydown", (e)=>{ if(e.key==="Enter") send(); });
+    const log = document.getElementById("chatLog");
+    const input = document.getElementById("chatInput");
+    const sendBtn = document.getElementById("chatSend");
 
-// 初期メッセージ
-addLine("assistant","こんにちは。場所（町名まで）と、気になる箇所、築年数、写真があれば最短です。写真なしでも概算は出せます。");
-</script>
-  
+    function addLine(role, text){
+      const label = role === "user" ? "あなた" : "AI忍者";
+      log.textContent += `${label}：${text}\n\n`;
+      log.scrollTop = log.scrollHeight;
+    }
+
+    // ★追加：URLが仮なら無効化して案内
+    const isPlaceholder = WORKER_URL.includes("YOUR-WORKER-URL-HERE");
+    if (isPlaceholder){
+      addLine("assistant","（準備中）AI忍者はまだ接続していません。いまは🟩LINEで写真相談が最短です。");
+      if (sendBtn) sendBtn.disabled = true;
+    }
+
+    async function send(){
+      if (isPlaceholder) return;
+
+      const text = (input.value || "").trim();
+      if(!text) return;
+
+      addLine("user", text);
+      input.value = "";
+      sendBtn.disabled = true;
+      addLine("assistant", "……（影の中で考え中）");
+
+      try{
+        const res = await fetch(WORKER_URL, {
+          method:"POST",
+          headers:{ "Content-Type":"application/json" },
+          body: JSON.stringify({ message: text })
+        });
+
+        const data = await res.json();
+
+        // 最後の「考え中」を消して、回答を表示
+        const blocks = log.textContent.split("\n\n");
+        blocks.pop(); // empty
+        blocks.pop(); // "AI忍者：……"
+        log.textContent = blocks.join("\n\n") + (blocks.length ? "\n\n" : "");
+
+        addLine("assistant", data.reply || "すみません、返答に失敗しました。LINEで写真送ってください。");
+      }catch(e){
+        addLine("assistant", "通信に失敗しました。LINEで写真送ってください。");
+      }finally{
+        sendBtn.disabled = false;
+      }
+    }
+
+    sendBtn?.addEventListener("click", send);
+    input?.addEventListener("keydown", (e)=>{ if(e.key==="Enter") send(); });
+
+    // 初期メッセージ（WORKERが仮の場合は上の案内が出る）
+    if (!isPlaceholder){
+      addLine("assistant","こんにちは。場所（町名まで）と、気になる箇所、築年数、写真があれば最短です。写真なしでも概算は出せます。");
+    }
+  </script>
+
 </body>
 </html>
