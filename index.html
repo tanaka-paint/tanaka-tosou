@@ -567,6 +567,55 @@ body.ready main{
     <p class="note">※歴史は軽めに。いまの家の状態が一番大事なので、写真だけ送ってください。</p>
   </div>
 </section>
+
+<section id="ai">
+  <div class="card shadowCorner">
+    <p class="k">AI忍者相談（24時間）</p>
+    <p class="mut" style="margin:0">
+      気になることをそのまま書いてください。概算と次の一手を返します。<br>
+      ※最終判断は写真で。LINEが最短です。
+    </p>
+
+    <div class="card" style="margin-top:12px">
+      <div id="chatLog" class="mut" style="height:220px; overflow:auto; white-space:pre-wrap;"></div>
+
+      <div style="display:flex; gap:10px; margin-top:10px">
+        <input id="chatInput" class="btn" style="flex:1; text-decoration:none;"
+               placeholder="例：外壁にヒビ。30坪。八王子。屋根も気になる" />
+        <button id="chatSend" class="btn primary">送信</button>
+      </div>
+
+      <p class="note" style="margin-top:10px">
+        返信が長い/不安なら：🟩 LINEで写真相談が最短です。
+      </p>
+
+      <div class="btns" style="margin-top:10px">
+        <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener noreferrer">🟩 LINEで写真送る</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <section id="ai">
+  <div class="card shadowCorner">
+    <p class="k">AI忍者相談（24時間）</p>
+    <p class="mut">気になることを書いてください。概算出します。</p>
+
+    <div class="card" style="margin-top:12px">
+      <div id="chatLog" class="mut" style="height:220px; overflow:auto; white-space:pre-wrap;"></div>
+
+      <div style="display:flex; gap:10px; margin-top:10px">
+        <input id="chatInput" class="btn" style="flex:1;"
+               placeholder="例：外壁ヒビ。30坪。屋根も気になる" />
+        <button id="chatSend" class="btn primary">送信</button>
+      </div>
+
+      <div class="btns" style="margin-top:10px">
+        <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank">🟩 LINEで写真相談</a>
+      </div>
+    </div>
+  </div>
+</section>
     
     <section id="sns">
       <div class="card shadowCorner">
@@ -757,5 +806,56 @@ window.addEventListener('load', () => {
   <div class="ninja-bubble">写真送るのが最短ルートです。</div>
 </div>
 
+<script>
+const WORKER_URL = "https://YOUR-WORKER-URL-HERE/chat"; // ←あとで置き換え
+
+const log = document.getElementById("chatLog");
+const input = document.getElementById("chatInput");
+const sendBtn = document.getElementById("chatSend");
+
+function addLine(role, text){
+  const label = role === "user" ? "あなた" : "AI忍者";
+  log.textContent += `${label}：${text}\n\n`;
+  log.scrollTop = log.scrollHeight;
+}
+
+async function send(){
+  const text = (input.value || "").trim();
+  if(!text) return;
+
+  addLine("user", text);
+  input.value = "";
+  sendBtn.disabled = true;
+  addLine("assistant", "……（影の中で考え中）");
+
+  try{
+    const res = await fetch(WORKER_URL, {
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify({ message: text })
+    });
+    const data = await res.json();
+
+    // 最後の「考え中」を消して、回答を表示
+    const lines = log.textContent.split("\n\n");
+    lines.pop(); // 空
+    lines.pop(); // "AI忍者：……"
+    log.textContent = lines.join("\n\n") + (lines.length? "\n\n":"");
+
+    addLine("assistant", data.reply || "すみません、返答に失敗しました。LINEで写真送ってください。");
+  }catch(e){
+    addLine("assistant", "通信に失敗しました。LINEで写真送ってください。");
+  }finally{
+    sendBtn.disabled = false;
+  }
+}
+
+sendBtn.addEventListener("click", send);
+input.addEventListener("keydown", (e)=>{ if(e.key==="Enter") send(); });
+
+// 初期メッセージ
+addLine("assistant","こんにちは。場所（町名まで）と、気になる箇所、築年数、写真があれば最短です。写真なしでも概算は出せます。");
+</script>
+  
 </body>
 </html>
