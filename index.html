@@ -949,7 +949,7 @@
 </section>
 
         <!-- ===== よくある質問 FAQ ===== -->
-<section style="background:#ffffff;padding:60px 20px">
+<section id="faq" style="background:#ffffff;padding:60px 20px">
   <div style="max-width:900px;margin:auto">
     <h2 style="font-size:28px;margin-bottom:20px;text-align:center">
       よくある質問
@@ -1129,7 +1129,7 @@
   flex-direction:column;
   gap:18px;
   transition:.3s;
-  z-index:9999;
+  z-index:10000;
 }
 
 .mobile-nav a{
@@ -1480,81 +1480,84 @@ section{scroll-margin-top:90px;}
   </div>
 
   <script>
-    const WORKER_URL = "https://fragrant-salad-6a5d.chilsoo129.workers.dev/chat"; 
+  const WORKER_URL = "https://fragrant-salad-6a5d.chilsoo129.workers.dev/chat";
 
-    const log = document.getElementById("chatLog");
-    const input = document.getElementById("chatInput");
-    const sendBtn = document.getElementById("chatSend");
+  const log = document.getElementById("chatLog");
+  const input = document.getElementById("chatInput");
+  const sendBtn = document.getElementById("chatSend");
 
-    function addLine(role, text){
-      const label = role === "user" ? "あなた" : "AI忍者";
-      log.textContent += `${label}：${text}\n\n`;
-      log.scrollTop = log.scrollHeight;
+  function addLine(role, text){
+    const label = role === "user" ? "あなた" : "AI忍者";
+    if (!log) return;
+    log.textContent += `${label}：${text}\n\n`;
+    log.scrollTop = log.scrollHeight;
+  }
+
+  const isPlaceholder = WORKER_URL.includes("YOUR-WORKER-URL-HERE");
+  if (isPlaceholder){
+    addLine("assistant","（準備中）AI忍者はまだ接続していません。いまは🟩LINEで写真相談が最短です。");
+    if (sendBtn) sendBtn.disabled = true;
+  }
+
+  async function send(){
+    if (isPlaceholder) return;
+
+    const text = (input?.value || "").trim();
+    if(!text) return;
+
+    addLine("user", text);
+    input.value = "";
+    if (sendBtn) sendBtn.disabled = true;
+    addLine("assistant", "……（影の中で考え中）");
+
+    try{
+      const res = await fetch(WORKER_URL, {
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify({ message: text })
+      });
+
+      const data = await res.json();
+
+      // 最後の「考え中」を消して、回答を表示
+      const blocks = log.textContent.split("\n\n");
+      blocks.pop(); // empty
+      blocks.pop(); // "AI忍者：……"
+      log.textContent = blocks.join("\n\n") + (blocks.length ? "\n\n" : "");
+
+      addLine("assistant", data.reply || "すみません、返答に失敗しました。LINEで写真送ってください。");
+    }catch(e){
+      addLine("assistant", "通信に失敗しました。LINEで写真送ってください。");
+    }finally{
+      if (sendBtn) sendBtn.disabled = false;
     }
+  }
 
-    // ★追加：URLが仮なら無効化して案内
-    const isPlaceholder = WORKER_URL.includes("YOUR-WORKER-URL-HERE");
-    if (isPlaceholder){
-      addLine("assistant","（準備中）AI忍者はまだ接続していません。いまは🟩LINEで写真相談が最短です。");
-      if (sendBtn) sendBtn.disabled = true;
-    }
+  sendBtn?.addEventListener("click", send);
+  input?.addEventListener("keydown", (e)=>{ if(e.key==="Enter") send(); });
 
-    async function send(){
-      if (isPlaceholder) return;
+  if (!isPlaceholder){
+    addLine("assistant","こんにちは。場所（町名まで）と、気になる箇所、築年数、写真があれば最短です。写真なしでも概算は出せます。");
+  }
+</script>
 
-      const text = (input.value || "").trim();
-      if(!text) return;
+<script>
+  // ハンバーガー
+  const ham = document.getElementById("hamburger");
+  const nav = document.getElementById("mobileNav");
 
-      addLine("user", text);
-      input.value = "";
-      sendBtn.disabled = true;
-      addLine("assistant", "……（影の中で考え中）");
+  if (ham && nav){
+    ham.addEventListener("click", ()=>{
+      nav.classList.toggle("open");
+    });
 
-      try{
-        const res = await fetch(WORKER_URL, {
-          method:"POST",
-          headers:{ "Content-Type":"application/json" },
-          body: JSON.stringify({ message: text })
-        });
-
-        const data = await res.json();
-
-        // 最後の「考え中」を消して、回答を表示
-        const blocks = log.textContent.split("\n\n");
-        blocks.pop(); // empty
-        blocks.pop(); // "AI忍者：……"
-        log.textContent = blocks.join("\n\n") + (blocks.length ? "\n\n" : "");
-
-        addLine("assistant", data.reply || "すみません、返答に失敗しました。LINEで写真送ってください。");
-      }catch(e){
-        addLine("assistant", "通信に失敗しました。LINEで写真送ってください。");
-      }finally{
-        sendBtn.disabled = false;
-      }
-    }
-
-    sendBtn?.addEventListener("click", send);
-    input?.addEventListener("keydown", (e)=>{ if(e.key==="Enter") send(); });
-
-    // 初期メッセージ（WORKERが仮の場合は上の案内が出る）
-    if (!isPlaceholder){
-      addLine("assistant","こんにちは。場所（町名まで）と、気になる箇所、築年数、写真があれば最短です。写真なしでも概算は出せます。");
-    }
-
-    <script>
-const ham = document.getElementById("hamburger");
-const nav = document.getElementById("mobileNav");
-
-ham.addEventListener("click", ()=>{
-  nav.classList.toggle("open");
-});
-
-/* メニュー押したら閉じる */
-document.querySelectorAll(".mobile-nav a").forEach(link=>{
-  link.addEventListener("click", ()=>{
-    nav.classList.remove("open");
-  });
-});
+    // メニュー押したら閉じる
+    document.querySelectorAll(".mobile-nav a").forEach(link=>{
+      link.addEventListener("click", ()=>{
+        nav.classList.remove("open");
+      });
+    });
+  }
 </script>
 
 </body>
