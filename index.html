@@ -401,6 +401,26 @@
     @media (prefers-reduced-motion: reduce){
       .ninja-peek{ transition: none; }
     }
+
+.work{position:relative}
+.work-cap{
+  position:absolute;
+  left:10px;
+  bottom:10px;
+  background:rgba(0,0,0,.65);
+  color:#fff;
+  padding:6px 10px;
+  border-radius:10px;
+  font-size:12px;
+  line-height:1.3;
+  backdrop-filter: blur(4px);
+}
+.work-cap span{
+  display:block;
+  opacity:.8;
+  font-size:11px;
+}
+    
   </style>
 </head>
 
@@ -620,6 +640,47 @@
       </div>
     </section>
 
+    <section id="works">
+  <div class="card shadowCorner">
+    <p class="k">施工の一部</p>
+    <p class="mut" style="margin:0">
+      派手に見せません。仕上がりだけ置いておきます。
+    </p>
+
+    <div class="works-grid">
+
+      <div class="work">
+        <img src="australia.jpg" alt="オーストラリア サンプル制作">
+        <div class="work-cap">
+          <b>海外研修｜オーストラリア</b>
+          <span>特殊塗装サンプル制作</span>
+        </div>
+      </div>
+
+      <div class="work">
+        <img src="salon.jpg" alt="美容室 特殊塗装">
+        <div class="work-cap">
+          <b>美容室｜特殊塗装</b>
+          <span>質感・意匠仕上げ</span>
+        </div>
+      </div>
+
+      <div class="work">
+        <img src="concrete.jpg" alt="打ちっぱなしコンクリート 保護塗装">
+        <div class="work-cap">
+          <b>打ちっぱなしコンクリート</b>
+          <span>保護・意匠メンテナンス</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="btns" style="margin-top:12px">
+      <a class="btn hot" href="https://youtube.com/channel/UC_ic4KvdbTO_w0gmX3QGXWg" target="_blank">🎥 動画でも見る</a>
+      <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank">🟩 写真で相談する</a>
+    </div>
+  </div>
+</section>
     <section id="sns">
       <div class="card shadowCorner">
         <p class="k">YouTube / Instagram（現場と作品）</p>
