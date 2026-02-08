@@ -63,3 +63,22 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ✅ 簡易見積：ボタンが欠けるのを防ぐ */
+#quick-estimate .qe-actions{
+  flex: 1 1 320px;   /* ← 0 0 auto をやめて縮められるように */
+  max-width: 100%;
+}
+
+@media (max-width: 520px){
+  #quick-estimate .qe-actions{
+    width: 100%;
+    flex-direction: column;   /* ← スマホは縦並び */
+    align-items: stretch;
+  }
+  #quick-estimate .qe-actions .btn,
+  #quick-estimate .qe-actions button{
+    width: 100%;
+    justify-content: center;
+  }
+}
