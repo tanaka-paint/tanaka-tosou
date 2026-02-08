@@ -1,430 +1,77 @@
 <!doctype html>
 <html lang="ja">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>忍者ペインターゲーム｜田中塗装</title>
-<style>
-  :root{--bg:#0b1220;--ink:#e5e7eb;--mut:#94a3b8;--line:rgba(255,255,255,.12);--a:#22c55e;--b:#60a5fa;--c:#fb7185;}
-  *{box-sizing:border-box}
-  body{
-    margin:0; font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",Segoe UI,Roboto,Arial,sans-serif;
-    background: radial-gradient(900px 600px at 15% 0%, rgba(96,165,250,.25), transparent 60%),
-                radial-gradient(900px 600px at 90% 15%, rgba(34,197,94,.22), transparent 60%),
-                radial-gradient(900px 600px at 50% 100%, rgba(251,113,133,.20), transparent 55%),
-                #060a14;
-    color:var(--ink);
-  }
-  .wrap{max-width:980px;margin:0 auto;padding:18px}
-  .card{
-    border:1px solid var(--line); border-radius:18px;
-    background: rgba(255,255,255,.06);
-    box-shadow: 0 18px 40px rgba(0,0,0,.35);
-    overflow:hidden;
-  }
-  header{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:12px}
-  .brand{display:flex;gap:10px;align-items:center;font-weight:900;letter-spacing:.04em}
-  .dot{width:12px;height:12px;border-radius:999px;background:conic-gradient(from 0deg,#ef4444,#f97316,#eab308,#22c55e,#06b6d4,#3b82f6,#a855f7,#ef4444);box-shadow:0 10px 18px rgba(0,0,0,.35)}
-  .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-  .pill{padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.06);font-size:12px;font-weight:800;color:var(--mut);white-space:nowrap}
-  .grid{display:grid;gap:12px}
-  @media(min-width:900px){.grid{grid-template-columns:1fr 320px}}
-  canvas{display:block;width:100%;height:auto;background:#0b1020}
-  .side{padding:14px}
-  .k{margin:0 0 8px;font-weight:900}
-  .mut{color:var(--mut);font-size:13px;line-height:1.55}
-  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
-  .btn{
-    appearance:none; border:1px solid var(--line); background:rgba(255,255,255,.06);
-    color:var(--ink); padding:10px 12px; border-radius:14px; font-weight:900;
-    cursor:pointer;
-  }
-  .btn.primary{border:none;background:linear-gradient(135deg,#2563eb,#60a5fa)}
-  .btn.ok{border:none;background:linear-gradient(135deg,#22c55e,#86efac);color:#04210f}
-  .btn.hot{border:none;background:linear-gradient(135deg,#fb7185,#f97316)}
-  .stat{margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
-  .big{font-size:26px;font-weight:1000;letter-spacing:.02em}
-  .small{font-size:12px;color:var(--mut)}
-  .hint{margin-top:10px;padding:10px 12px;border:1px dashed rgba(255,255,255,.18);border-radius:14px;color:var(--mut);font-size:12px}
-  .footer{margin-top:10px;color:rgba(255,255,255,.55);font-size:11px}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ゲームセンター｜田中塗装</title>
+  <meta name="description" content="占いゲームとタレゲーム。遊べ。静かに。" />
+  <style>
+    :root{--ink:#0f172a;--mut:#475569;--line:#e2e8f0;--night:#0f172a;--smoke:#1e293b;--r:18px}
+    *{box-sizing:border-box}
+    body{
+      margin:0; line-height:1.75;
+      font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(900px 600px at 10% 0%, rgba(37,99,235,.12), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(249,115,22,.12), transparent 60%),
+        repeating-linear-gradient(135deg, rgba(2,6,23,.045) 0 10px, rgba(2,6,23,0) 10px 22px),
+        #fff;
+    }
+    a{color:inherit; text-decoration:underline; text-underline-offset:3px;}
+    .wrap{max-width:980px;margin:0 auto;padding:22px 18px 40px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 0 6px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:1000}
+    .dot{width:14px;height:14px;border-radius:999px;background:conic-gradient(from 0deg,#ef4444,#f97316,#eab308,#22c55e,#06b6d4,#3b82f6,#a855f7,#ef4444);box-shadow:0 10px 22px rgba(0,0,0,.12);border:1px solid rgba(0,0,0,.06)}
+    .card{border:1px solid var(--line);border-radius:var(--r);background:rgba(255,255,255,.92);box-shadow:0 14px 26px rgba(15,23,42,.08),0 2px 0 rgba(0,0,0,.06),inset 0 1px 0 rgba(255,255,255,.55);padding:16px}
+    h1{margin:10px 0 8px;font-size:28px;line-height:1.2;background:linear-gradient(135deg,var(--night),var(--smoke));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .mut{color:var(--mut)}
+    .grid{display:grid;gap:12px;margin-top:14px}
+    @media(min-width:860px){.grid{grid-template-columns:1fr 1fr}}
+    .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;text-decoration:none;font-weight:1000;border:1px solid var(--line);background:#fff;box-shadow:0 10px 22px rgba(15,23,42,.06)}
+    .btn.primary{background:linear-gradient(135deg,#2563eb,#60a5fa);border:none;color:#fff}
+    .btn.dark{background:linear-gradient(135deg,var(--night),var(--smoke));border:none;color:#fff}
+    .btn.ok{background:linear-gradient(135deg,#22c55e,#86efac);border:none}
+    .note{font-size:13px;color:var(--mut);border-left:4px solid rgba(2,6,23,.18);padding-left:10px;margin:12px 0 0}
+  </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div class="brand"><span class="dot"></span>忍者ペインターゲーム <span style="opacity:.7">｜田中塗装</span></div>
-    <div class="meta">
-      <span class="pill">🎮 タップで塗る</span>
-      <span class="pill">💧 タレはNG</span>
-      <span class="pill">🥷 静かに速く</span>
-    </div>
-  </header>
-
-  <div class="card grid">
-    <div>
-      <canvas id="cv" width="960" height="540" aria-label="game canvas"></canvas>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand"><span class="dot"></span>ゲームセンター <span class="mut">｜田中塗装</span></div>
+      <a class="btn" href="index.html">← トップに戻る</a>
     </div>
 
-    <div class="side">
-      <p class="k">ルール</p>
-      <p class="mut">
-        画面を<strong>タップ/クリック</strong>すると、その列に「ローラー塗り」が入ります。<br>
-        上から落ちてくる<strong>タレ（💧）</strong>に当たるとライフ減。<br>
-        60秒でどれだけ<strong>綺麗に塗れるか</strong>勝負。
-      </p>
+    <div class="card">
+      <div class="mut">遊べ。静かに。仕上がりだけ残せ。</div>
+      <h1>選べるゲーム</h1>
 
-      <div class="row">
-        <button class="btn primary" id="startBtn">START</button>
-        <button class="btn" id="pauseBtn">PAUSE</button>
-        <button class="btn hot" id="resetBtn">RESET</button>
-      </div>
-
-      <div class="stat">
-        <div class="small">SCORE</div>
-        <div class="big" id="score">0</div>
-        <div class="row" style="justify-content:space-between">
-          <div>
-            <div class="small">TIME</div>
-            <div class="big" id="time">60</div>
+      <div class="grid">
+        <div class="card">
+          <b>🥷 占いゲーム（全部入り）</b>
+          <div class="mut">1枚引き / 3枚引き / 施工・色占い</div>
+          <div class="btns">
+            <a class="btn dark" href="fortune.html?tab=1">今日の1枚</a>
+            <a class="btn" href="fortune.html?tab=2">3枚引き</a>
+            <a class="btn" href="fortune.html?tab=3">施工・色占い</a>
           </div>
-          <div>
-            <div class="small">LIFE</div>
-            <div class="big" id="life">3</div>
+        </div>
+
+        <div class="card">
+          <b>🍖 タレゲーム（元祖）</b>
+          <div class="mut">既存のやつをそのまま残す。</div>
+          <div class="btns">
+            <a class="btn primary" href="tare-game.html">タレゲームで遊ぶ</a>
           </div>
         </div>
       </div>
 
-      <div class="hint">
-        コツ：<br>
-        ・タレの列は塗らずに避ける<br>
-        ・端からコツコツ埋めると点が伸びる<br>
-        ・「静かに速い」ほど強い
-      </div>
-
-      <div class="row">
+      <p class="note">※トップページの「🎮 ゲームで遊ぶ」はこの game.html を指すのが一番キレイ。</p>
+      <div class="btns" style="margin-top:10px">
         <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener noreferrer">🟩 LINEで写真相談</a>
       </div>
-
-      <div class="footer">※オフラインで動きます（外部通信なし）</div>
     </div>
   </div>
-</div>
-
-<script>
-(() => {
-  const cv = document.getElementById('cv');
-  const ctx = cv.getContext('2d');
-
-  const ui = {
-    score: document.getElementById('score'),
-    time: document.getElementById('time'),
-    life: document.getElementById('life'),
-    start: document.getElementById('startBtn'),
-    pause: document.getElementById('pauseBtn'),
-    reset: document.getElementById('resetBtn'),
-  };
-
-  // ===== Game config =====
-  const W = cv.width, H = cv.height;
-  const COLS = 12;                 // columns
-  const cellW = W / COLS;
-  const paintSpeed = 10;           // paint fill speed per tap
-  const dripSpeedBase = 120;       // pixels/sec
-  const dripSpawnBase = 0.95;      // per sec
-  const MAX_TIME = 60;
-
-  // ===== State =====
-  let running = false, paused = false;
-  let tLeft = MAX_TIME;
-  let score = 0;
-  let life = 3;
-
-  // paint grid: 0..1 per column coverage (vertical fill from bottom)
-  const paint = new Array(COLS).fill(0);
-
-  // drips
-  const drips = []; // {col, y, v}
-  let last = performance.now();
-  let accSpawn = 0;
-
-  // effects
-  const shakes = []; // {t, amp}
-
-  function reset(){
-    running = false; paused = false;
-    tLeft = MAX_TIME; score = 0; life = 3;
-    for(let i=0;i<COLS;i++) paint[i]=0;
-    drips.length = 0;
-    shakes.length = 0;
-    ui.score.textContent = score;
-    ui.time.textContent = tLeft;
-    ui.life.textContent = life;
-    draw(0);
-  }
-
-  function start(){
-    if(running) return;
-    running = true; paused = false;
-    last = performance.now();
-    requestAnimationFrame(loop);
-  }
-
-  function togglePause(){
-    if(!running) return;
-    paused = !paused;
-    if(!paused){
-      last = performance.now();
-      requestAnimationFrame(loop);
-    }
-  }
-
-  function addShake(amp=6){
-    shakes.push({t:0.18, amp});
-  }
-
-  // tap/click to paint a column
-  function onPointer(e){
-    if(!running || paused) return;
-
-    const rect = cv.getBoundingClientRect();
-    const x = (e.clientX ?? (e.touches && e.touches[0].clientX)) - rect.left;
-    const col = Math.max(0, Math.min(COLS-1, Math.floor((x / rect.width) * COLS)));
-
-    // if a drip is in this column near the bottom, painting is risky: small penalty
-    const near = drips.some(d => d.col===col && d.y > H*0.62);
-    if(near){
-      score = Math.max(0, score - 8);
-      addShake(4);
-    }
-
-    // paint fills upward
-    paint[col] = Math.min(1, paint[col] + (paintSpeed/100));
-    score += 12;
-
-    // bonus for completing a column
-    if(paint[col] >= 1){
-      score += 35;
-    }
-
-    ui.score.textContent = score;
-  }
-
-  function spawn(dt){
-    // difficulty scales with time: later = more drips
-    const k = 1 + (1 - tLeft/MAX_TIME) * 0.85;
-    accSpawn += dt * dripSpawnBase * k;
-
-    while(accSpawn >= 1){
-      accSpawn -= 1;
-      const col = Math.floor(Math.random()*COLS);
-
-      // don't spawn too many in same column immediately
-      const crowded = drips.filter(d=>d.col===col && d.y < H*0.35).length > 0;
-      if(crowded && Math.random() < 0.6) continue;
-
-      drips.push({
-        col,
-        y: -20,
-        v: dripSpeedBase * (0.8 + Math.random()*0.7) * k
-      });
-    }
-  }
-
-  function update(dt){
-    if(!running || paused) return;
-
-    // time
-    tLeft -= dt;
-    if(tLeft <= 0){
-      tLeft = 0;
-      running = false;
-    }
-    ui.time.textContent = Math.ceil(tLeft).toString();
-
-    spawn(dt);
-
-    // drips move
-    for(const d of drips) d.y += d.v * dt;
-
-    // collision: if drip hits painted area in that column => smear => lose life
-    for(let i=drips.length-1;i>=0;i--){
-      const d = drips[i];
-      const filledFromBottom = paint[d.col] * H;
-      const paintTopY = H - filledFromBottom; // painted area is y >= paintTopY
-
-      // If drip enters painted zone, it's a "run"
-      if(d.y >= paintTopY && paint[d.col] > 0.08){
-        drips.splice(i,1);
-        life -= 1;
-        ui.life.textContent = life;
-        addShake(10);
-
-        // lose some paint and score
-        paint[d.col] = Math.max(0, paint[d.col] - 0.16);
-        score = Math.max(0, score - 40);
-        ui.score.textContent = score;
-
-        if(life <= 0){
-          life = 0;
-          running = false;
-        }
-      } else if(d.y > H + 30){
-        // missed drip: small reward for avoiding
-        drips.splice(i,1);
-        score += 4;
-        ui.score.textContent = score;
-      }
-    }
-
-    // subtle decay so player must keep painting
-    for(let c=0;c<COLS;c++){
-      paint[c] = Math.max(0, paint[c] - dt*0.006);
-    }
-
-    // shake decay
-    for(let i=shakes.length-1;i>=0;i--){
-      shakes[i].t -= dt;
-      if(shakes[i].t <= 0) shakes.splice(i,1);
-    }
-  }
-
-  function draw(dt){
-    // camera shake
-    let sx=0, sy=0;
-    for(const s of shakes){
-      const a = s.amp * (s.t/0.18);
-      sx += (Math.random()*2-1) * a;
-      sy += (Math.random()*2-1) * a;
-    }
-
-    ctx.save();
-    ctx.clearRect(0,0,W,H);
-    ctx.translate(sx, sy);
-
-    // background
-    const g = ctx.createLinearGradient(0,0,0,H);
-    g.addColorStop(0,'#0b1020');
-    g.addColorStop(1,'#070a14');
-    ctx.fillStyle = g;
-    ctx.fillRect(0,0,W,H);
-
-    // wall grid
-    ctx.strokeStyle = 'rgba(255,255,255,.07)';
-    ctx.lineWidth = 1;
-    for(let c=0;c<=COLS;c++){
-      ctx.beginPath();
-      ctx.moveTo(c*cellW,0);
-      ctx.lineTo(c*cellW,H);
-      ctx.stroke();
-    }
-    for(let r=0;r<=6;r++){
-      ctx.beginPath();
-      ctx.moveTo(0, r*(H/6));
-      ctx.lineTo(W, r*(H/6));
-      ctx.stroke();
-    }
-
-    // painted columns
-    for(let c=0;c<COLS;c++){
-      const h = paint[c] * H;
-      if(h <= 1) continue;
-
-      const x = c*cellW;
-      const y = H - h;
-
-      const gg = ctx.createLinearGradient(x,y,x,y+h);
-      gg.addColorStop(0,'rgba(96,165,250,.20)');
-      gg.addColorStop(0.55,'rgba(34,197,94,.22)');
-      gg.addColorStop(1,'rgba(251,113,133,.20)');
-      ctx.fillStyle = gg;
-      ctx.fillRect(x+2, y, cellW-4, h);
-
-      // shine edge
-      ctx.fillStyle = 'rgba(255,255,255,.08)';
-      ctx.fillRect(x+4, y, 2, h);
-    }
-
-    // drips
-    for(const d of drips){
-      const x = d.col*cellW + cellW*0.5;
-      ctx.fillStyle = 'rgba(255,255,255,.85)';
-      ctx.beginPath();
-      ctx.arc(x, d.y, 8, 0, Math.PI*2);
-      ctx.fill();
-
-      ctx.fillStyle = 'rgba(255,255,255,.20)';
-      ctx.beginPath();
-      ctx.arc(x+3, d.y-3, 10, 0, Math.PI*2);
-      ctx.fill();
-
-      // tiny tail
-      ctx.strokeStyle = 'rgba(255,255,255,.35)';
-      ctx.lineWidth = 3;
-      ctx.beginPath();
-      ctx.moveTo(x, d.y+8);
-      ctx.lineTo(x, d.y+24);
-      ctx.stroke();
-    }
-
-    // overlay text
-    ctx.fillStyle = 'rgba(255,255,255,.78)';
-    ctx.font = '900 18px system-ui, -apple-system, "Noto Sans JP", sans-serif';
-    ctx.fillText('必殺：影塗（タップで塗れ）', 18, 30);
-
-    // end screens
-    if(!running){
-      ctx.fillStyle = 'rgba(0,0,0,.55)';
-      ctx.fillRect(0,0,W,H);
-
-      ctx.fillStyle = 'rgba(255,255,255,.92)';
-      ctx.font = '1000 42px system-ui, -apple-system, "Noto Sans JP", sans-serif';
-      const title = (life<=0) ? '任務失敗…（タレにやられた）' : (tLeft<=0 ? '任務完了！' : 'STARTで開始');
-      centerText(title, H*0.46);
-
-      ctx.font = '900 22px system-ui, -apple-system, "Noto Sans JP", sans-serif';
-      centerText(`SCORE：${score}`, H*0.56);
-
-      ctx.fillStyle = 'rgba(255,255,255,.72)';
-      ctx.font = '800 14px system-ui, -apple-system, "Noto Sans JP", sans-serif';
-      centerText('コツ：タレの列は塗らない。静かに速く。', H*0.63);
-    } else if(paused){
-      ctx.fillStyle = 'rgba(0,0,0,.45)';
-      ctx.fillRect(0,0,W,H);
-      ctx.fillStyle = 'rgba(255,255,255,.9)';
-      ctx.font = '1000 40px system-ui, -apple-system, "Noto Sans JP", sans-serif';
-      centerText('PAUSED', H*0.52);
-    }
-
-    ctx.restore();
-
-    function centerText(text, y){
-      const m = ctx.measureText(text);
-      ctx.fillText(text, (W - m.width)/2, y);
-    }
-  }
-
-  function loop(now){
-    if(!running && !paused){
-      draw(0);
-      return;
-    }
-    const dt = Math.min(0.033, (now - last)/1000);
-    last = now;
-    if(!paused) update(dt);
-    draw(dt);
-    requestAnimationFrame(loop);
-  }
-
-  // events
-  cv.addEventListener('pointerdown', onPointer, {passive:true});
-  cv.addEventListener('touchstart', onPointer, {passive:true});
-  ui.start.addEventListener('click', () => { if(!running){ start(); } });
-  ui.pause.addEventListener('click', () => { togglePause(); });
-  ui.reset.addEventListener('click', () => { reset(); });
-
-  // init
-  reset();
-})();
-</script>
 </body>
 </html>
