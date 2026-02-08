@@ -1167,6 +1167,31 @@
 
 /* スクロール位置ズレ防止 */
 section{scroll-margin-top:90px;}
+
+  /* トップへ戻るボタン */
+#toTop{
+  position:fixed;
+  right:18px;
+  bottom:90px;
+  width:48px;
+  height:48px;
+  border:none;
+  border-radius:50%;
+  background:#0b3a6f;
+  color:#fff;
+  font-size:18px;
+  box-shadow:0 4px 12px rgba(0,0,0,.25);
+  cursor:pointer;
+  opacity:0;
+  transform:translateY(20px);
+  transition:.3s;
+  z-index:9999;
+}
+
+#toTop.show{
+  opacity:1;
+  transform:translateY(0);
+}  
   
 </style>
 
@@ -1587,7 +1612,25 @@ try {
       });
     });
   }
+
+  // トップへ戻るボタン
+const toTop = document.getElementById("toTop");
+
+window.addEventListener("scroll", () => {
+  if(window.scrollY > 600){
+    toTop.classList.add("show");
+  }else{
+    toTop.classList.remove("show");
+  }
+});
+
+toTop.addEventListener("click", () => {
+  window.scrollTo({ top:0, behavior:"smooth" });
+});
+  
 </script>
 
+<button id="toTop">▲</button>
+  
 </body>
 </html>
