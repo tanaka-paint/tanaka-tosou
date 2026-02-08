@@ -1,42 +1,375 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>お問い合わせ｜田中塗装</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="田中塗装へのお問い合わせ。外壁・屋根・防水・打ちっぱなし補修・マイクロセメント・特殊塗装。LINE写真相談が最短です。" />
+
+  <!-- ファビコン（任意：indexと合わせる） -->
+  <link rel="icon" href="favicon.png?v=2" type="image/png" />
+  <meta name="theme-color" content="#0b3a6f" />
+
+  <style>
+    :root{
+      --ink:#0f172a;
+      --mut:#475569;
+      --bg:#ffffff;
+      --line:#e2e8f0;
+      --night:#0f172a;
+      --smoke:#1e293b;
+
+      --shadowA:0 18px 40px rgba(15,23,42,.10);
+      --shadowB:
+        0 14px 26px rgba(15,23,42,.08),
+        0 2px 0 rgba(0,0,0,.06),
+        inset 0 1px 0 rgba(255,255,255,.55);
+
+      --r:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink);
+      line-height:1.75;
+      background:
+        radial-gradient(900px 600px at 10% 0%, rgba(37,99,235,.12), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(249,115,22,.12), transparent 60%),
+        radial-gradient(900px 600px at 50% 100%, rgba(22,163,74,.10), transparent 55%),
+        repeating-linear-gradient(135deg, rgba(2,6,23,.045) 0 10px, rgba(2,6,23,0) 10px 22px),
+        var(--bg);
+    }
+    a{color:inherit;text-decoration:underline;text-underline-offset:3px;}
+    .wrap{max-width:980px;margin:0 auto;padding:0 18px;}
+    header{padding:22px 0 10px;}
+
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      padding:10px 0;
+    }
+    .brand{
+      display:flex;align-items:center;gap:10px;font-weight:1000;letter-spacing:.02em;
+    }
+    .brand .dot{
+      width:14px;height:14px;border-radius:999px;
+      background: conic-gradient(from 0deg, #ef4444, #f97316, #eab308, #22c55e, #06b6d4, #3b82f6, #a855f7, #ef4444);
+      box-shadow:0 10px 22px rgba(0,0,0,.12);
+      border:1px solid rgba(0,0,0,.06);
+    }
+    .mini{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;}
+    .badge{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:7px 10px;border-radius:999px;border:1px solid var(--line);
+      background:rgba(255,255,255,.85);
+      font-weight:900;font-size:12px;color:var(--mut);
+      white-space:nowrap;
+    }
+
+    .hero{
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:rgba(255,255,255,.86);
+      box-shadow:var(--shadowA);
+      padding:18px;
+      overflow:hidden;
+      position:relative;
+      margin-top:6px;
+    }
+    .hero:after{
+      content:"";
+      position:absolute;inset:-40px -40px auto auto;
+      width:220px;height:220px;border-radius:999px;
+      background:radial-gradient(circle at 30% 30%, rgba(2,6,23,.16), rgba(2,6,23,0) 62%);
+      pointer-events:none;
+      transform:rotate(18deg);
+    }
+    h1{
+      margin:10px 0 6px;
+      font-size:30px;line-height:1.15;letter-spacing:.01em;
+      background:linear-gradient(180deg, var(--night) 0%, var(--smoke) 38%, var(--night) 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .lead{margin:0;color:var(--mut);}
+
+    .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:12px 14px;border-radius:14px;text-decoration:none;font-weight:1000;
+      border:1px solid var(--line);background:#fff;
+      box-shadow:0 10px 22px rgba(15,23,42,.06);
+      transition:transform .06s ease;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn:active{transform:translateY(0)}
+    .btn.ok{background:linear-gradient(135deg,#22c55e,#86efac);border:none}
+    .btn.primary{background:linear-gradient(135deg,#2563eb,#60a5fa);border:none;color:#fff}
+    .btn.dark{background:linear-gradient(135deg, var(--night), var(--smoke));border:none;color:#fff}
+
+    main{padding:14px 0 28px;}
+    .grid{display:grid;gap:12px}
+    @media(min-width:920px){.grid.cols2{grid-template-columns:1.1fr .9fr}}
+
+    .card{
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      background:rgba(255,255,255,.90);
+      box-shadow:var(--shadowB);
+      padding:16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .card.shadowCorner:after{
+      content:"";
+      position:absolute;right:-40px;bottom:-40px;
+      width:160px;height:160px;border-radius:999px;
+      background:radial-gradient(circle at 30% 30%, rgba(2,6,23,.14), rgba(2,6,23,0) 62%);
+      pointer-events:none;
+    }
+    .k{margin:0 0 10px;font-weight:1000;letter-spacing:.02em}
+    .mut{color:var(--mut)}
+    .note{
+      font-size:13px;color:var(--mut);
+      border-left:4px solid rgba(2,6,23,.18);
+      padding-left:10px;margin:10px 0 0;
+    }
+
+    /* フォーム */
+    form{display:grid;gap:12px;margin-top:10px}
+    label{font-weight:900;font-size:13px;color:var(--mut)}
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid rgba(2,6,23,.12);
+      background:rgba(255,255,255,.92);
+      color:var(--ink);
+      outline:none;
+      font-size:16px; /* iPhoneズーム防止 */
+    }
+    input:focus, textarea:focus{
+      border-color: rgba(37,99,235,.55);
+      box-shadow: 0 0 0 4px rgba(37,99,235,.18);
+    }
+    textarea{min-height:140px;resize:vertical}
+
+    .formRow{display:grid;gap:10px}
+    @media(min-width:720px){.formRow.cols2{grid-template-columns:1fr 1fr}}
+
+    .submit{
+      border:none;
+      cursor:pointer;
+      width:100%;
+      justify-content:center;
+    }
+
+    .miniHelp{
+      display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;
+      font-size:13px;color:var(--mut);
+    }
+
+    .footer{
+      padding:18px 0 30px;color:var(--mut);font-size:12px
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .btn{transition:none;}
+      .btn:hover{transform:none;}
+    }
+  </style>
 </head>
 
 <body>
+  <header class="wrap">
+    <div class="topbar">
+      <div class="brand"><span class="dot"></span>田中塗装 <span class="mut">｜八王子</span></div>
+      <div class="mini">
+        <span class="badge">🥷 静かに速い</span>
+        <span class="badge">📸 LINE写真相談OK</span>
+        <span class="badge">🛠 職人直対応</span>
+      </div>
+    </div>
 
-<header class="header">
-  <h1>お問い合わせ</h1>
-  <p>外壁塗装・屋根塗装・特殊塗装などお気軽にご相談ください。</p>
-</header>
+    <div class="hero">
+      <div class="mut" style="font-weight:900;">お問い合わせ</div>
+      <h1>相談は軽くてOK。<br>押し売りはしません。</h1>
+      <p class="lead">
+        「まだ迷ってる」でも大丈夫。写真だけでもOK。<br>
+        いちばん早いのは <b>LINEで写真</b> です。
+      </p>
 
-  <p><a href="index.html">← トップへ戻る</a></p>
-  
-<section class="contact">
+      <div class="btns">
+        <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener noreferrer">🟩 LINEで写真送る（最短）</a>
+        <a class="btn" href="tel:090-6120-3852">📞 電話する</a>
+        <a class="btn dark" href="index.html">← トップへ戻る</a>
+      </div>
+      <p class="note">※現場中は電話に出られないことがあります。LINEが確実です。</p>
+    </div>
+  </header>
 
-<form action="https://formspree.io/f/mvzboywr" method="POST">
+  <main class="wrap">
+    <div class="grid cols2">
 
-<label>お名前</label>
-<input type="text" name="name" required>
+      <!-- フォーム -->
+      <section class="card shadowCorner" aria-label="お問い合わせフォーム">
+        <p class="k">フォームで送る（24時間）</p>
+        <p class="mut" style="margin:0">
+          返信用のメールアドレスだけ間違えないでOK。あとは雑でOK。
+        </p>
 
-<label>メールアドレス</label>
-<input type="email" name="email" required>
+        <form action="https://formspree.io/f/mvzboywr" method="POST">
+          <div class="formRow cols2">
+            <div>
+              <label for="name">お名前（必須）</label>
+              <input id="name" type="text" name="name" autocomplete="name" required placeholder="例：山田 太郎">
+            </div>
+            <div>
+              <label for="phone">電話番号（任意）</label>
+              <input id="phone" type="tel" name="phone" autocomplete="tel" placeholder="例：090-0000-0000">
+            </div>
+          </div>
 
-<label>電話番号</label>
-<input type="tel" name="phone">
+          <div>
+            <label for="email">メールアドレス（必須）</label>
+            <input id="email" type="email" name="email" autocomplete="email" required placeholder="例：xxx@example.com">
+          </div>
 
-<label>お問い合わせ内容</label>
-<textarea name="message" rows="6" required></textarea>
+          <div>
+            <label for="message">お問い合わせ内容（必須）</label>
+            <textarea id="message" name="message" required
+              placeholder="例：八王子市◯◯町／築15年／外壁サイディング／ひび割れが気になる／見積希望 など"></textarea>
+          </div>
 
-<button type="submit">送信する</button>
+          <button class="btn primary submit" type="submit">送信する</button>
 
-</form>
+          <div class="miniHelp">
+            <span>✅ 住所は町名まででOK</span>
+            <span>✅ 写真があるならLINEが最短</span>
+            <span>✅ 迷っててもOK</span>
+          </div>
 
-</section>
+          <p class="note">
+            送信後、控えメールが届かない場合：迷惑メールフォルダをご確認ください。
+          </p>
+        </form>
+      </section>
 
+      <!-- 右カラム：テンプレ/導線 -->
+      <aside class="card shadowCorner" aria-label="相談テンプレと連絡先">
+        <p class="k">LINEに送るテンプレ（コピペOK）</p>
+        <div class="card" style="padding:12px">
+          <p class="mut" style="margin:0;white-space:pre-wrap">
+① 住所（町名までOK）
+② 気になる場所（外壁/屋根/ベランダ/打ちっぱなし）
+③ 写真2〜4枚（全体＋気になる部分）
+④ 希望（色替え/補修/防水など）
+⑤ 希望時期（できれば）
+          </p>
+        </div>
+
+        <div class="btns" style="margin-top:12px">
+          <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener noreferrer">🟩 LINEを開く</a>
+          <a class="btn" href="tel:090-6120-3852">📞 電話</a>
+          <a class="btn" href="mailto:tanakatoso_yoon@ezweb.ne.jp">📩 メール</a>
+        </div>
+
+        <p class="note">
+          忍者スタイルでいきます。静かに近づいて、仕上がりだけ残します。
+        </p>
+      </aside>
+
+    </div>
+
+    <div class="footer">
+      田中塗装｜〒193-0824 東京都八王子市長房町627-1-101｜TEL 090-6120-3852
+      <br>© Tanaka Tosou. All Rights Reserved.
+    </div>
+  </main>
+  <!-- ===== スクロール忍者（CONTACT版） ===== -->
+<style>
+.ninja-peek{
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  z-index: 9997;
+
+  display:flex;
+  align-items:flex-end;
+  gap:10px;
+
+  opacity: 0;
+  transform: translate(40px, 40px);
+  pointer-events:none;
+
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+.ninja-peek.show{
+  opacity: 1;
+  transform: translate(0, 0);
+  pointer-events:auto;
+}
+
+.ninja-img{
+  width: 88px;
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(2,6,23,.22);
+  border: 1px solid rgba(255,255,255,.18);
+}
+
+.ninja-bubble{
+  position:relative;
+  max-width: 200px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(226,232,240,.9);
+  background: rgba(255,255,255,.92);
+  font-weight: 900;
+  font-size: 13px;
+  line-height: 1.35;
+  box-shadow: 0 14px 28px rgba(2,6,23,.10);
+}
+
+.ninja-bubble::after{
+  content:"";
+  position:absolute;
+  width: 10px; height: 10px;
+  transform: rotate(45deg);
+  background: rgba(255,255,255,.92);
+  border-left: 1px solid rgba(226,232,240,.9);
+  border-bottom: 1px solid rgba(226,232,240,.9);
+  right: 90px;
+  bottom: 16px;
+}
+</style>
+
+<div id="ninja-peek" class="ninja-peek">
+  <img src="ninja.png" class="ninja-img" alt="">
+  <div class="ninja-bubble">写真送るのが最短ルートです。</div>
+</div>
+
+<script>
+window.addEventListener('load', () => {
+  const ninja = document.getElementById('ninja-peek');
+  if(!ninja) return;
+
+  // 2秒後に出現
+  setTimeout(() => {
+    ninja.classList.add('show');
+
+    // 4秒後に消える
+    setTimeout(() => {
+      ninja.classList.remove('show');
+    }, 4000);
+
+  }, 2000);
+
+  // クリックでLINE
+  ninja.addEventListener('click', () => {
+    window.open('https://line.me/ti/p/yHunueNM1o', '_blank');
+  });
+});
+</script>
 </body>
 </html>
