@@ -968,17 +968,27 @@
     margin-top:12px;
   }
   #quick-estimate .qe-field span{display:block; font-weight:700; margin-bottom:6px;}
-  #quick-estimate .qe-field input, 
+  #quick-estimate .qe-field input,
   #quick-estimate .qe-field select{
-    width:100%;
-    padding:10px 12px;
-    border:1px solid rgba(255,255,255,.18);
-    border-radius:10px;
-    background: rgba(0,0,0,.18);
-    color: inherit;
-    outline:none;
-  }
-  #quick-estimate .qe-field small{
+  width:100%;
+  padding:10px 12px;
+
+  /* 明るく読みやすく */
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(2,6,23,.12);
+  color: var(--ink);
+
+  border-radius:10px;
+  outline:none;
+  font-size:16px; /* iPhoneズーム防止 */
+}
+
+/* 選択中の青い光（プロっぽくなる） */
+#quick-estimate .qe-field input:focus,
+#quick-estimate .qe-field select:focus{
+  border-color: rgba(37,99,235,.55);
+  box-shadow: 0 0 0 4px rgba(37,99,235,.18);
+}  #quick-estimate .qe-field small{
     display:block;
     opacity:.8;
     margin-top:6px;
