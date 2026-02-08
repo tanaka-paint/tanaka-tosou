@@ -1539,7 +1539,7 @@ section{scroll-margin-top:90px;}
 </script>
 
 <button id="toTop">▲</button>
-  
+
 <script>
   // ハンバーガー
   const ham = document.getElementById("hamburger");
@@ -1550,7 +1550,6 @@ section{scroll-margin-top:90px;}
       nav.classList.toggle("open");
     });
 
-    // メニュー押したら閉じる
     document.querySelectorAll(".mobile-nav a").forEach(link=>{
       link.addEventListener("click", ()=>{
         nav.classList.remove("open");
@@ -1558,14 +1557,12 @@ section{scroll-margin-top:90px;}
     });
   }
 
-  // ✅ トップへ戻るボタン（クリックは1回だけ）
+  // トップへ戻るボタン
   const toTop = document.getElementById("toTop");
-
   if (toTop){
     window.addEventListener("scroll", () => {
-      toTop.classList.toggle("show", window.scrollY > 600);
+      toTop.classList.toggle("show", window.scrollY > 200);
     });
-
     toTop.addEventListener("click", () => {
       window.scrollTo({ top:0, behavior:"smooth" });
     });
