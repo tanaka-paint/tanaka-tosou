@@ -49,7 +49,7 @@
   
   <!-- ★ファビコン設定（超重要） -->
   <link rel="icon" href="https://tanaka-paint.github.io/tanaka-tosou/favicon.png?v=2" type="image/png">
-　<link rel="apple-touch-icon" href="https://tanaka-paint.github.io/tanaka-tosou/favicon.png?v=2">
+  <link rel="apple-touch-icon" href="https://tanaka-paint.github.io/tanaka-tosou/favicon.png?v=2">
   <meta name="theme-color" content="#0b3a6f"> 
   
   <!-- ★追加：演出画像を先読みして安定させる -->
@@ -1351,59 +1351,7 @@ section{scroll-margin-top:90px;}
 </script>
 <!-- ===== 簡易見積フォーム ここまで ===== -->
         <!-- ===== 簡易見積フォーム ===== -->
-<section style="background:#f7f7f7;padding:60px 20px;text-align:center">
-  <h2 style="font-size:28px;margin-bottom:10px;">30秒で分かる簡易見積</h2>
-  <p style="margin-bottom:30px;">写真を送るだけで概算をお伝えします</p>
 
-  <form action="https://formspree.io/f/xgvylwka" method="POST" style="max-width:500px;margin:auto;text-align:left">
-
-    <label>建物タイプ</label>
-    <select name="建物タイプ" required>
-      <option>戸建て</option>
-      <option>アパート</option>
-      <option>店舗</option>
-    </select>
-
-    <label>塗装したい場所</label>
-    <select name="塗装箇所">
-      <option>外壁</option>
-      <option>屋根</option>
-      <option>ベランダ</option>
-      <option>室内</option>
-    </select>
-
-    <label>築年数</label>
-    <select name="築年数">
-      <option>10年未満</option>
-      <option>10〜20年</option>
-      <option>20〜30年</option>
-      <option>30年以上</option>
-    </select>
-
-    <label>延床面積</label>
-    <select name="坪数">
-      <option>30坪</option>
-      <option>35坪</option>
-      <option>40坪</option>
-      <option>50坪以上</option>
-      <option>不明</option>
-    </select>
-
-    <label>お名前</label>
-    <input type="text" name="name" required>
-
-    <label>電話番号</label>
-    <input type="tel" name="phone" required>
-
-    <label>メール</label>
-    <input type="email" name="email" required>
-
-    <button type="submit" style="background:#ff6600;color:#fff;padding:15px;border:none;width:100%;font-size:18px;margin-top:20px;">
-      簡易見積を依頼する
-    </button>
-
-  </form>
-</section>
         <div class="card shadowCorner">
           <p class="k">お問い合わせ</p>
           <p class="mut" style="margin:0">
@@ -1542,52 +1490,47 @@ section{scroll-margin-top:90px;}
   }
 
   async function send(){
-    if (isPlaceholder) return;
+  if (isPlaceholder) return;
 
-    const text = (input?.value || "").trim();
-    if(!text) return;
+  const text = (input?.value || "").trim();
+  if(!text) return;
 
-    addLine("user", text);
-    input.value = "";
-    if (sendBtn) sendBtn.disabled = true;
-    addLine("assistant", "……（影の中で考え中）");
+  addLine("user", text);
+  input.value = "";
+  if (sendBtn) sendBtn.disabled = true;
 
-   let data = null;
+  // いったん「考え中」を出す
+  addLine("assistant", "……（影の中で考え中）");
 
-try {
-  const res = await fetch(WORKER_URL, {
-    method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body: JSON.stringify({ message: text })
-  });
+  let data = null;
 
-  // JSONじゃなくても落ちない
   try {
-    data = await res.json();
-  } catch {
-    data = { reply:"通信は成功しましたが、応答の解析に失敗しました。" };
-  }
+    const res = await fetch(WORKER_URL, {
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify({ message: text })
+    });
 
-} catch (err) {
-  // 通信自体が失敗しても落ちない
-  data = { reply:"通信に失敗しました。時間をおいてもう一度お試しください。" };
-}
-    
-      // 最後の「考え中」を消して、回答を表示
-      const blocks = log.textContent.split("\n\n");
-      blocks.pop(); // empty
-      blocks.pop(); // "AI忍者：……"
-      log.textContent = blocks.join("\n\n") + (blocks.length ? "\n\n" : "");
-
-      addLine("assistant", data.reply || "すみません、返答に失敗しました。LINEで写真送ってください。");
-    }catch(e){
-      addLine("assistant", "通信に失敗しました。LINEで写真送ってください。");
-    }finally{
-      if (sendBtn) sendBtn.disabled = false;
+    try {
+      data = await res.json();
+    } catch {
+      data = { reply:"通信は成功しましたが、応答の解析に失敗しました。" };
     }
-  }
 
-  sendBtn?.addEventListener("click", send);
+  } catch {
+    data = { reply:"通信に失敗しました。時間をおいてもう一度お試しください。" };
+  } finally {
+    // 最後の「考え中」を消して、回答を表示
+    const blocks = (log?.textContent || "").split("\n\n");
+    blocks.pop(); // empty
+    blocks.pop(); // "AI忍者：……"
+    if (log) log.textContent = blocks.join("\n\n") + (blocks.length ? "\n\n" : "");
+
+    addLine("assistant", data?.reply || "すみません、返答に失敗しました。LINEで写真送ってください。");
+    if (sendBtn) sendBtn.disabled = false;
+  }
+}
+    sendBtn?.addEventListener("click", send);
   input?.addEventListener("keydown", (e)=>{ if(e.key==="Enter") send(); });
 
   if (!isPlaceholder){
