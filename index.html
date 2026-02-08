@@ -1556,18 +1556,23 @@ section{scroll-margin-top:90px;}
     });
   }
 
-  // トップへ戻るボタン
+// トップへ戻るボタン（安全版）
 const toTop = document.getElementById("toTop");
 
-window.addEventListener("scroll", () => {
-  if(window.scrollY > 600){
-    toTop.classList.add("show");
-  }else{
-    toTop.classList.remove("show");
-  }
-});
+if (toTop){
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 600){
+      toTop.classList.add("show");
+    }else{
+      toTop.classList.remove("show");
+    }
+  });
 
-toTop.addEventListener("click", () => {
+  toTop.addEventListener("click", () => {
+    window.scrollTo({ top:0, behavior:"smooth" });
+  });
+}
+  toTop.addEventListener("click", () => {
   window.scrollTo({ top:0, behavior:"smooth" });
 });
   
