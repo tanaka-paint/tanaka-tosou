@@ -968,8 +968,8 @@
     margin-top:12px;
   }
   #quick-estimate .qe-field span{display:block; font-weight:700; margin-bottom:6px;}
-  #quick-estimate .qe-field input,
-  #quick-estimate .qe-field select{
+  #quick-estimate .qe-field input:not([type="checkbox"]),
+  #quick-estimate .qe-field select{  
   width:100%;
   padding:10px 12px;
 
@@ -1007,7 +1007,19 @@
     gap:8px;
     opacity:.95;
   }
-  #quick-estimate .qe-result{
+  /* ✅ チェックボックスは幅固定（崩れ防止） */
+#quick-estimate .qe-checks input[type="checkbox"]{
+  width:18px;
+  height:18px;
+  flex:0 0 18px;
+  margin:0;
+}
+
+/* ✅ ラベルの文字が縦にならないように */
+#quick-estimate .qe-checks label{
+  min-width:220px;
+  line-height:1.4;
+}  #quick-estimate .qe-result{
     display:flex;
     gap:14px;
     align-items:stretch;
