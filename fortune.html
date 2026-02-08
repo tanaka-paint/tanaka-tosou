@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>占いゲーム｜忍者おみくじ×3枚引き×施工占い｜田中塗装</title>
+  <meta name="description" content="忍者おみくじ（1枚）・3枚引き（過去/現在/未来）・施工＆色選び占いをミックス。遊びながら、次の一手が見える。" />
+  <style>
+    :root{
+      --ink:#0f172a; --mut:#475569; --line:#e2e8f0;
+      --night:#0f172a; --smoke:#1e293b;
+      --r:18px;
+      --shadowA:0 18px 40px rgba(15,23,42,.10);
+      --shadowB:0 14px 26px rgba(15,23,42,.08), 0 2px 0 rgba(0,0,0,.06), inset 0 1px 0 rgba(255,255,255,.55);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink); line-height:1.75;
+      background:
+        radial-gradient(900px 600px at 10% 0%, rgba(37,99,235,.12), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(249,115,22,.12), transparent 60%),
+        radial-gradient(900px 600px at 50% 100%, rgba(22,163,74,.10), transparent 55%),
+        repeating-linear-gradient(135deg, rgba(2,6,23,.045) 0 10px, rgba(2,6,23,0) 10px 22px),
+        #fff;
+    }
+    a{color:inherit; text-decoration:underline; text-underline-offset:3px;}
+    .wrap{max-width:980px;margin:0 auto;padding:22px 18px 104px}
+    .top{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      padding:10px 0 6px;
+    }
+    .brand{display:flex;align-items:center;gap:10px;font-weight:1000}
+    .dot{
+      width:14px;height:14px;border-radius:999px;
+      background: conic-gradient(from 0deg, #ef4444, #f97316, #eab308, #22c55e, #06b6d4, #3b82f6, #a855f7, #ef4444);
+      box-shadow:0 10px 22px rgba(0,0,0,.12);
+      border:1px solid rgba(0,0,0,.06);
+    }
+    .card{
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      background:rgba(255,255,255,.92);
+      box-shadow:var(--shadowB);
+      padding:16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .card:after{
+      content:"";
+      position:absolute;right:-40px;top:-40px;
+      width:220px;height:220px;border-radius:999px;
+      background:radial-gradient(circle at 30% 30%, rgba(2,6,23,.14), rgba(2,6,23,0) 62%);
+      pointer-events:none;
+      transform:rotate(18deg);
+    }
+    h1{
+      margin:10px 0 8px;
+      font-size:28px;line-height:1.2;
+      background:linear-gradient(135deg, var(--night), var(--smoke));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .mut{color:var(--mut)}
+    .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:12px 14px;border-radius:14px;text-decoration:none;font-weight:1000;
+      border:1px solid var(--line);background:#fff;
+      box-shadow:0 10px 22px rgba(15,23,42,.06);
+      cursor:pointer;
+      transition: transform .06s ease;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn:active{transform:translateY(0)}
+    .btn.primary{background:linear-gradient(135deg,#2563eb,#60a5fa);border:none;color:#fff}
+    .btn.dark{background:linear-gradient(135deg, var(--night), var(--smoke));border:none;color:#fff}
+    .btn.ok{background:linear-gradient(135deg,#22c55e,#86efac);border:none}
+    .tabs{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+    .tab{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.85);
+      padding:9px 12px;border-radius:999px;
+      font-weight:1000;color:var(--mut);
+      cursor:pointer;
+      user-select:none;
+    }
+    .tab[aria-selected="true"]{
+      background:linear-gradient(135deg, rgba(2,6,23,.92), rgba(30,41,59,.92));
+      color:#fff;border:none;
+    }
+    .panel{display:none;margin-top:14px}
+    .panel.show{display:block}
+
+    .result{
+      margin-top:14px;
+      padding:14px;border-radius:14px;
+      border:1px dashed rgba(2,6,23,.18);
+      background:rgba(2,6,23,.03);
+      white-space:pre-wrap;
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* 結果演出：シュッ… */
+    .result.fx::after{
+      content:"";
+      position:absolute; inset:-20px;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.85) 30%, transparent 55%);
+      transform: translateX(-120%) rotate(6deg);
+      animation: slash 520ms ease-out forwards;
+      pointer-events:none;
+    }
+    @keyframes slash{
+      to{ transform: translateX(140%) rotate(6deg); opacity:0; }
+    }
+
+    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .tag{
+      display:inline-flex;align-items:center;
+      padding:6px 10px;border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.85);
+      font-weight:900;font-size:12px;color:var(--mut);
+    }
+    .grid2{display:grid;gap:12px}
+    @media(min-width:860px){ .grid2{grid-template-columns:1fr 1fr} }
+    .field{display:grid;gap:6px;margin-top:10px}
+    select{
+      width:100%;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:#fff;
+      font:inherit;
+    }
+    .note{
+      font-size:13px;color:var(--mut);
+      border-left:4px solid rgba(2,6,23,.18);
+      padding-left:10px;margin:12px 0 0;
+    }
+
+    /* 3枚引きカード見せ */
+    .cardsRow{
+      display:grid; gap:10px; margin-top:12px;
+    }
+    @media(min-width:860px){ .cardsRow{grid-template-columns:repeat(3,1fr);} }
+    .tarot{
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(255,255,255,.9);
+      box-shadow:0 10px 18px rgba(0,0,0,.06);
+      padding:12px;
+      min-height:120px;
+      position:relative;
+      overflow:hidden;
+    }
+    .tarot .pos{font-weight:1000;color:var(--mut);font-size:12px}
+    .tarot .name{font-weight:1000;margin-top:6px}
+    .tarot .txt{color:var(--mut);margin-top:6px; font-weight:700; font-size:13px; line-height:1.45}
+    .tarot.flip{
+      transform: rotateY(90deg);
+      opacity:0;
+      animation: flipIn 520ms ease forwards;
+    }
+    @keyframes flipIn{
+      0%{transform:rotateY(90deg); opacity:0}
+      60%{transform:rotateY(-12deg); opacity:1}
+      100%{transform:rotateY(0); opacity:1}
+    }
+
+    /* 下部固定CTA */
+    .ctaBar{
+      position:fixed;left:0;right:0;bottom:0;
+      padding:10px 12px;
+      background:rgba(255,255,255,.9);
+      backdrop-filter: blur(10px);
+      border-top:1px solid var(--line);
+      z-index:50;
+    }
+    .ctaInner{
+      max-width:980px;margin:0 auto;
+      display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+    }
+    .ctaText{font-weight:1000}
+
+    @media (prefers-reduced-motion: reduce){
+      .btn{transition:none}
+      .btn:hover{transform:none}
+      .result.fx::after{display:none}
+      .tarot.flip{animation:none; transform:none; opacity:1}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand"><span class="dot"></span>占いゲーム <span class="mut">｜田中塗装</span></div>
+      <a class="btn" href="index.html">← トップに戻る</a>
+    </div>
+
+    <div class="card">
+      <div class="mut">遊びだけど、次の一手はマジで出す。</div>
+      <h1>忍者おみくじ × 3枚引き × 施工・色占い</h1>
+
+      <div class="tabs" role="tablist" aria-label="fortune tabs">
+        <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true">🥷 1枚引き</button>
+        <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false">🃏 3枚引き</button>
+        <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false">🛠 施工・色占い</button>
+      </div>
+
+      <!-- Panel 1 -->
+      <div class="panel show" id="p1" role="tabpanel" aria-labelledby="t1">
+        <div class="mut">一発で今日の運勢。静かに引け。</div>
+        <div class="btns">
+          <button class="btn primary" id="draw1">🥷 引く</button>
+          <a class="btn dark" id="share1" target="_blank" rel="noopener noreferrer">🟩 LINEで送る</a>
+        </div>
+        <div class="result" id="res1">まだ引いてない。引け。</div>
+        <div class="tags" id="tags1"></div>
+      </div>
+
+      <!-- Panel 2 -->
+      <div class="panel" id="p2" role="tabpanel" aria-labelledby="t2">
+        <div class="mut">過去・現在・未来。読ませるやつ。</div>
+        <div class="btns">
+          <button class="btn primary" id="draw2">🃏 3枚引く</button>
+          <a class="btn dark" id="share2" target="_blank" rel="noopener noreferrer">🟩 LINEで送る</a>
+        </div>
+
+        <div class="cardsRow" id="cardsRow"></div>
+
+        <div class="result" id="res2">まだ引いてない。3枚いけ。</div>
+      </div>
+
+      <!-- Panel 3 -->
+      <div class="panel" id="p3" role="tabpanel" aria-labelledby="t3">
+        <div class="mut">家の状況で「次の一手」を出す。田中塗装専用。</div>
+
+        <div class="grid2">
+          <div class="card" style="padding:14px">
+            <div class="field">
+              <label><b>気になる場所</b></label>
+              <select id="q_place">
+                <option value="wall">外壁（サイディング/モルタル）</option>
+                <option value="roof">屋根</option>
+                <option value="balcony">ベランダ・防水</option>
+                <option value="concrete">打ちっぱなし（補修・保護）</option>
+                <option value="shop">店舗・内装（意匠）</option>
+              </select>
+            </div>
+            <div class="field">
+              <label><b>状態</b></label>
+              <select id="q_state">
+                <option value="light">軽度（まだいける）</option>
+                <option value="mid" selected>中程度（一般的）</option>
+                <option value="heavy">重度（割れ/剥がれ/漏れ気味）</option>
+              </select>
+            </div>
+            <div class="field">
+              <label><b>気分（色の方向）</b></label>
+              <select id="q_mood">
+                <option value="bright">明るく華やか</option>
+                <option value="calm" selected>落ち着き・上品</option>
+                <option value="dark">闇・締める（忍者）</option>
+              </select>
+            </div>
+
+            <div class="btns">
+              <button class="btn primary" id="draw3">🛠 出す</button>
+              <a class="btn dark" id="share3" target="_blank" rel="noopener noreferrer">🟩 LINEで送る</a>
+            </div>
+          </div>
+
+          <div class="card" style="padding:14px">
+            <div class="mut">出た結果は、このままLINEで送ると話が早い。</div>
+            <div class="result" id="res3">まだ占ってない。状況を選んで出せ。</div>
+          </div>
+        </div>
+
+        <p class="note">
+          ※遊び＋実務の間。最終は写真で決める。<br>
+          「町名までの住所＋気になる箇所＋写真2〜4枚」これで最短。
+        </p>
+      </div>
+
+      <p class="note">
+        ※これは遊び。でも “行動すれば+1が乗る” はガチ。<br>
+        施工相談は <a href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener noreferrer">LINE写真相談</a> が最短です。
+      </p>
+    </div>
+  </div>
+
+  <!-- 下固定：相談導線 -->
+  <div class="ctaBar">
+    <div class="ctaInner">
+      <div class="ctaText">🟩 写真送るのが最短ルートです（町名までOK）</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn ok" href="https://line.me/ti/p/yHunueNM1o" target="_blank" rel="noopener noreferrer">LINEで写真送る</a>
+        <a class="btn" href="tel:090-6120-3852">📞 電話</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const enc = encodeURIComponent;
+
+    // ===== ちっちゃいSE（外部ファイル不要）=====
+    function beep(){
+      try{
+        const Ctx = window.AudioContext || window.webkitAudioContext;
+        if(!Ctx) return;
+        const ctx = new Ctx();
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = "triangle";
+        o.frequency.value = 520;
+        g.gain.value = 0.08;
+        o.connect(g); g.connect(ctx.destination);
+        o.start();
+        // 忍者っぽく「シュッ」：一瞬で落とす
+        g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.12);
+        o.stop(ctx.currentTime + 0.13);
+        setTimeout(()=>ctx.close?.(), 220);
+      }catch(e){}
+    }
+
+    // ===== 結果演出 =====
+    function fx(el){
+      el.classList.remove("fx");
+      void el.offsetWidth; // reflow
+      el.classList.add("fx");
+      beep();
+    }
+
+    // ===== Tabs =====
+    const tabs = [
+      { t:$("t1"), p:$("p1") },
+      { t:$("t2"), p:$("p2") },
+      { t:$("t3"), p:$("p3") },
+    ];
+    function openTab(i){
+      tabs.forEach((x,idx)=>{
+        const on = idx===i;
+        x.t.setAttribute("aria-selected", on ? "true" : "false");
+        x.p.classList.toggle("show", on);
+      });
+      // URLにも反映（戻ってきた時に同じタブ）
+      const url = new URL(location.href);
+      url.searchParams.set("tab", String(i+1));
+      history.replaceState(null, "", url.toString());
+    }
+    tabs.forEach((x, i)=> x.t.addEventListener("click", ()=>openTab(i)));
+
+    // URL ?tab=2 / ?tab=3 対応
+    const params = new URLSearchParams(location.search);
+    const tab = params.get("tab");
+    if(tab==="2") openTab(1);
+    if(tab==="3") openTab(2);
+
+    // ===== 1枚引き =====
+    const fortunes = [
+      { rank:"大吉", vibe:"影が味方する日。静かに動くほど、勝ちが積む。", tags:["速い判断","連絡が吉","道具が冴える"], plus1:"+1：15分だけ片付け（現場でも部屋でも）" },
+      { rank:"中吉", vibe:"焦らずでOK。手順を守るほど仕上がりが跳ねる。", tags:["段取り強い","確認が武器","ムラが消える"], plus1:"+1：メモ3行（やる/やらない/連絡）" },
+      { rank:"小吉", vibe:"派手な勝ちより地味な積み上げが効く。", tags:["継続勝ち","手直し減","信用が増える"], plus1:"+1：施工・作品写真を1枚整理" },
+      { rank:"吉", vibe:"普通が一番強い。普通にやれば普通に勝つ。", tags:["淡々と強い","安全第一","ミスが減る"], plus1:"+1：水分と休憩をちゃんと取る" },
+      { rank:"末吉", vibe:"運は後半に来る。午前は準備、午後で回収。", tags:["午後に上がる","待ちが正解","積み上げ"], plus1:"+1：午後に1本だけ連絡（DM/メール）" },
+      { rank:"凶", vibe:"今日は無理しない。攻めるより守りが勝つ。", tags:["事故回避","やり直し防止","点検が吉"], plus1:"+1：危ない所を1つ潰す（足元/養生/段差）" },
+    ];
+    function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+    function render1(f){
+      $("res1").textContent =
+`【${f.rank}】
+${f.vibe}
+
+${f.plus1}
+
+（忍者メモ：静かにやるほど、効く。）`;
+
+      const tags = $("tags1");
+      tags.innerHTML = "";
+      f.tags.forEach(t=>{
+        const s = document.createElement("span");
+        s.className = "tag";
+        s.textContent = "🌀 " + t;
+        tags.appendChild(s);
+      });
+
+      const msg = `忍者おみくじ結果：${f.rank}\n${f.vibe}\n${f.plus1}\n\n${location.href}`;
+      $("share1").href = "https://line.me/R/msg/text/?" + enc(msg);
+      fx($("res1"));
+    }
+    $("draw1").addEventListener("click", ()=> render1(pick(fortunes)));
+
+    // ===== 3枚引き =====
+    const cards = [
+      { name:"墨の刃", text:"切るべきは相手じゃなく、迷い。やる事を減らすと勝つ。" },
+      { name:"雨の養生", text:"守る準備が仕上がりを決める。焦らず、先に覆え。" },
+      { name:"乾き待ち", text:"待つのも仕事。いま動くとムラになる。タイミングを読め。" },
+      { name:"下地の声", text:"表じゃない。下が全て。小さい違和感を先に潰せ。" },
+      { name:"影の導線", text:"見えない動線が現場を救う。段取りで半分勝ってる。" },
+      { name:"無機の盾", text:"長期戦は耐久が勝つ。安さより回数を減らせ。" },
+      { name:"色の呼吸", text:"派手さより調和。光と影のバランスで品が出る。" },
+      { name:"一筆入魂", text:"一点集中。全部やらない。ここを決めろ。" },
+    ];
+
+    function draw3cards(){
+      const pool = [...cards];
+      const out = [];
+      for(let i=0;i<3;i++){
+        const idx = Math.floor(Math.random() * pool.length);
+        out.push(pool.splice(idx,1)[0]);
+      }
+      return out;
+    }
+
+    function renderTarotCards(cs){
+      const row = $("cardsRow");
+      row.innerHTML = "";
+      const labels = ["過去","現在","未来"];
+      cs.forEach((c,i)=>{
+        const d = document.createElement("div");
+        d.className = "tarot flip";
+        d.style.animationDelay = (i*90) + "ms";
+        d.innerHTML = `
+          <div class="pos">【${labels[i]}】</div>
+          <div class="name">${c.name}</div>
+          <div class="txt">${c.text}</div>
+        `;
+        row.appendChild(d);
+      });
+    }
+
+    function render2(cs){
+      const [past, now, future] = cs;
+      const plus1 = "+1：写真を3枚（全体/気になる所/近接）撮っておく。";
+      $("res2").textContent =
+`【過去】${past.name}
+${past.text}
+
+【現在】${now.name}
+${now.text}
+
+【未来】${future.name}
+${future.text}
+
+${plus1}
+（忍者メモ：先に整えて、静かに勝つ。）`;
+
+      renderTarotCards(cs);
+
+      const msg = `3枚引き結果\n過去：${past.name} / ${past.text}\n現在：${now.name} / ${now.text}\n未来：${future.name} / ${future.text}\n${plus1}\n\n${location.href}`;
+      $("share2").href = "https://line.me/R/msg/text/?" + enc(msg);
+      fx($("res2"));
+    }
+
+    $("draw2").addEventListener("click", ()=> render2(draw3cards()));
+
+    // ===== 施工・色占い =====
+    const placeMap = {
+      wall:"外壁",
+      roof:"屋根",
+      balcony:"ベランダ防水",
+      concrete:"打ちっぱなし",
+      shop:"店舗・内装"
+    };
+    const moodMap = {
+      bright:"明るく華やか",
+      calm:"落ち着き・上品",
+      dark:"闇・締める（忍者）"
+    };
+
+    function render3(){
+      const place = $("q_place").value;
+      const state = $("q_state").value;
+      const mood  = $("q_mood").value;
+
+      const base = [];
+      base.push(`【対象】${placeMap[place]}`);
+      base.push(`【状態】${$("q_state").selectedOptions[0].textContent}`);
+      base.push(`【方向】${moodMap[mood]}`);
+
+      let next = "";
+      let note = "";
+      let color = "";
+
+      if(place==="wall"){
+        next = (state==="heavy")
+          ? "次の一手：クラック/浮きを先に直してから塗る。下地が主役。"
+          : "次の一手：チョーキング確認→下塗りをケチらない。";
+        note = "外壁は「下地8割」。写真で割れ・目地・チョーキングが見えれば最短。";
+      }
+      if(place==="roof"){
+        next = (state==="heavy")
+          ? "次の一手：コケ/錆/素地劣化チェック→下処理厚めでいく。"
+          : "次の一手：屋根は紫外線が強い。耐久寄せ（無機/シリケート）が相性◎。";
+        note = "屋根は見えない所ほど差が出る。全体写真＋棟板金周りがあると強い。";
+      }
+      if(place==="balcony"){
+        next = (state==="heavy")
+          ? "次の一手：漏れ疑いならトップだけじゃなく下地から。"
+          : "次の一手：表面の割れ・立上り・排水をチェックして予防防水。";
+        note = "防水は“漏れてから”が高い。怪しいなら早めが勝ち。";
+      }
+      if(place==="concrete"){
+        next = (state==="heavy")
+          ? "次の一手：欠損/爆裂リスク確認→補修→保護材（ランデックス等）で守る。"
+          : "次の一手：汚れ/白華を整理→保護で美観回復。";
+        note = "打ちっぱなしは「補修＋保護」がセット。写真で劣化が判断できる。";
+      }
+      if(place==="shop"){
+        next = (state==="heavy")
+          ? "次の一手：用途/動線/汚れ方を聞いてから、意匠と耐久の両立を設計。"
+          : "次の一手：意匠は光の入り方で決まる。写真とイメージ共有が最速。";
+        note = "店舗は“雰囲気”が売上に直結。素材・照明・色で最短提案できる。";
+      }
+
+      if(mood==="bright") color = "色：白×アクセント1色（玄関/帯）で“華やかに見せる”。";
+      if(mood==="calm")   color = "色：グレージュ/石色/低彩度で“上品に静か”。";
+      if(mood==="dark")   color = "色：チャコール/濃紺/黒寄せで“影が締める”。（忍者）";
+
+      const plus1 = "+1：町名までの住所＋気になる箇所＋写真2〜4枚を用意。";
+      const out =
+`${base.join(" / ")}
+
+${next}
+${color}
+
+${note}
+
+${plus1}
+（忍者メモ：迷ったら、写真。押すのはローラーだけ。）`;
+
+      $("res3").textContent = out;
+
+      const msg = `施工・色占い結果\n${out}\n\n相談はこちら：https://line.me/ti/p/yHunueNM1o`;
+      $("share3").href = "https://line.me/R/msg/text/?" + enc(msg);
+      fx($("res3"));
+    }
+
+    $("draw3").addEventListener("click", render3);
+
+    // おまけ：ロード直後に「1枚引き」押したくなるなら（好みでON）
+    // render1(pick(fortunes));
+  </script>
+</body>
+</html>
