@@ -1556,28 +1556,20 @@ section{scroll-margin-top:90px;}
     });
   }
 
-// トップへ戻るボタン（安全版）
-const toTop = document.getElementById("toTop");
+  // ✅ トップへ戻るボタン（クリックは1回だけ）
+  const toTop = document.getElementById("toTop");
 
-if (toTop){
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 600){
-      toTop.classList.add("show");
-    }else{
-      toTop.classList.remove("show");
-    }
-  });
+  if (toTop){
+    window.addEventListener("scroll", () => {
+      toTop.classList.toggle("show", window.scrollY > 600);
+    });
 
-  toTop.addEventListener("click", () => {
-    window.scrollTo({ top:0, behavior:"smooth" });
-  });
-}
-  toTop.addEventListener("click", () => {
-  window.scrollTo({ top:0, behavior:"smooth" });
-});
-  
+    toTop.addEventListener("click", () => {
+      window.scrollTo({ top:0, behavior:"smooth" });
+    });
+  }
 </script>
-
+  
 <button id="toTop">▲</button>
   
 </body>
