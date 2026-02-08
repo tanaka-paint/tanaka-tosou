@@ -36,3 +36,30 @@
 .contact button:hover{
   background:#c4001e;
 }
+
+/* ===============================
+   トップへ戻るボタン
+=============================== */
+#toTop{
+  position: fixed;
+  right: 18px;
+  bottom: 110px; /* ← 忍者と被らない高さ */
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  border: 1px solid rgba(2,6,23,.12);
+  background: #fff;
+  box-shadow: 0 18px 40px rgba(2,6,23,.18);
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 9998;
+
+  opacity: 0;
+  transform: translateY(20px);
+  transition: .3s;
+}
+
+#toTop.show{
+  opacity: 1;
+  transform: translateY(0);
+}
