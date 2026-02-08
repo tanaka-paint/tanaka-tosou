@@ -82,3 +82,27 @@
     justify-content: center;
   }
 }
+
+/* ===== スマホ：見積ボタン修正（重要）===== */
+@media (max-width:600px){
+
+  /* 横並びをやめて縦並び */
+  #quick-estimate .qe-actions{
+    flex-direction:column;
+    align-items:stretch;
+    width:100%;
+  }
+
+  /* ボタン全部フル幅 */
+  #quick-estimate .qe-actions .btn,
+  #quick-estimate .qe-actions button{
+    width:100%;
+    justify-content:center;
+  }
+
+  /* LINEボタンの巨大paddingを少し縮める */
+  #quick-estimate .qe-actions .btn.ok{
+    padding:14px 16px;
+    font-size:16px;
+  }
+}
